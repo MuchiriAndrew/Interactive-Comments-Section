@@ -10,6 +10,10 @@
             <span id="ops"><b>-</b></span>
           </div>
 
+          <img @click="handleReply" v-if="showReply" src="../assets/icon-arrow-up.svg" alt="arrowup">
+          <img @click="handleReply" v-else src="../assets/icon-arrow-down.svg" alt="arrowdown">
+          
+
         </div>
         <div id="text-wrapper" class="pt-2">
 
@@ -33,6 +37,8 @@
 
         </div>
       </div>
+
+      <ReplyComponent :showReply = 'showReply' :handleReply = 'handleReply'/>
 
       <div id="comments" class="bg-light rounded-2 mb-1">
         <div id="counter-div" >
@@ -68,6 +74,8 @@
 
       </div>
 
+      <ReplyComponent :showReply = 'showReply' :handleReply = 'handleReply'/>
+
     </div>
 
     
@@ -75,13 +83,26 @@
 </template>
 
 <script>
+import ReplyComponent from '../components/ReplyComponent.vue'
 export default {
   name: 'HomeView',
-  components: {}
+  components: {ReplyComponent},
+  data() {
+    return {
+      showReply:false,
+    }
+  },
+
+  methods: {
+    handleReply() {
+      this.showReply = !this.showReply
+    }
+
+  }
 }
 </script>
 
-<style scoped>
+<style>
 #wrapper {
   min-height: 100vh;
   display: flex;
@@ -94,6 +115,7 @@ export default {
   width: 50%;
   display: flex;
   flex-direction: column;
+  align-items: flex-end;
 }
 
 #comments {
@@ -110,7 +132,8 @@ export default {
   height: 100px;
   width: 10%;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-around;
   align-items: center;
 }
 
