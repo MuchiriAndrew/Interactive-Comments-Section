@@ -51,7 +51,6 @@ export default {
   data() {
     return {
       myData : commentData.comments,
-      userImage : []
     }
   },
 }
