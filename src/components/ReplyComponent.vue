@@ -22,7 +22,6 @@
                 <img src="../assets/icon-reply.svg" alt="reply">
                 <p class="m-0">Reply</p>
                 </div>
-                
             </div>
 
             <div id="comment-text" class="pt-2">
