@@ -86,7 +86,7 @@ export default {
     width: 12%;
 }
 
-@media only screen and (max-width: 768px){ 
+@media only screen and (max-width: 767px){ 
   #comments {
     width: 90%;
   height: auto;

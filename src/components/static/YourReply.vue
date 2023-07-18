@@ -156,7 +156,7 @@ export default {
     align-items: center;
 }
 
-@media only screen and (max-width: 768px){ 
+@media only screen and (max-width: 767px){ 
   #comments {
   width: 90%;
   height: auto;

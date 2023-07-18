@@ -39,7 +39,7 @@ export default {
 
 <style>
 
-@media only screen and (max-width: 992px){ 
+@media only screen and (max-width: 1200px){ 
   #comments-container{
     width: 100%;
   }

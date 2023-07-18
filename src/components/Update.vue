@@ -182,7 +182,7 @@ button:hover {
     transition: 0.3s ease-in-out;
 }
 
-@media only screen and (max-width: 768px){ 
+@media only screen and (max-width: 767px){ 
   #comments {
   width: 90%;
   height: auto;

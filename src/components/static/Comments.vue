@@ -221,7 +221,7 @@ color: hsl(211, 10%, 45%);
   color: hsl(238, 40%, 52%);
 }
 
-@media only screen and (max-width: 768px){ 
+@media only screen and (max-width: 767px){ 
   #comments {
   height: auto;
   min-height: 100px;
