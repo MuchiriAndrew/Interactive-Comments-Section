@@ -13,13 +13,13 @@
 
             <div id="comment-info">
                 <div id="first-info">
-                <img src="../assets/avatars/image-ramsesmiron.png" alt="amyrobson">
+                <img src="../../assets/avatars/image-ramsesmiron.png" alt="amyrobson">
                 <h6 class="m-0"><b>ramsesmiron</b></h6>
                 <span>1 week ago</span>
                 </div>
 
                 <div id="second-info">
-                <img src="../assets/icon-reply.svg" alt="reply">
+                <img src="../../assets/icon-reply.svg" alt="reply">
                 <p class="m-0">Reply</p>
                 </div>
             </div>

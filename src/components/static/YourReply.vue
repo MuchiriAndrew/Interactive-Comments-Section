@@ -13,7 +13,7 @@
 
             <div id="comment-info">
                 <div id="first-info">
-                <img src="../assets/avatars/image-juliusomo.png" alt="juliusomo">
+                <img src="../../assets/avatars/image-juliusomo.png" alt="juliusomo">
                 <h6 class="m-0"><b>juliusomo</b></h6>
                 <span id="you-tag" class="rounded-1 px-2"><b>you</b></span>
                 <span>2 days ago</span>
@@ -21,12 +21,12 @@
 
                 <div id="second-info">
                     <div id="delete">
-                        <img src="../assets/icon-delete.svg" alt="delete">
+                        <img src="../../assets/icon-delete.svg" alt="delete">
                         <p class="m-0">Delete</p>
                     </div>
 
                     <div id="edit">
-                        <img src="../assets/icon-edit.svg" alt="delete">
+                        <img src="../../assets/icon-edit.svg" alt="delete">
                         <p class="m-0">Edit</p>
                     </div>
                 
