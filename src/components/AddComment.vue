@@ -1,7 +1,7 @@
 <template>
   <div id="comments" class="bg-white rounded-2 mb-1 pt-3">
 
-            <div id="image-div">
+            <div id="image-div" class="d-none d-md-block">
                 <img src="../assets/avatars/image-juliusomo.png" alt="juliusomo">
             </div>
 
@@ -9,7 +9,15 @@
                 <textarea name="addcomment" id="addcomment" class="rounded-2 p-2" placeholder="Add a comment..."></textarea>
             </form>
 
-            <button class="rounded-2">SEND</button>
+            <button class="rounded-2 d-none d-md-block">SEND</button>
+
+            <div id="newone" class="d-flex d-md-none">
+                <div id="image-div">
+                    <img src="../assets/avatars/image-juliusomo.png" alt="juliusomo">
+                </div>
+
+                <button class="rounded-2">SEND</button>          
+            </div>
             
     </div>
 
@@ -63,6 +71,40 @@ button {
 button:hover {
     background-color: hsl(239, 57%, 85%);
     transition: 0.3s ease-in-out;
+}
+
+@media only screen and (max-width: 768px){ 
+#newone {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#newone img {
+    width: 30px;
+}
+
+#comments {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: unset;
+}
+#text-area {
+   width: 100%;
+   min-height: 100px;
+}
+
+#addcomment {
+    resize: none;
+    width: 100%;
+    min-height: 100px;
+    border: 1px solid hsl(223, 19%, 93%);
+}
+
 }
 
 </style>

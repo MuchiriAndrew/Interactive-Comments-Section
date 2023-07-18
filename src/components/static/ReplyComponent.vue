@@ -1,6 +1,6 @@
 <template>
        <div id="comments" class="bg-white rounded-2 mb-2">
-            <div id="counter-div" class="order-2 order-lg-1" >
+            <div id="counter-div" class="order-2 order-md-1 d-none d-md-flex" >
             <div id="count" class="rounded-3">
                 <span id="ops"><b>+</b></span>
                 <span id="number"><b>4</b></span>
@@ -9,7 +9,7 @@
 
             </div>
 
-            <div id="text-wrapper" class="pt-2 order-1 order-lg-2">
+            <div id="text-wrapper" class="pt-2 order-1 order-md-2">
 
             <div id="comment-info">
                 <div id="first-info">
@@ -18,7 +18,7 @@
                 <span>1 week ago</span>
                 </div>
 
-                <div id="second-info">
+                <div id="second-info" class="d-none d-md-flex">
                 <img src="../../assets/icon-reply.svg" alt="reply">
                 <p class="m-0">Reply</p>
                 </div>
@@ -29,6 +29,20 @@
             </div>
 
             </div>
+
+            <div id="new-div" class="order-2 d-flex d-md-none">
+        <div id="count" class="rounded-3">
+            <span id="ops"><b>+</b></span>
+            <span id="number"><b>4</b></span>
+            <span id="ops"><b>-</b></span>
+          </div>
+
+          <div id="second-info">
+              <img src="../../assets/icon-reply.svg" alt="reply">
+              <p class="m-0">Reply</p>
+            </div>
+
+      </div>
       </div>
 </template>
 

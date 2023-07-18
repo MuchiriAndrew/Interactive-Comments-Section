@@ -43,8 +43,6 @@ export default {
   #comments-container{
     width: 100%;
   }
-
-
 }
 
 
