@@ -1,5 +1,5 @@
 <template>
-  <div id="comments" class="bg-light rounded-2 mb-1 pt-3">
+  <div id="comments" class="bg-white rounded-2 mb-1 pt-3">
 
             <div id="image-div">
                 <img src="../assets/avatars/image-juliusomo.png" alt="juliusomo">
@@ -49,6 +49,7 @@ export default {
     width: 100%;
     min-height: 80px;
     border: 1px solid hsl(223, 19%, 93%);
+    font-size: 13px;
 }
 
 button {
@@ -58,6 +59,12 @@ button {
     width: 70px;
     height: 30px;
     border: none;
+}
+
+
+button:hover {
+    background-color: hsl(239, 57%, 85%);
+    transition: 0.3s ease-in-out;
 }
 
 </style>

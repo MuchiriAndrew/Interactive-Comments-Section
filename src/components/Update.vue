@@ -1,4 +1,4 @@
-<template>
+  <template>
       <div id="comments" class="bg-white rounded-2 mb-2">
             <div id="counter-div" class="order-2 order-lg-1 d-none d-lg-flex">
             <div id="count" class="rounded-3">
@@ -9,37 +9,41 @@
 
             </div>
 
-            <div id="text-wrapper" class="pt-2 order-1 order-lg-2">
+            <div id="text-wrapper" class="pt-2">
 
-            <div id="comment-info">
-                <div id="first-info">
-                <img src="../../assets/avatars/image-juliusomo.png" alt="juliusomo">
-                <h6 class="m-0"><b>juliusomo</b></h6>
-                <span id="you-tag" class="rounded-1 px-2"><b>you</b></span>
-                <span>2 days ago</span>
-                </div>
-
-                <div class="d-none d-lg-flex" id="second-info">
-                    <div id="delete">
-                        <img src="../../assets/icon-delete.svg" alt="delete">
-                        <p class="m-0">Delete</p>
+                <div id="comment-info">
+                    <div id="first-info">
+                    <img src="../assets/avatars/image-juliusomo.png" alt="juliusomo">
+                    <h6 class="m-0"><b>juliusomo</b></h6>
+                    <span id="you-tag" class="rounded-1 px-2"><b>you</b></span>
+                    <span>2 days ago</span>
                     </div>
 
-                    <div id="edit">
-                        <img src="../../assets/icon-edit.svg" alt="delete">
-                        <p class="m-0">Edit</p>
+                    <div id="second-info" class="d-none d-lg-flex">
+                        <div id="delete">
+                            <img src="../assets/icon-delete.svg" alt="delete">
+                            <p class="m-0">Delete</p>
+                        </div>
+
+                        <div id="edit">
+                            <img src="../assets/icon-edit.svg" alt="delete">
+                            <p class="m-0">Edit</p>
+                        </div>
+                    
                     </div>
-                
                 </div>
+
+                <div id="update-text">
+                     <form id="text-area" class="">
+                    <textarea name="addcomment" id="addcomment" class="rounded-2 p-2" placeholder="Add a comment..."></textarea>
+                    </form>
+
+                    <button class="rounded-2">UPDATE</button>
+                </div>
+
             </div>
 
-            <div id="comment-text" class="pt-2">
-                <p>I couldn't agree more with this. Everything moves so fast and it always seems like everyone knows the newest library/framework. But the fundamentals are what stay constant.</p>
-            </div>
-
-            </div>
-
-            <div class="d-flex d-lg-none order-2" id="new-info">
+           <div class="d-flex d-lg-none order-2" id="new-info">
                 
                     <div id="count" class="rounded-3">
                         <span id="ops"><b>+</b></span>
@@ -49,12 +53,12 @@
 
                     <div id="second">
                         <div id="delete">
-                        <img src="../../assets/icon-delete.svg" alt="delete">
+                        <img src="../assets/icon-delete.svg" alt="delete">
                         <p class="m-0">Delete</p>
                     </div>
 
                     <div id="edit">
-                        <img src="../../assets/icon-edit.svg" alt="delete">
+                        <img src="../assets/icon-edit.svg" alt="delete">
                         <p class="m-0">Edit</p>
                     </div>
 
@@ -68,28 +72,7 @@
 </template>
 
 <script>
-// import commentData from "../data.json"
 export default {
-    name: 'ReplyComponent',
-//   data() {
-//     return {
-//         myData : commentData.comments,
-//         replyData: [],
-//     }
-//   },
-
-
-    
-// mounted() {
-//     for (let i = 0; i < this.myData.length; i++) {
-//       if(this.myData[i].replies.length > 0){
-//           console.log(this.myData[i].replies);
-//           this.replyData = this.myData[i].replies
-//     }
-//   }
-// }
-
-
 
 }
 </script>
@@ -97,10 +80,21 @@ export default {
 <style scoped>
 #comments {
     width: 85%;
+    min-height: 200px;
+
 }
 
 #first-info {
     min-width: 50%;
+}
+
+#text-wrapper {
+  width: 90%;
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
+  font-size: 13px;
+  justify-content: space-around;
 }
 
 #second-info {
@@ -156,6 +150,38 @@ export default {
     align-items: center;
 }
 
+#update-text {
+    width: 97%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+#text-area {
+    width: 100%;
+}
+
+#addcomment {
+    resize: none;
+    width: 100%;
+    min-height: 80px;
+    border: 1px solid hsl(223, 19%, 93%);
+}
+
+button {
+    background-color: hsl(238, 40%, 52%);
+    border: none;
+    width: 70px;
+    height: 30px;
+    color: white;
+}
+
+
+button:hover {
+    background-color: hsl(239, 57%, 85%);
+    transition: 0.3s ease-in-out;
+}
+
 @media only screen and (max-width: 768px){ 
   #comments {
   width: 90%;
@@ -190,22 +216,15 @@ export default {
 
 #text-wrapper {
   width: 100%;
-  min-height: 100px;
+  min-height: 190px;
   display: flex;
   flex-direction: column;
   font-size: 13px;
   justify-content: space-around;
 }
 
-#comment-info {
-  height: 30px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
 #first-info {
-  min-width: 70%;
+  min-width: 80%;
 }
 
 #second-info {
@@ -224,6 +243,40 @@ export default {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+}
+
+#update-text {
+    width: 100%;
+    display: flex;
+    height: 150px;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-around;
+}
+
+#text-area {
+    width: 100%;
+}
+
+#addcomment {
+    resize: none;
+    width: 100%;
+    min-height: 100px;
+    border: 1px solid hsl(223, 19%, 93%);
+}
+
+button {
+    background-color: hsl(238, 40%, 52%);
+    border: none;
+    width: 70px;
+    height: 30px;
+    color: white;
+}
+
+
+button:hover {
+    background-color: hsl(239, 57%, 85%);
+    transition: 0.3s ease-in-out;
 }
 }
 
