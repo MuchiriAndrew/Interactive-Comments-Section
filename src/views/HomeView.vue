@@ -2,7 +2,7 @@
   <div class="container-fluid" id="wrapper">
     <div id="comments-container" class="bg-info">
 
-      <div v-for="comment in myData" :key="comment" id="comments" class="bg-light rounded-2 mb-1">
+      <div id="comments" class="bg-light rounded-2 mb-2">
         <div id="counter-div" >
           <div id="count" class="rounded-3">
             <span id="ops"><b>+</b></span>
@@ -15,9 +15,9 @@
 
           <div id="comment-info">
             <div id="first-info">
-              <img src="./images/avatars/image-amyrobson.png" :alt="comment.user.username">
-              <h6 class="m-0"><b>{{comment.user.username}}</b></h6>
-              <span>{{comment.createdAt}}</span>
+              <img src="../assets/avatars/image-amyrobson.png" alt="amyrobson">
+              <h6 class="m-0"><b>amyrobson</b></h6>
+              <span>1 month ago</span>
             </div>
 
             <div id="second-info">
@@ -28,13 +28,47 @@
           </div>
 
           <div id="comment-text" class="pt-2">
-            <p>{{comment.content}}</p>
+            <p>Impressive! Though it seems the drag feature could be improved. But overall it looks incredible. You've nailed the design and the responsiveness at various breakpoints works really well.</p>
+          </div>
+
+        </div>
+      </div>
+
+      <div id="comments" class="bg-light rounded-2 mb-2">
+        <div id="counter-div" >
+          <div id="count" class="rounded-3">
+            <span id="ops"><b>+</b></span>
+            <span id="number"><b>5</b></span>
+            <span id="ops"><b>-</b></span>
+          </div>
+
+        </div>
+        <div id="text-wrapper" class="pt-2">
+
+          <div id="comment-info">
+            <div id="first-info">
+              <img src="../assets/avatars/image-maxblagun.png" alt="maxblagun">
+              <h6 class="m-0"><b>maxblagun</b></h6>
+              <span>2 weeks ago</span>
+            </div>
+
+            <div id="second-info">
+              <img src="../assets/icon-reply.svg" alt="reply">
+              <p class="m-0">Reply</p>
+            </div>
+            
+          </div>
+
+          <div id="comment-text" class="pt-2">
+            <p>Woah, your project looks awesome! How long have you been coding for? I'm still new, but think I want to dive into React as well soon. Perhaps you can give me an insight on where I can learn React? Thanks!</p>
           </div>
 
         </div>
       </div>
 
       <ReplyComponent />
+      <YourReply />
+      <AddComment />
 
     </div>
 
@@ -43,16 +77,18 @@
 </template>
 
 <script>
-import commentData from "../data.json"
+// import commentData from "../data.json"
 import ReplyComponent from "../components/ReplyComponent.vue"
+import YourReply from "../components/YourReply.vue"
+import AddComment from "../components/AddComment.vue"
 export default {
-  components:{ReplyComponent},
+  components:{ReplyComponent, YourReply, AddComment},
   name: 'HomeView',
-  data() {
-    return {
-      myData : commentData.comments,
-    }
-  },
+  // data() {
+  //   return {
+  //     myData : commentData.comments,
+  //   }
+  // },
 }
 
 </script>
