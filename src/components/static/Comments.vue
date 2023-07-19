@@ -8,7 +8,6 @@
           </div>
 
         </div>
-
         <div id="text-wrapper" class="pt-2 order-1 order-md-2">
 
           <div id="comment-info">
@@ -18,7 +17,7 @@
               <span>{{data.comments[0].createdAt}}</span>
             </div>
 
-            <div id="second-info" class="d-none d-md-flex">
+            <div @click="handleClicked1" id="second-info" class="d-none d-md-flex">
               <img src="../../assets/icon-reply.svg" alt="reply">
               <p class="m-0">Reply</p>
             </div>
@@ -30,7 +29,6 @@
           </div>
 
         </div>
-
         <div id="new-div" class="order-2 d-flex d-md-none">
         <div id="count" class="rounded-3">
             <span id="ops"><b>+</b></span>
@@ -38,14 +36,14 @@
             <span id="ops"><b>-</b></span>
           </div>
 
-          <div id="second-info">
+          <div  @click="handleClicked1" id="second-info">
               <img src="../../assets/icon-reply.svg" alt="reply">
               <p class="m-0">Reply</p>
             </div>
 
       </div>
       </div>
-
+                  <AddReply :style= "[clicked1 ? {'display':'none'} : {}]"/>
       
 
       <div id="comments" class="bg-white rounded-2 mb-2">
@@ -66,7 +64,7 @@
               <span>{{this.data.comments[1].createdAt}}</span>
             </div>
 
-            <div id="second-info" class="d-none d-md-flex">
+            <div  @click="handleClicked2" id="second-info" class="d-none d-md-flex">
               <img src="../../assets/icon-reply.svg" alt="reply">
               <p class="m-0">Reply</p>
             </div>
@@ -78,7 +76,6 @@
           </div>
 
         </div>
-
         <div id="new-div" class="order-2 d-flex d-md-none">
         <div id="count" class="rounded-3">
             <span id="ops"><b>+</b></span>
@@ -86,21 +83,27 @@
             <span id="ops"><b>-</b></span>
           </div>
 
-          <div id="second-info">
+          <div  @click="handleClicked2" id="second-info">
               <img src="../../assets/icon-reply.svg" alt="reply">
               <p class="m-0">Reply</p>
             </div>
 
       </div>
       </div>
+                  <AddReply :style= "[clicked2 ? {'display':'none'} : {}]"/>
   
 </template>
 
 <script>
+import AddReply from "../AddReply.vue"
+
 export default {
+  components: {AddReply},
   props : ['data'],
    data() {
     return {
+      clicked1:true,
+      clicked2:true,
     }
   },
 
@@ -118,6 +121,13 @@ export default {
     subtractScore2() {
       if(this.data.comments[1].score > 0)
       this.data.comments[1].score--
+    },
+    handleClicked1() {
+      this.clicked1 = !this.clicked1
+    },
+
+    handleClicked2() {
+      this.clicked2 = !this.clicked2
     }
   }
 

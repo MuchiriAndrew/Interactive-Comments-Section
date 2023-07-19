@@ -1,5 +1,20 @@
 <template>
-      <div id="comments" class="bg-white rounded-2 mb-2">
+
+<!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" >
+        <div class="modal-dialog modal-dialog-centered bg-white rounded-3" id="modal-container">
+        <div class="modal-content" id="modal-content">
+            <h3>Delete Comment</h3>
+            <p>Are you sure you want to remove this comment? This will remove the comment and can't be undone</p>
+            <div id="btn-div">
+                <div id="cancel" class="rounded-2"  data-bs-dismiss="modal">NO, CANCEL</div>
+                <div id="yes-delete" class="rounded-2" data-bs-dismiss="modal">YES, DELETE</div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+      <div id="comments" class="bg-white rounded-2 mb-2" :style = "[!clicked1 ? {'display':'none'} : {}]" >
             <div id="counter-div" class="order-2 order-md-1 d-none d-md-flex">
             <div id="count" class="rounded-3">
                 <span @click="addScore1" id="ops"><b>+</b></span>
@@ -20,12 +35,12 @@
                 </div>
 
                 <div class="d-none d-md-flex" id="second-info">
-                    <div id="delete">
+                    <div id="delete" data-bs-toggle="modal" data-bs-target="#exampleModal">
                         <img src="../../assets/icon-delete.svg" alt="delete">
                         <p class="m-0">Delete</p>
                     </div>
 
-                    <div id="edit">
+                    <div @click="handleEdit" id="edit">
                         <img src="../../assets/icon-edit.svg" alt="delete">
                         <p class="m-0">Edit</p>
                     </div>
@@ -47,8 +62,8 @@
                         <span @click="subtractScore1" id="ops"><b>-</b></span>
                     </div>
 
-                    <div id="second">
-                        <div id="delete">
+                    <div  id="second">
+                        <div @click="handleDelete" id="delete" data-bs-toggle="modal" data-bs-target="#exampleModal">
                         <img src="../../assets/icon-delete.svg" alt="delete">
                         <p class="m-0">Delete</p>
                     </div>
@@ -65,12 +80,31 @@
             </div>
       </div>
 
+      <Update :data = 'data' :style = "[clicked1 ? {'display':'none'} : {}]" :clicked1 = 'clicked1' :handleUpdate = 'handleUpdate'/>
+
 </template>
 
 <script>
+import Update from "../Update.vue"
+
 export default {
+    components: {Update},
     name: 'ReplyComponent',
-    props: ['data','score1', 'addScore1', 'subtractScore1']
+    props: ['data','score1', 'addScore1', 'subtractScore1'],
+    data() {
+    return {
+      clicked1:true,
+      showModal:false
+    }
+  },
+  methods: {
+    handleEdit(){
+        this.clicked1 = !this.clicked1
+    },
+    handleUpdate() {
+        this.clicked1 = !this.clicked1
+    },
+  }
 }
 </script>
 
@@ -134,6 +168,72 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+#modal-container {
+    max-width: none;
+    width:350px;
+    min-height: 0px;
+    height: 200px;
+    padding: 17px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+}
+
+#modal-content {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    border: none;
+}
+
+#modal-content h3 {
+    font-size: 24px;
+}
+
+#modal-content p {
+    color: hsl(211, 10%, 45%);
+}
+
+#btn-div {
+    height: 30%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+#cancel {
+    background: hsl(240, 7%, 46%);
+    width: 40%;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 15px;
+}
+#cancel:hover {
+    background: hsl(239, 57%, 85%);
+    cursor: pointer;
+}
+
+#yes-delete {
+    background: hsl(358, 79%, 66%);
+    width: 40%;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 15px;
+}
+#yes-delete:hover {
+    background: hsl(357, 100%, 86%);
+    cursor: pointer;
 }
 
 @media only screen and (max-width: 767px){ 

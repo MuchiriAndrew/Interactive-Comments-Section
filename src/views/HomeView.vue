@@ -3,10 +3,8 @@
     <div id="comments-container" class="">
 
       <Comments :data = 'data' />
-      <AddReply />
       <ReplyComponent :data = 'data' />
-      <YourReply :data = 'data' :score1 = 'score1' :addScore1="addScore1" :subtractScore1="subtractScore1"  />
-      <Update :data = 'data' :score1 = 'score1' :addScore1="addScore1" :subtractScore1="subtractScore1" />
+      <YourReply :data = 'data' :showModal = 'showModal' :addScore1="addScore1" :subtractScore1="subtractScore1"  />
       <AddComment />
 
     </div>
@@ -29,7 +27,7 @@ export default {
   name: 'HomeView',
   data() {
     return {
-      data:allData
+      data:allData,
     }
   },
 

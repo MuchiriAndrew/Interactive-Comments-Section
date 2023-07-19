@@ -38,7 +38,7 @@
                     <textarea name="addcomment" id="addcomment" class="rounded-2 p-2" placeholder="Add a comment..." :value = 'data.comments[1].replies[1].content'></textarea>
                     </form>
 
-                    <button class="rounded-2">UPDATE</button>
+                    <button @click="handleUpdate" class="rounded-2">UPDATE</button>
                 </div>
 
             </div>
@@ -73,7 +73,7 @@
 
 <script>
 export default {
-    props: ['data','score1', 'addScore1', 'subtractScore1']
+    props: ['data','score1', 'addScore1', 'subtractScore1', 'handleUpdate']
 
 }
 </script>
@@ -82,7 +82,6 @@ export default {
 #comments {
     width: 85%;
     min-height: 200px;
-
 }
 
 #first-info {

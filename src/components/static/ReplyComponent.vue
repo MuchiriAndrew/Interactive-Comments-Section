@@ -18,7 +18,7 @@
                 <span>{{data.comments[1].replies[0].createdAt}}</span>
                 </div>
 
-                <div id="second-info" class="d-none d-md-flex">
+                <div @click="handleClicked1" id="second-info" class="d-none d-md-flex">
                 <img src="../../assets/icon-reply.svg" alt="reply">
                 <p class="m-0">Reply</p>
                 </div>
@@ -44,15 +44,23 @@
 
       </div>
       </div>
+
+      <AddReply :style= "[clicked1 ? {'display':'none'} : {}]"/>
+
+
 </template>
 
 <script>
+import AddReply from "../AddReply.vue"
+
 export default {
   props: ['data'],
+  components:{AddReply},
     name: 'ReplyComponent',
        data() {
     return {
-      score1: 4,
+      clicked1:true,
+      clicked2:true,
     }
   },
 
@@ -65,6 +73,13 @@ export default {
       if(this.data.comments[1].replies[0].score > 0)  
       this.data.comments[1].replies[0].score--
     },
+     handleClicked1() {
+      this.clicked1 = !this.clicked1
+    },
+
+    handleClicked2() {
+      this.clicked2 = !this.clicked2
+    }
   }
 
 }
