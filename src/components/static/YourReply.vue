@@ -3,7 +3,7 @@
             <div id="counter-div" class="order-2 order-md-1 d-none d-md-flex">
             <div id="count" class="rounded-3">
                 <span @click="addScore1" id="ops"><b>+</b></span>
-                <span id="number"><b>{{score1}}</b></span>
+                <span id="number"><b>{{data.comments[1].replies[1].score}}</b></span>
                 <span @click="subtractScore1" id="ops"><b>-</b></span>
             </div>
 
@@ -14,9 +14,9 @@
             <div id="comment-info">
                 <div id="first-info">
                 <img src="../../assets/avatars/image-juliusomo.png" alt="juliusomo">
-                <h6 class="m-0"><b>juliusomo</b></h6>
+                <h6 class="m-0"><b>{{data.currentUser.username}}</b></h6>
                 <span id="you-tag" class="rounded-1 px-2"><b>you</b></span>
-                <span>2 days ago</span>
+                <span>{{data.comments[1].replies[1].createdAt}}</span>
                 </div>
 
                 <div class="d-none d-md-flex" id="second-info">
@@ -34,7 +34,7 @@
             </div>
 
             <div id="comment-text" class="pt-2">
-                <p>I couldn't agree more with this. Everything moves so fast and it always seems like everyone knows the newest library/framework. But the fundamentals are what stay constant.</p>
+                <p><b>@{{data.comments[1].replies[1].replyingTo}}</b> {{data.comments[1].replies[1].content}}</p>
             </div>
 
             </div>
@@ -43,7 +43,7 @@
                 
                     <div id="count" class="rounded-3">
                         <span @click="addScore1" id="ops"><b>+</b></span>
-                        <span id="number"><b>{{score1}}</b></span>
+                        <span id="number"><b>{{data.comments[1].replies[1].score}}</b></span>
                         <span @click="subtractScore1" id="ops"><b>-</b></span>
                     </div>
 
@@ -68,30 +68,9 @@
 </template>
 
 <script>
-// import commentData from "../data.json"
 export default {
     name: 'ReplyComponent',
-    props: ['score1', 'addScore1', 'subtractScore1']
-//   data() {
-//     return {
-//         myData : commentData.comments,
-//         replyData: [],
-//     }
-//   },
-
-
-    
-// mounted() {
-//     for (let i = 0; i < this.myData.length; i++) {
-//       if(this.myData[i].replies.length > 0){
-//           console.log(this.myData[i].replies);
-//           this.replyData = this.myData[i].replies
-//     }
-//   }
-// }
-
-
-
+    props: ['data','score1', 'addScore1', 'subtractScore1']
 }
 </script>
 

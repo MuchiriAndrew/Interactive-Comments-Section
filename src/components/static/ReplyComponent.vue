@@ -3,7 +3,7 @@
             <div id="counter-div" class="order-2 order-md-1 d-none d-md-flex" >
             <div id="count" class="rounded-3">
                 <span @click="addScore1" id="ops"><b>+</b></span>
-                <span id="number"><b>{{score1}}</b></span>
+                <span id="number"><b>{{data.comments[1].replies[0].score}}</b></span>
                 <span @click="subtractScore1" id="ops"><b>-</b></span>
             </div>
 
@@ -14,8 +14,8 @@
             <div id="comment-info">
                 <div id="first-info">
                 <img src="../../assets/avatars/image-ramsesmiron.png" alt="amyrobson">
-                <h6 class="m-0"><b>ramsesmiron</b></h6>
-                <span>1 week ago</span>
+                <h6 class="m-0"><b>{{data.comments[1].replies[0].user.username}}</b></h6>
+                <span>{{data.comments[1].replies[0].createdAt}}</span>
                 </div>
 
                 <div id="second-info" class="d-none d-md-flex">
@@ -25,7 +25,7 @@
             </div>
 
             <div id="comment-text" class="pt-2">
-                <p>If you're still new, I'd recommend focusing on the fundamentals of HTML, CSS, and JS before considering React. It's very tempting to jump ahead but lay a solid foundation first.</p>
+                <p><b>@{{data.comments[1].replies[0].replyingTo}}</b> {{ data.comments[1].replies[0].content}}</p>
             </div>
 
             </div>
@@ -33,7 +33,7 @@
             <div id="new-div" class="order-2 d-flex d-md-none">
         <div id="count" class="rounded-3">
             <span @click="addScore1" id="ops"><b>+</b></span>
-            <span id="number"><b>{score1}</b></span>
+            <span id="number"><b>{{data.comments[1].replies[0].score}}</b></span>
             <span @click="subtractScore1" id="ops"><b>-</b></span>
           </div>
 
@@ -47,8 +47,8 @@
 </template>
 
 <script>
-// import commentData from "../data.json"
 export default {
+  props: ['data'],
     name: 'ReplyComponent',
        data() {
     return {
@@ -58,33 +58,14 @@ export default {
 
   methods: {
     addScore1() {
-      this.score1++
+      this.data.comments[1].replies[0].score++
     },
 
     subtractScore1() {
-      if(this.score1 > 0)  
-      this.score1--
+      if(this.data.comments[1].replies[0].score > 0)  
+      this.data.comments[1].replies[0].score--
     },
   }
-//   data() {
-//     return {
-//         myData : commentData.comments,
-//         replyData: [],
-//     }
-//   },
-
-
-    
-// mounted() {
-//     for (let i = 0; i < this.myData.length; i++) {
-//       if(this.myData[i].replies.length > 0){
-//           console.log(this.myData[i].replies);
-//           this.replyData = this.myData[i].replies
-//     }
-//   }
-// }
-
-
 
 }
 </script>

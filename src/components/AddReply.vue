@@ -6,7 +6,7 @@
             </div>
 
             <form id="text-area" class="">
-                <textarea name="addcomment" id="addcomment" class="rounded-2 p-2" placeholder="Add a reply..."></textarea>
+                <textarea v-model="text" name="addcomment" id="addcomment" class="rounded-2 p-2" placeholder="Add a reply..."></textarea>
             </form>
 
             <button class="rounded-2 d-none d-md-block">REPLY</button>
@@ -25,6 +25,14 @@
 
 <script>
 export default {
+    data(){
+        return{
+            text:""
+        }
+    },
+    updated() {
+        console.log(this.text);
+    }
 
 }
 </script>

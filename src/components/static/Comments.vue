@@ -3,7 +3,7 @@
         <div id="counter-div" class="order-2 order-md-1 d-none d-md-flex">
           <div id="count" class="rounded-3">
             <span @click="addScore1" id="ops"><b>+</b></span>
-            <span id="number"><b>{{score1}}</b></span>
+            <span id="number"><b>{{data.comments[0].score}}</b></span>
             <span @click="subtractScore1" id="ops"><b>-</b></span>
           </div>
 
@@ -14,8 +14,8 @@
           <div id="comment-info">
             <div id="first-info">
               <img src="../../assets/avatars/image-amyrobson.png" alt="amyrobson">
-              <h6 class="m-0"><b>amyrobson</b></h6>
-              <span>1 month ago</span>
+              <h6 class="m-0"><b>{{data.comments[0].user.username}}</b></h6>
+              <span>{{data.comments[0].createdAt}}</span>
             </div>
 
             <div id="second-info" class="d-none d-md-flex">
@@ -26,7 +26,7 @@
           </div>
 
           <div id="comment-text" class="pt-2">
-            <p>Impressive! Though it seems the drag feature could be improved. But overall it looks incredible. You've nailed the design and the responsiveness at various breakpoints works really well.</p>
+            <p>{{data.comments[0].content}}</p>
           </div>
 
         </div>
@@ -34,7 +34,7 @@
         <div id="new-div" class="order-2 d-flex d-md-none">
         <div id="count" class="rounded-3">
             <span id="ops"><b>+</b></span>
-            <span id="number"><b>{{score1}}</b></span>
+            <span id="number"><b>{{data.comments[0].score}}</b></span>
             <span id="ops"><b>-</b></span>
           </div>
 
@@ -52,7 +52,7 @@
         <div id="counter-div" class="order-2 order-md-1 d-none d-md-flex" >
           <div id="count" class="rounded-3">
             <span @click="addScore2" id="ops"><b>+</b></span>
-            <span id="number"><b>{{score2}}</b></span>
+            <span id="number"><b>{{this.data.comments[1].score}}</b></span>
             <span @click="subtractScore2" id="ops"><b>-</b></span>
           </div>
 
@@ -62,8 +62,8 @@
           <div id="comment-info">
             <div id="first-info">
               <img src="../../assets/avatars/image-maxblagun.png" alt="maxblagun">
-              <h6 class="m-0"><b>maxblagun</b></h6>
-              <span>2 weeks ago</span>
+              <h6 class="m-0"><b>{{this.data.comments[1].user.username}}</b></h6>
+              <span>{{this.data.comments[1].createdAt}}</span>
             </div>
 
             <div id="second-info" class="d-none d-md-flex">
@@ -74,7 +74,7 @@
           </div>
 
           <div id="comment-text" class="pt-2">
-            <p>Woah, your project looks awesome! How long have you been coding for? I'm still new, but think I want to dive into React as well soon. Perhaps you can give me an insight on where I can learn React? Thanks!</p>
+            <p>{{data.comments[1].content}}</p>
           </div>
 
         </div>
@@ -82,7 +82,7 @@
         <div id="new-div" class="order-2 d-flex d-md-none">
         <div id="count" class="rounded-3">
             <span id="ops"><b>+</b></span>
-            <span id="number"><b>{{score2}}</b></span>
+            <span id="number"><b>{{this.data.comments[1].score}}</b></span>
             <span id="ops"><b>-</b></span>
           </div>
 
@@ -98,27 +98,26 @@
 
 <script>
 export default {
+  props : ['data'],
    data() {
     return {
-      score1: 12,
-      score2: 5,
     }
   },
 
   methods: {
     addScore1() {
-      this.score1++
+      this.data.comments[0].score++
     },
     addScore2() {
-      this.score2++
+     this.data.comments[1].score++
     },
     subtractScore1() {
-      if(this.score1 > 0)  
-      this.score1--
+      if(this.data.comments[0].score > 0)  
+     this.data.comments[0].score--
     },
     subtractScore2() {
-      if(this.score2 > 0)
-      this.score2--
+      if(this.data.comments[1].score > 0)
+      this.data.comments[1].score--
     }
   }
 
