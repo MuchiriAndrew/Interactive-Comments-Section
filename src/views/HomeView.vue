@@ -5,8 +5,8 @@
       <Comments />
       <AddReply />
       <ReplyComponent />
-      <YourReply />
-       <Update />
+      <YourReply :score1 = 'score1' :addScore1="addScore1" :subtractScore1="subtractScore1"  />
+      <Update :score1 = 'score1' :addScore1="addScore1" :subtractScore1="subtractScore1" />
       <AddComment />
      
 
@@ -30,9 +30,25 @@ export default {
   name: 'HomeView',
   // data() {
   //   return {
-  //     myData : commentData.comments,
   //   }
   // },
+
+  data() {
+    return {
+      score1: 2,
+    }
+  },
+
+  methods: {
+    addScore1() {
+      this.score1++
+    },
+
+    subtractScore1() {
+      if(this.score1 > 0)  
+      this.score1--
+    },
+  }
 }
 
 </script>

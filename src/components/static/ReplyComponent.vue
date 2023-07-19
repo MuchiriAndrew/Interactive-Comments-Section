@@ -2,9 +2,9 @@
        <div id="comments" class="bg-white rounded-2 mb-2">
             <div id="counter-div" class="order-2 order-md-1 d-none d-md-flex" >
             <div id="count" class="rounded-3">
-                <span id="ops"><b>+</b></span>
-                <span id="number"><b>4</b></span>
-                <span id="ops"><b>-</b></span>
+                <span @click="addScore1" id="ops"><b>+</b></span>
+                <span id="number"><b>{{score1}}</b></span>
+                <span @click="subtractScore1" id="ops"><b>-</b></span>
             </div>
 
             </div>
@@ -32,9 +32,9 @@
 
             <div id="new-div" class="order-2 d-flex d-md-none">
         <div id="count" class="rounded-3">
-            <span id="ops"><b>+</b></span>
-            <span id="number"><b>4</b></span>
-            <span id="ops"><b>-</b></span>
+            <span @click="addScore1" id="ops"><b>+</b></span>
+            <span id="number"><b>{score1}</b></span>
+            <span @click="subtractScore1" id="ops"><b>-</b></span>
           </div>
 
           <div id="second-info">
@@ -50,6 +50,22 @@
 // import commentData from "../data.json"
 export default {
     name: 'ReplyComponent',
+       data() {
+    return {
+      score1: 4,
+    }
+  },
+
+  methods: {
+    addScore1() {
+      this.score1++
+    },
+
+    subtractScore1() {
+      if(this.score1 > 0)  
+      this.score1--
+    },
+  }
 //   data() {
 //     return {
 //         myData : commentData.comments,

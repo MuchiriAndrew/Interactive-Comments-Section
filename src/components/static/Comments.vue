@@ -2,9 +2,9 @@
 <div id="comments" class="bg-white rounded-2 mb-2">
         <div id="counter-div" class="order-2 order-md-1 d-none d-md-flex">
           <div id="count" class="rounded-3">
-            <span id="ops"><b>+</b></span>
-            <span id="number"><b>12</b></span>
-            <span id="ops"><b>-</b></span>
+            <span @click="addScore1" id="ops"><b>+</b></span>
+            <span id="number"><b>{{score1}}</b></span>
+            <span @click="subtractScore1" id="ops"><b>-</b></span>
           </div>
 
         </div>
@@ -34,7 +34,7 @@
         <div id="new-div" class="order-2 d-flex d-md-none">
         <div id="count" class="rounded-3">
             <span id="ops"><b>+</b></span>
-            <span id="number"><b>12</b></span>
+            <span id="number"><b>{{score1}}</b></span>
             <span id="ops"><b>-</b></span>
           </div>
 
@@ -51,9 +51,9 @@
       <div id="comments" class="bg-white rounded-2 mb-2">
         <div id="counter-div" class="order-2 order-md-1 d-none d-md-flex" >
           <div id="count" class="rounded-3">
-            <span id="ops"><b>+</b></span>
-            <span id="number"><b>5</b></span>
-            <span id="ops"><b>-</b></span>
+            <span @click="addScore2" id="ops"><b>+</b></span>
+            <span id="number"><b>{{score2}}</b></span>
+            <span @click="subtractScore2" id="ops"><b>-</b></span>
           </div>
 
         </div>
@@ -82,7 +82,7 @@
         <div id="new-div" class="order-2 d-flex d-md-none">
         <div id="count" class="rounded-3">
             <span id="ops"><b>+</b></span>
-            <span id="number"><b>5</b></span>
+            <span id="number"><b>{{score2}}</b></span>
             <span id="ops"><b>-</b></span>
           </div>
 
@@ -98,6 +98,29 @@
 
 <script>
 export default {
+   data() {
+    return {
+      score1: 12,
+      score2: 5,
+    }
+  },
+
+  methods: {
+    addScore1() {
+      this.score1++
+    },
+    addScore2() {
+      this.score2++
+    },
+    subtractScore1() {
+      if(this.score1 > 0)  
+      this.score1--
+    },
+    subtractScore2() {
+      if(this.score2 > 0)
+      this.score2--
+    }
+  }
 
 }
 </script>

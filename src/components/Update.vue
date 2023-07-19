@@ -3,7 +3,7 @@
             <div id="counter-div" class="order-2 order-md-1 d-none d-md-flex">
             <div id="count" class="rounded-3">
                 <span id="ops"><b>+</b></span>
-                <span id="number"><b>2</b></span>
+                <span id="number"><b>{{score1}}</b></span>
                 <span id="ops"><b>-</b></span>
             </div>
 
@@ -47,7 +47,7 @@
                 
                     <div id="count" class="rounded-3">
                         <span id="ops"><b>+</b></span>
-                        <span id="number"><b>2</b></span>
+                        <span id="number"><b>{{score1}}</b></span>
                         <span id="ops"><b>-</b></span>
                     </div>
 
@@ -73,6 +73,7 @@
 
 <script>
 export default {
+    props: ['score1', 'addScore1', 'subtractScore1']
 
 }
 </script>
