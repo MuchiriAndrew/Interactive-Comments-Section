@@ -14,74 +14,82 @@
     </div>
     </div>
 
-      <div id="comments" class="bg-white rounded-2 mb-2" :style = "[!clicked1 ? {'display':'none'} : {}]" >
-            <div id="counter-div" class="order-2 order-md-1 d-none d-md-flex">
-            <div id="count" class="rounded-3">
-                <span @click="addScore1" id="ops"><b>+</b></span>
-                <span id="number"><b>{{data.comments[1].replies[1].score}}</b></span>
-                <span @click="subtractScore1" id="ops"><b>-</b></span>
-            </div>
+        <transition name="comment-update">
 
-            </div>
+            <Update :data = 'data' v-if="clicked1" :clicked1 = 'clicked1' :handleUpdate = 'handleUpdate'/>
 
-            <div id="text-wrapper" class="pt-2 order-1 order-md-2">
 
-            <div id="comment-info">
-                <div id="first-info">
-                <img src="../../assets/avatars/image-juliusomo.png" alt="juliusomo">
-                <h6 class="m-0"><b>{{data.currentUser.username}}</b></h6>
-                <span id="you-tag" class="rounded-1 px-2"><b>you</b></span>
-                <span>{{data.comments[1].replies[1].createdAt}}</span>
-                </div>
-
-                <div class="d-none d-md-flex" id="second-info">
-                    <div id="delete" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                        <img src="../../assets/icon-delete.svg" alt="delete">
-                        <p class="m-0">Delete</p>
-                    </div>
-
-                    <div @click="handleEdit" id="edit">
-                        <img src="../../assets/icon-edit.svg" alt="delete">
-                        <p class="m-0">Edit</p>
-                    </div>
-                
-                </div>
-            </div>
-
-            <div id="comment-text" class="pt-2">
-                <p><b>@{{data.comments[1].replies[1].replyingTo}}</b> {{data.comments[1].replies[1].content}}</p>
-            </div>
-
-            </div>
-
-            <div class="d-flex d-md-none order-2" id="new-info">
-                
+            <div id="comments" class="bg-white rounded-2 mb-2" v-else >
+                    <div id="counter-div" class="order-2 order-md-1 d-none d-md-flex">
                     <div id="count" class="rounded-3">
                         <span @click="addScore1" id="ops"><b>+</b></span>
                         <span id="number"><b>{{data.comments[1].replies[1].score}}</b></span>
                         <span @click="subtractScore1" id="ops"><b>-</b></span>
                     </div>
 
-                    <div  id="second">
-                        <div @click="handleDelete" id="delete" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                        <img src="../../assets/icon-delete.svg" alt="delete">
-                        <p class="m-0">Delete</p>
                     </div>
 
-                    <div @click="handleEdit" id="edit">
-                        <img src="../../assets/icon-edit.svg" alt="delete">
-                        <p class="m-0">Edit</p>
+                    <div id="text-wrapper" class="pt-2 order-1 order-md-2">
+
+                    <div id="comment-info">
+                        <div id="first-info">
+                        <img src="../../assets/avatars/image-juliusomo.png" alt="juliusomo">
+                        <h6 class="m-0"><b>{{data.currentUser.username}}</b></h6>
+                        <span id="you-tag" class="rounded-1 px-2"><b>you</b></span>
+                        <span>{{data.comments[1].replies[1].createdAt}}</span>
+                        </div>
+
+                        <div class="d-none d-md-flex" id="second-info">
+                            <div id="delete" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                <img src="../../assets/icon-delete.svg" alt="delete">
+                                <p class="m-0">Delete</p>
+                            </div>
+
+                            <div @click="handleEdit" id="edit">
+                                <img src="../../assets/icon-edit.svg" alt="delete">
+                                <p class="m-0">Edit</p>
+                            </div>
+                        
+                        </div>
+                    </div>
+
+                    <div id="comment-text" class="pt-2">
+                        <p><b>@{{data.comments[1].replies[1].replyingTo}}</b> {{data.comments[1].replies[1].content}}</p>
                     </div>
 
                     </div>
 
-                    
-                
+                    <div class="d-flex d-md-none order-2" id="new-info">
+                        
+                            <div id="count" class="rounded-3">
+                                <span @click="addScore1" id="ops"><b>+</b></span>
+                                <span id="number"><b>{{data.comments[1].replies[1].score}}</b></span>
+                                <span @click="subtractScore1" id="ops"><b>-</b></span>
+                            </div>
+
+                            <div  id="second">
+                                <div @click="handleDelete" id="delete" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                <img src="../../assets/icon-delete.svg" alt="delete">
+                                <p class="m-0">Delete</p>
+                            </div>
+
+                            <div @click="handleEdit" id="edit">
+                                <img src="../../assets/icon-edit.svg" alt="delete">
+                                <p class="m-0">Edit</p>
+                            </div>
+
+                            </div>
+
+                            
+                        
+                    </div>
             </div>
-      </div>
 
-      <Update :data = 'data' :style = "[clicked1 ? {'display':'none'} : {}]" :clicked1 = 'clicked1' :handleUpdate = 'handleUpdate'/>
 
+        </transition>
+        
+
+      
 </template>
 
 <script>
@@ -93,7 +101,7 @@ export default {
     props: ['data','score1', 'addScore1', 'subtractScore1'],
     data() {
     return {
-      clicked1:true,
+      clicked1:false,
       showModal:false
     }
   },
@@ -112,6 +120,7 @@ export default {
 #comments {
     width: 85%;
 }
+
 
 #first-info {
     min-width: 50%;

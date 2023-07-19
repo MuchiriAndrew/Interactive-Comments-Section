@@ -43,7 +43,10 @@
 
       </div>
       </div>
-                  <AddReply :style= "[clicked1 ? {'display':'none'} : {}]"/>
+
+      <transition name="fade">                  
+        <AddReply v-if="clicked1"/>
+      </transition>
       
 
       <div id="comments" class="bg-white rounded-2 mb-2">
@@ -90,8 +93,11 @@
 
       </div>
       </div>
-                  <AddReply :style= "[clicked2 ? {'display':'none'} : {}]"/>
-  
+
+      <transition name="fade">                  
+        <AddReply v-if="clicked2"/>
+      </transition>  
+      
 </template>
 
 <script>
@@ -102,8 +108,8 @@ export default {
   props : ['data'],
    data() {
     return {
-      clicked1:true,
-      clicked2:true,
+      clicked1:false,
+      clicked2:false,
     }
   },
 
@@ -135,6 +141,14 @@ export default {
 </script>
 
 <style>
+
+.fade-enter-from{opacity: 0;transform: translateY(-20px);}
+.fade-enter-to{opacity: 1;}
+.fade-enter-active{transition: all 0.5s ease-in-out;}
+
+.fade-leave-from{ opacity: 1;}
+.fade-leave-to{opacity: 0;transform: translateY(-20px);}
+.fade-leave-active{transition: all 0.5s ease-in-out;}
 
 #wrapper {
   min-height: 100vh;

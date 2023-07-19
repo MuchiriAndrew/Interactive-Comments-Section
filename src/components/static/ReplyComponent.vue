@@ -45,7 +45,9 @@
       </div>
       </div>
 
-      <AddReply :style= "[clicked1 ? {'display':'none'} : {}]"/>
+      <transition name="fade">                  
+        <AddReply v-if="clicked1"/>
+      </transition>
 
 
 </template>
@@ -59,8 +61,8 @@ export default {
     name: 'ReplyComponent',
        data() {
     return {
-      clicked1:true,
-      clicked2:true,
+      clicked1:false,
+      clicked2:false,
     }
   },
 

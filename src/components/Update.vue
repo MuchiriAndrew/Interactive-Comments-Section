@@ -18,19 +18,6 @@
                     <span id="you-tag" class="rounded-1 px-2"><b>you</b></span>
                     <span>{{data.comments[1].replies[1].createdAt}}</span>
                     </div>
-
-                    <!-- <div id="second-info" class="d-none d-md-flex">
-                        <div id="delete">
-                            <img src="../assets/icon-delete.svg" alt="delete">
-                            <p class="m-0">Delete</p>
-                        </div>
-
-                        <div id="edit">
-                            <img src="../assets/icon-edit.svg" alt="delete">
-                            <p class="m-0">Edit</p>
-                        </div>
-                    
-                    </div> -->
                 </div>
 
                 <div id="update-text">
@@ -49,22 +36,7 @@
                         <span id="ops"><b>+</b></span>
                         <span id="number"><b>{{data.comments[1].replies[1].score}}</b></span>
                         <span id="ops"><b>-</b></span>
-                    </div>
-
-                    <!-- <div id="second">
-                        <div id="delete">
-                        <img src="../assets/icon-delete.svg" alt="delete">
-                        <p class="m-0">Delete</p>
-                    </div>
-
-                    <div id="edit">
-                        <img src="../assets/icon-edit.svg" alt="delete">
-                        <p class="m-0">Edit</p>
-                    </div>
-
-                    </div> -->
-
-                    
+                    </div>                
                 
             </div>
       </div>
