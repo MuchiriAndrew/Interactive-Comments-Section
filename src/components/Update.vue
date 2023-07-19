@@ -19,7 +19,7 @@
                     <span>{{data.comments[1].replies[1].createdAt}}</span>
                     </div>
 
-                    <div id="second-info" class="d-none d-md-flex">
+                    <!-- <div id="second-info" class="d-none d-md-flex">
                         <div id="delete">
                             <img src="../assets/icon-delete.svg" alt="delete">
                             <p class="m-0">Delete</p>
@@ -30,7 +30,7 @@
                             <p class="m-0">Edit</p>
                         </div>
                     
-                    </div>
+                    </div> -->
                 </div>
 
                 <div id="update-text">
@@ -51,7 +51,7 @@
                         <span id="ops"><b>-</b></span>
                     </div>
 
-                    <div id="second">
+                    <!-- <div id="second">
                         <div id="delete">
                         <img src="../assets/icon-delete.svg" alt="delete">
                         <p class="m-0">Delete</p>
@@ -62,7 +62,7 @@
                         <p class="m-0">Edit</p>
                     </div>
 
-                    </div>
+                    </div> -->
 
                     
                 

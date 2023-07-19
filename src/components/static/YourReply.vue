@@ -68,7 +68,7 @@
                         <p class="m-0">Delete</p>
                     </div>
 
-                    <div id="edit">
+                    <div @click="handleEdit" id="edit">
                         <img src="../../assets/icon-edit.svg" alt="delete">
                         <p class="m-0">Edit</p>
                     </div>
