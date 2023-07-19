@@ -31,9 +31,9 @@
         </div>
         <div id="new-div" class="order-2 d-flex d-md-none">
         <div id="count" class="rounded-3">
-            <span id="ops"><b>+</b></span>
+            <span @click="addScore1" id="ops"><b>+</b></span>
             <span id="number"><b>{{data.comments[0].score}}</b></span>
-            <span id="ops"><b>-</b></span>
+            <span @click="subtractScore1" id="ops"><b>-</b></span>
           </div>
 
           <div  @click="handleClicked1" id="second-info">
@@ -78,9 +78,9 @@
         </div>
         <div id="new-div" class="order-2 d-flex d-md-none">
         <div id="count" class="rounded-3">
-            <span id="ops"><b>+</b></span>
+            <span @click="addScore2" id="ops"><b>+</b></span>
             <span id="number"><b>{{this.data.comments[1].score}}</b></span>
-            <span id="ops"><b>-</b></span>
+            <span @click="subtractScore2" id="ops"><b>-</b></span>
           </div>
 
           <div  @click="handleClicked2" id="second-info">

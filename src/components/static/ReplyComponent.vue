@@ -37,7 +37,7 @@
             <span @click="subtractScore1" id="ops"><b>-</b></span>
           </div>
 
-          <div id="second-info">
+          <div  @click="handleClicked1" id="second-info">
               <img src="../../assets/icon-reply.svg" alt="reply">
               <p class="m-0">Reply</p>
             </div>
