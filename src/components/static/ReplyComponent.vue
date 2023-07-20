@@ -1,4 +1,6 @@
 <template>
+
+        <template>
       <div id="comments" class="bg-white rounded-2 mb-2">
             <div id="counter-div" class="order-2 order-md-1 d-none d-md-flex" >
             <div id="count" class="rounded-3">
@@ -48,6 +50,10 @@
       <transition name="fade">                  
         <AddReply v-if="clicked1"/>
       </transition>
+
+        </template>
+
+
 
 </template>
 

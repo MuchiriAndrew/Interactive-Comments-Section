@@ -1,14 +1,12 @@
 <template>
-
-
     <template v-for="(comment, index) in commentData" :key="index">
 
           <div id="comments" class="bg-white rounded-2 mb-2">
             <div id="counter-div" class="order-2 order-md-1 d-none d-md-flex">
               <div id="count" class="rounded-3">
-                <span @click="addScore1" id="ops"><b>+</b></span>
+                <span @click="addScore(comment)" id="ops"><b>+</b></span>
                 <span id="number"><b>{{comment.score}}</b></span>
-                <span @click="subtractScore1" id="ops"><b>-</b></span>
+                <span @click="subtractScore(comment)" id="ops"><b>-</b></span>
               </div>
 
             </div>
@@ -21,7 +19,7 @@
                   <span>{{comment.createdAt}}</span>
                 </div>
 
-                <div @click="handleClicked1" id="second-info" class="d-none d-md-flex">
+                <div @click="show === index ? show = -1 : show = index" id="second-info" class="d-none d-md-flex">
                   <img src="../../assets/icon-reply.svg" alt="reply">
                   <p class="m-0">Reply</p>
                 </div>
@@ -35,12 +33,12 @@
             </div>
             <div id="new-div" class="order-2 d-flex d-md-none">
             <div id="count" class="rounded-3">
-                <span @click="addScore1" id="ops"><b>+</b></span>
+                <span @click="subtractScore(comment)" id="ops"><b>+</b></span>
                 <span id="number"><b>{{comment.score}}</b></span>
-                <span @click="subtractScore1" id="ops"><b>-</b></span>
+                <span @click="subtractScore(comment)" id="ops"><b>-</b></span>
               </div>
 
-              <div  @click="handleClicked1" id="second-info">
+              <div  @click="show === index ? show = -1 : show = index" id="second-info">
                   <img src="../../assets/icon-reply.svg" alt="reply">
                   <p class="m-0">Reply</p>
                 </div>
@@ -48,14 +46,20 @@
           </div>
           </div>
 
+          <transition name="fade">                  
+              <AddReply v-if="show === index"/>
+          </transition>
+
           <!-- The reply Component For Each Comment -->
-          <div v-for="(reply,index) in comment.replies" :key="index">
-          <div id="comments" class="bg-white rounded-2 mb-2">
+
+
+          <div id="replies-container" v-for="(reply,index) in comment.replies" :key="index">
+          <div  id="reply-comments" class="bg-white rounded-2 mb-2">
             <div id="counter-div" class="order-2 order-md-1 d-none d-md-flex" >
             <div id="count" class="rounded-3">
-                <span @click="addScore1" id="ops"><b>+</b></span>
+                <span @click="addScore(reply)" id="ops"><b>+</b></span>
                 <span id="number"><b>{{reply.score}}</b></span>
-                <span @click="subtractScore1" id="ops"><b>-</b></span>
+                <span @click="subtractScore(reply)" id="ops"><b>-</b></span>
             </div>
 
             </div>
@@ -63,13 +67,13 @@
             <div id="text-wrapper" class="pt-2 order-1 order-md-2">
 
             <div id="comment-info">
-                <div id="first-info">
+                <div id="reply-first-info">
                 <img src="../../assets/avatars/image-ramsesmiron.png" alt="amyrobson">
                 <h6 class="m-0"><b>{{reply.user.username}}</b></h6>
                 <span>{{reply.createdAt}}</span>
                 </div>
 
-                <div @click="handleClicked1" id="second-info" class="d-none d-md-flex">
+                <div @click="show2 === index ? show2 = -1 : show2 = index" id="reply-second-info" class="d-none d-md-flex">
                 <img src="../../assets/icon-reply.svg" alt="reply">
                 <p class="m-0">Reply</p>
                 </div>
@@ -83,12 +87,12 @@
 
             <div id="new-div" class="order-2 d-flex d-md-none">
         <div id="count" class="rounded-3">
-            <span @click="addScore1" id="ops"><b>+</b></span>
+            <span @click="addScore(reply)" id="ops"><b>+</b></span>
             <span id="number"><b>{{reply.score}}</b></span>
-            <span @click="subtractScore1" id="ops"><b>-</b></span>
+            <span @click="subtractScore(reply)" id="ops"><b>-</b></span>
           </div>
 
-          <div  @click="handleClicked1" id="second-info">
+          <div  @click="show2 === index ? show2 = -1 : show2 = index" id="second-info">
               <img src="../../assets/icon-reply.svg" alt="reply">
               <p class="m-0">Reply</p>
             </div>
@@ -96,135 +100,16 @@
       </div>
       </div>
 
+     
+
       <transition name="fade">                  
-        <AddReply v-if="clicked1"/>
+        <AddReply v-if="show2 === index" style="width:85%"/>
       </transition>
 
-          </div>
+           </div>
 
-          <transition name="fade">                  
-              <AddReply v-if="clicked1"/>
-          </transition>
 
     </template>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      <!-- <div id="comments" class="bg-white rounded-2 mb-2">
-        <div id="counter-div" class="order-2 order-md-1 d-none d-md-flex">
-          <div id="count" class="rounded-3">
-            <span @click="addScore1" id="ops"><b>+</b></span>
-            <span id="number"><b>{{data.comments[0].score}}</b></span>
-            <span @click="subtractScore1" id="ops"><b>-</b></span>
-          </div>
-
-        </div>
-        <div id="text-wrapper" class="pt-2 order-1 order-md-2">
-
-          <div id="comment-info">
-            <div id="first-info">
-              <img src="../../assets/avatars/image-amyrobson.png" alt="amyrobson">
-              <h6 class="m-0"><b>{{data.comments[0].user.username}}</b></h6>
-              <span>{{data.comments[0].createdAt}}</span>
-            </div>
-
-            <div @click="handleClicked1" id="second-info" class="d-none d-md-flex">
-              <img src="../../assets/icon-reply.svg" alt="reply">
-              <p class="m-0">Reply</p>
-            </div>
-            
-          </div>
-
-          <div id="comment-text" class="pt-2">
-            <p>{{data.comments[0].content}}</p>
-          </div>
-
-        </div>
-        <div id="new-div" class="order-2 d-flex d-md-none">
-        <div id="count" class="rounded-3">
-            <span @click="addScore1" id="ops"><b>+</b></span>
-            <span id="number"><b>{{data.comments[0].score}}</b></span>
-            <span @click="subtractScore1" id="ops"><b>-</b></span>
-          </div>
-
-          <div  @click="handleClicked1" id="second-info">
-              <img src="../../assets/icon-reply.svg" alt="reply">
-              <p class="m-0">Reply</p>
-            </div>
-
-      </div>
-      </div>
-
-      <transition name="fade">                  
-        <AddReply v-if="clicked1"/>
-      </transition>
-      
-
-      <div id="comments" class="bg-white rounded-2 mb-2">
-        <div id="counter-div" class="order-2 order-md-1 d-none d-md-flex" >
-          <div id="count" class="rounded-3">
-            <span @click="addScore2" id="ops"><b>+</b></span>
-            <span id="number"><b>{{this.data.comments[1].score}}</b></span>
-            <span @click="subtractScore2" id="ops"><b>-</b></span>
-          </div>
-
-        </div>
-        <div id="text-wrapper" class="pt-2 order-1 order-md-2">
-
-          <div id="comment-info">
-            <div id="first-info">
-              <img src="../../assets/avatars/image-maxblagun.png" alt="maxblagun">
-              <h6 class="m-0"><b>{{this.data.comments[1].user.username}}</b></h6>
-              <span>{{this.data.comments[1].createdAt}}</span>
-            </div>
-
-            <div  @click="handleClicked2" id="second-info" class="d-none d-md-flex">
-              <img src="../../assets/icon-reply.svg" alt="reply">
-              <p class="m-0">Reply</p>
-            </div>
-            
-          </div>
-
-          <div id="comment-text" class="pt-2">
-            <p>{{data.comments[1].content}}</p>
-          </div>
-
-        </div>
-        <div id="new-div" class="order-2 d-flex d-md-none">
-        <div id="count" class="rounded-3">
-            <span @click="addScore2" id="ops"><b>+</b></span>
-            <span id="number"><b>{{this.data.comments[1].score}}</b></span>
-            <span @click="subtractScore2" id="ops"><b>-</b></span>
-          </div>
-
-          <div  @click="handleClicked2" id="second-info">
-              <img src="../../assets/icon-reply.svg" alt="reply">
-              <p class="m-0">Reply</p>
-            </div>
-
-      </div>
-      </div>
-
-      <transition name="fade">                  
-        <AddReply v-if="clicked2"/>
-      </transition>   -->
-      
 </template>
 
 <script>
@@ -236,35 +121,28 @@ export default {
   props : ['data'],
    data() {
     return {
-      clicked1:false,
-      clicked2:false,
+      show:false,
+      show2:false,
       commentData: [],
-      replyData: []
     }
   },
 
   methods: {
-    addScore1() {
-      this.data.comments[0].score++
+    addScore(comment) {
+      comment.score++
     },
-    addScore2() {
-     this.data.comments[1].score++
-    },
-    subtractScore1() {
-      if(this.data.comments[0].score > 0)  
-     this.data.comments[0].score--
-    },
-    subtractScore2() {
-      if(this.data.comments[1].score > 0)
-      this.data.comments[1].score--
-    },
-    handleClicked1() {
-      this.clicked1 = !this.clicked1
+    addScore(reply) {
+      reply.score++
     },
 
-    handleClicked2() {
-      this.clicked2 = !this.clicked2
-    }
+    subtractScore(comment) {
+      if(comment.score > 0)  
+     comment.score--
+    },
+    subtractScore(reply) {
+      if(reply.score > 0)  
+     reply.score--
+    },
   },
 
   mounted() {
@@ -272,14 +150,9 @@ export default {
       const response = await fetch ('http://localhost:3000/comments')
       const data = await response.json()
       this.commentData = data
-
-      let i = this.commentData.length-1
-        for(let n=0;n<=i;n++) {
-          this.replyData.push(this.commentData[n].replies)
-        }
     }
     getData()
-    .then(data=> console.log('replies found',this.replyData))
+    .then(data=> console.log('replies found',this.commentData))
   }
 }
 </script>
@@ -317,6 +190,24 @@ export default {
   flex-direction: row;
   justify-content: center;
   align-items: flex-start;
+}
+
+#reply-comments {
+  width: 85%;
+  height: auto;
+  min-height: 100px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+#replies-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
 }
 
 #counter-div{
@@ -363,11 +254,27 @@ export default {
   align-items: center;
 }
 
+#reply-first-info {
+  display: flex;
+  min-width: 50%;
+  height: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
 #first-info img {
   height: 100%;
 }
 
 #first-info span {
+color: hsl(211, 10%, 45%);
+}
+#reply-first-info img {
+  height: 100%;
+}
+
+#reply-first-info span {
 color: hsl(211, 10%, 45%);
 }
 
@@ -379,7 +286,16 @@ color: hsl(211, 10%, 45%);
   justify-content: space-around;
   align-items: center;
   margin-right: 15px;
+}
 
+#reply-second-info {
+  display: flex;
+  flex-direction: row;
+  width: 12%;
+  height: 100%;
+  justify-content: space-around;
+  align-items: center;
+  margin-right: 15px;
 }
 
 #second-info p {
@@ -392,6 +308,18 @@ color: hsl(211, 10%, 45%);
 }
 
 #second-info img{
+  height: 35%;
+}
+#reply-second-info p {
+  font-weight: 500;
+  color: hsl(238, 40%, 52%);
+}
+
+#reply-second-info :hover {
+  cursor: pointer;
+}
+
+#reply-second-info img{
   height: 35%;
 }
 
@@ -412,7 +340,18 @@ color: hsl(211, 10%, 45%);
 }
 
 @media only screen and (max-width: 767px){ 
-  #comments {
+#comments {
+  height: auto;
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 15px;
+}
+
+#reply-comments {
+  width: 90%;
   height: auto;
   min-height: 100px;
   display: flex;
@@ -461,11 +400,23 @@ color: hsl(211, 10%, 45%);
 #first-info {
   min-width: 60%;
 }
+#reply-first-info {
+  min-width: 70%;
+}
 
 #second-info {
   display: flex;
   flex-direction: row;
   width: 20%;
+  height: 100%;
+  justify-content: space-around;
+  align-items: center;
+  margin-right: 15px;
+}
+#reply-second-info {
+  display: flex;
+  flex-direction: row;
+  width: 17%;
   height: 100%;
   justify-content: space-around;
   align-items: center;

@@ -3,7 +3,6 @@
     <div id="comments-container" class="">
 
       <Comments :data = 'data' />
-      <!-- <ReplyComponent :data = 'data' /> -->
       <!-- <YourReply :data = 'data' :showModal = 'showModal' :addScore1="addScore1" :subtractScore1="subtractScore1"  /> -->
       <AddComment :data = 'data' />
 
@@ -15,15 +14,12 @@
 
 <script>
 import Comments from "../components/static/Comments.vue"
-import ReplyComponent from "../components/static/ReplyComponent.vue"
 import YourReply from "../components/static/YourReply.vue"
 import AddComment from "../components/AddComment.vue"
-import AddReply from "../components/AddReply.vue"
-import Update from "../components/Update.vue"
 import allData from "../data.json"
 
 export default {
-  components:{ReplyComponent, YourReply, AddComment, Comments, AddReply, Update},
+  components:{YourReply, AddComment, Comments,},
   name: 'HomeView',
   data() {
     return {
@@ -32,22 +28,7 @@ export default {
   },
 
   methods: {
-    addScore1() {
-      this.data.comments[1].replies[1].score++
-    },
 
-    subtractScore1() {
-      if(this.data.comments[1].replies[1].score > 0)  
-      this.data.comments[1].replies[1].score--
-    },
-
-    toggleReplyForm(){
-        if (display === "none") {
-          replyForm.style.display = "flex";
-        } else {
-          replyForm.style.display = "none";
-        }
-      }
   },
 
 

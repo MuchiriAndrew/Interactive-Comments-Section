@@ -10,6 +10,7 @@
                 <button class="rounded-2 d-none d-md-block">SEND</button>
             </form>
 
+
             
 
             <div id="newone" class="d-flex d-md-none">
@@ -38,7 +39,7 @@ export default {
     methods: {
         handleSend() {            
     const newComment = {
-          id: this.data.comments.length + 1,
+          id: 5,
           content: this.commentText,
           createdAt: "now",
           score: 0,
@@ -50,7 +51,7 @@ export default {
             username: "juliusomo",
           },
           replies: [],
-        };        
+    };        
 
     fetch('http://localhost:3000/comments', {
         method: 'POST',
@@ -61,14 +62,6 @@ export default {
     console.log("push reached")
     }
     },
-
-    // mounted() {
-    //     console.log(this.data.comments.length);
-    // }, 
-    // updated() {
-    //     console.log(this.commentText);
-    // }
-
 }
 </script>
 
@@ -79,6 +72,7 @@ export default {
     flex-direction: row;
     justify-content: space-around;
     align-items: flex-start;
+    padding-bottom: 20px;
 }
 
 #image-div{
@@ -91,13 +85,16 @@ export default {
 }
 
 #text-area {
-    width: 65%;
+    width: 80%;
    min-height: 100px;
+   display: flex;
+   flex-direction: row;
+   justify-content: space-around;
 }
 
 #addcomment {
     resize: none;
-    width: 100%;
+    width: 80%;
     min-height: 80px;
     border: 1px solid hsl(223, 19%, 93%);
 }
@@ -123,6 +120,7 @@ button:hover {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    padding-top: 20px;
 }
 
 #newone img {

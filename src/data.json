@@ -63,20 +63,6 @@
           }
         }
       ]
-    },
-    {
-      "id": 4,
-      "content": "Drew",
-      "createdAt": "now",
-      "score": 0,
-      "user": {
-        "image": {
-          "png": "./image-juliusomo.png",
-          "webp": "./image-juliusomo.webp"
-        },
-        "username": "juliusomo"
-      },
-      "replies": []
     }
   ]
 }
