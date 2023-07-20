@@ -16,14 +16,14 @@
 
         <transition name="comment-update">
 
-            <Update :data = 'data' v-if="clicked1" :clicked1 = 'clicked1' :handleUpdate = 'handleUpdate'/>
+            <Update :reply = 'reply' :data = 'data' v-if="clicked1" :clicked1 = 'clicked1' :handleUpdate = 'handleUpdate'/>
 
 
             <div id="comments" class="bg-white rounded-2 mb-2" v-else >
                     <div id="counter-div" class="order-2 order-md-1 d-none d-md-flex">
                     <div id="count" class="rounded-3">
                         <span @click="addScore1" id="ops"><b>+</b></span>
-                        <span id="number"><b>{{data.comments[1].replies[1].score}}</b></span>
+                        <span id="number"><b>{{reply.score}}</b></span>
                         <span @click="subtractScore1" id="ops"><b>-</b></span>
                     </div>
 
@@ -34,9 +34,9 @@
                     <div id="comment-info">
                         <div id="first-info">
                         <img src="../../assets/avatars/image-juliusomo.png" alt="juliusomo">
-                        <h6 class="m-0"><b>{{data.currentUser.username}}</b></h6>
+                        <h6 class="m-0"><b>{{reply.user.username}}</b></h6>
                         <span id="you-tag" class="rounded-1 px-2"><b>you</b></span>
-                        <span>{{data.comments[1].replies[1].createdAt}}</span>
+                        <span>{{reply.createdAt}}</span>
                         </div>
 
                         <div class="d-none d-md-flex" id="second-info">
@@ -54,7 +54,7 @@
                     </div>
 
                     <div id="comment-text" class="pt-2">
-                        <p><b>@{{data.comments[1].replies[1].replyingTo}}</b> {{data.comments[1].replies[1].content}}</p>
+                        <p><b>@{{reply.replyingTo}} &nbsp;</b>{{reply.content}}</p>
                     </div>
 
                     </div>
@@ -63,7 +63,7 @@
                         
                             <div id="count" class="rounded-3">
                                 <span @click="addScore1" id="ops"><b>+</b></span>
-                                <span id="number"><b>{{data.comments[1].replies[1].score}}</b></span>
+                                <span id="number"><b>{{reply.score}}</b></span>
                                 <span @click="subtractScore1" id="ops"><b>-</b></span>
                             </div>
 
@@ -78,10 +78,7 @@
                                 <p class="m-0">Edit</p>
                             </div>
 
-                            </div>
-
-                            
-                        
+                            </div>    
                     </div>
             </div>
 
@@ -98,7 +95,7 @@ import Update from "../Update.vue"
 export default {
     components: {Update},
     name: 'ReplyComponent',
-    props: ['data','score1', 'addScore1', 'subtractScore1'],
+    props: ['data','score1', 'addScore1', 'subtractScore1', 'reply'],
     data() {
     return {
       clicked1:false,

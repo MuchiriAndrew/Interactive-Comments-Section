@@ -3,7 +3,7 @@
             <div id="counter-div" class="order-2 order-md-1 d-none d-md-flex">
             <div id="count" class="rounded-3">
                 <span id="ops"><b>+</b></span>
-                <span id="number"><b>{{data.comments[1].replies[1].score}}</b></span>
+                <span id="number"><b>{{reply.score}}</b></span>
                 <span id="ops"><b>-</b></span>
             </div>
 
@@ -14,15 +14,15 @@
                 <div id="comment-info">
                     <div id="first-info">
                     <img src="../assets/avatars/image-juliusomo.png" alt="juliusomo">
-                    <h6 class="m-0"><b>{{data.currentUser.username}}</b></h6>
+                    <h6 class="m-0"><b>{{reply.user.username}}</b></h6>
                     <span id="you-tag" class="rounded-1 px-2"><b>you</b></span>
-                    <span>{{data.comments[1].replies[1].createdAt}}</span>
+                    <span>{{reply.createdAt}}</span>
                     </div>
                 </div>
 
                 <div id="update-text">
                      <form id="text-area" class="">
-                    <textarea name="addcomment" id="addcomment" class="rounded-2 p-2" placeholder="Add a comment..." :value = 'data.comments[1].replies[1].content'></textarea>
+                    <textarea name="addcomment" id="addcomment" class="rounded-2 p-2" placeholder="Add a comment..." :value = 'reply.content'></textarea>
                     </form>
 
                     <button @click="handleUpdate" class="rounded-2">UPDATE</button>
@@ -34,7 +34,7 @@
                 
                     <div id="count" class="rounded-3">
                         <span id="ops"><b>+</b></span>
-                        <span id="number"><b>{{data.comments[1].replies[1].score}}</b></span>
+                        <span id="number"><b>{{reply.score}}</b></span>
                         <span id="ops"><b>-</b></span>
                     </div>                
                 
@@ -45,7 +45,7 @@
 
 <script>
 export default {
-    props: ['data','score1', 'addScore1', 'subtractScore1', 'handleUpdate']
+    props: ['data','score1', 'addScore1', 'subtractScore1', 'handleUpdate','reply']
 
 }
 </script>

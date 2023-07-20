@@ -63,6 +63,20 @@
           }
         }
       ]
+    },
+    {
+      "id": 5,
+      "content": "This is a new comment....A new comment cannot be added since it will have a similar ID and the data.json file storing the data will reject it...A method to increment the id will be implemented later",
+      "createdAt": "now",
+      "score": 0,
+      "user": {
+        "image": {
+          "png": "./image-juliusomo.png",
+          "webp": "./image-juliusomo.webp"
+        },
+        "username": "juliusomo"
+      },
+      "replies": []
     }
   ]
 }
