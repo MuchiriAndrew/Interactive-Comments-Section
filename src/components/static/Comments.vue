@@ -1,5 +1,132 @@
 <template>
-<div id="comments" class="bg-white rounded-2 mb-2">
+
+
+    <template v-for="(comment, index) in commentData" :key="index">
+
+          <div id="comments" class="bg-white rounded-2 mb-2">
+            <div id="counter-div" class="order-2 order-md-1 d-none d-md-flex">
+              <div id="count" class="rounded-3">
+                <span @click="addScore1" id="ops"><b>+</b></span>
+                <span id="number"><b>{{comment.score}}</b></span>
+                <span @click="subtractScore1" id="ops"><b>-</b></span>
+              </div>
+
+            </div>
+            <div id="text-wrapper" class="pt-2 order-1 order-md-2">
+
+              <div id="comment-info">
+                <div id="first-info">
+                  <img src="../../assets/avatars/image-amyrobson.png" alt="amyrobson">
+                  <h6 class="m-0"><b>{{comment.user.username}}</b></h6>
+                  <span>{{comment.createdAt}}</span>
+                </div>
+
+                <div @click="handleClicked1" id="second-info" class="d-none d-md-flex">
+                  <img src="../../assets/icon-reply.svg" alt="reply">
+                  <p class="m-0">Reply</p>
+                </div>
+                
+              </div>
+
+              <div id="comment-text" class="pt-2">
+                <p>{{comment.content}}</p>
+              </div>
+
+            </div>
+            <div id="new-div" class="order-2 d-flex d-md-none">
+            <div id="count" class="rounded-3">
+                <span @click="addScore1" id="ops"><b>+</b></span>
+                <span id="number"><b>{{comment.score}}</b></span>
+                <span @click="subtractScore1" id="ops"><b>-</b></span>
+              </div>
+
+              <div  @click="handleClicked1" id="second-info">
+                  <img src="../../assets/icon-reply.svg" alt="reply">
+                  <p class="m-0">Reply</p>
+                </div>
+
+          </div>
+          </div>
+
+          <!-- The reply Component For Each Comment -->
+          <div v-for="(reply,index) in comment.replies" :key="index">
+          <div id="comments" class="bg-white rounded-2 mb-2">
+            <div id="counter-div" class="order-2 order-md-1 d-none d-md-flex" >
+            <div id="count" class="rounded-3">
+                <span @click="addScore1" id="ops"><b>+</b></span>
+                <span id="number"><b>{{reply.score}}</b></span>
+                <span @click="subtractScore1" id="ops"><b>-</b></span>
+            </div>
+
+            </div>
+
+            <div id="text-wrapper" class="pt-2 order-1 order-md-2">
+
+            <div id="comment-info">
+                <div id="first-info">
+                <img src="../../assets/avatars/image-ramsesmiron.png" alt="amyrobson">
+                <h6 class="m-0"><b>{{reply.user.username}}</b></h6>
+                <span>{{reply.createdAt}}</span>
+                </div>
+
+                <div @click="handleClicked1" id="second-info" class="d-none d-md-flex">
+                <img src="../../assets/icon-reply.svg" alt="reply">
+                <p class="m-0">Reply</p>
+                </div>
+            </div>
+
+            <div id="comment-text" class="pt-2">
+                <p><b>@{{reply.replyingTo}}</b> {{reply.content}}</p>
+            </div>
+
+            </div>
+
+            <div id="new-div" class="order-2 d-flex d-md-none">
+        <div id="count" class="rounded-3">
+            <span @click="addScore1" id="ops"><b>+</b></span>
+            <span id="number"><b>{{reply.score}}</b></span>
+            <span @click="subtractScore1" id="ops"><b>-</b></span>
+          </div>
+
+          <div  @click="handleClicked1" id="second-info">
+              <img src="../../assets/icon-reply.svg" alt="reply">
+              <p class="m-0">Reply</p>
+            </div>
+
+      </div>
+      </div>
+
+      <transition name="fade">                  
+        <AddReply v-if="clicked1"/>
+      </transition>
+
+          </div>
+
+          <transition name="fade">                  
+              <AddReply v-if="clicked1"/>
+          </transition>
+
+    </template>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <!-- <div id="comments" class="bg-white rounded-2 mb-2">
         <div id="counter-div" class="order-2 order-md-1 d-none d-md-flex">
           <div id="count" class="rounded-3">
             <span @click="addScore1" id="ops"><b>+</b></span>
@@ -96,20 +223,23 @@
 
       <transition name="fade">                  
         <AddReply v-if="clicked2"/>
-      </transition>  
+      </transition>   -->
       
 </template>
 
 <script>
 import AddReply from "../AddReply.vue"
+import ReplyComponent from "./ReplyComponent.vue"
 
 export default {
-  components: {AddReply},
+  components: {AddReply, ReplyComponent},
   props : ['data'],
    data() {
     return {
       clicked1:false,
       clicked2:false,
+      commentData: [],
+      replyData: []
     }
   },
 
@@ -135,8 +265,22 @@ export default {
     handleClicked2() {
       this.clicked2 = !this.clicked2
     }
-  }
+  },
 
+  mounted() {
+    const getData = async () => {
+      const response = await fetch ('http://localhost:3000/comments')
+      const data = await response.json()
+      this.commentData = data
+
+      let i = this.commentData.length-1
+        for(let n=0;n<=i;n++) {
+          this.replyData.push(this.commentData[n].replies)
+        }
+    }
+    getData()
+    .then(data=> console.log('replies found',this.replyData))
+  }
 }
 </script>
 
