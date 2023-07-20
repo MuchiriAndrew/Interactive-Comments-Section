@@ -5,19 +5,17 @@
                 <img src="../assets/avatars/image-juliusomo.png" alt="juliusomo">
             </div>
 
-            <form @submit.prevent="handleSend" id="text-area" class="">
+            <form @submit="handleSend" id="text-area" class="">
                 <textarea v-model="commentText" name="addcomment" id="addcomment" class="rounded-2 p-2" placeholder="Add a comment..."></textarea>
                 <button class="rounded-2 d-none d-md-block">SEND</button>
             </form>
 
 
-            
-
             <div id="newone" class="d-flex d-md-none">
                 <div id="image-div">
                     <img src="../assets/avatars/image-juliusomo.png" alt="juliusomo">
                 </div>
-                    <form @submit.prevent="handleSend">
+                    <form @submit="handleSend">
                         <button  class="rounded-2">SEND</button>
                     </form>
                           
@@ -37,7 +35,8 @@ export default {
     },
 
     methods: {
-        handleSend() {            
+        handleSend() {     
+            location.reload()       
     const newComment = {
           id: 5,
           content: this.commentText,
