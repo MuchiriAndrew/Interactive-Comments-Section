@@ -3,9 +3,9 @@
     <div id="comments-container" class="">
 
       <Comments :data = 'data' />
-      <ReplyComponent :data = 'data' />
-      <YourReply :data = 'data' :showModal = 'showModal' :addScore1="addScore1" :subtractScore1="subtractScore1"  />
-      <AddComment />
+      <!-- <ReplyComponent :data = 'data' /> -->
+      <!-- <YourReply :data = 'data' :showModal = 'showModal' :addScore1="addScore1" :subtractScore1="subtractScore1"  /> -->
+      <AddComment :data = 'data' />
 
     </div>
 

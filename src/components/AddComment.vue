@@ -5,18 +5,21 @@
                 <img src="../assets/avatars/image-juliusomo.png" alt="juliusomo">
             </div>
 
-            <form id="text-area" class="">
-                <textarea name="addcomment" id="addcomment" class="rounded-2 p-2" placeholder="Add a comment..."></textarea>
+            <form @submit.prevent="handleSend" id="text-area" class="">
+                <textarea v-model="commentText" name="addcomment" id="addcomment" class="rounded-2 p-2" placeholder="Add a comment..."></textarea>
+                <button class="rounded-2 d-none d-md-block">SEND</button>
             </form>
 
-            <button class="rounded-2 d-none d-md-block">SEND</button>
+            
 
             <div id="newone" class="d-flex d-md-none">
                 <div id="image-div">
                     <img src="../assets/avatars/image-juliusomo.png" alt="juliusomo">
                 </div>
-
-                <button class="rounded-2">SEND</button>          
+                    <form @submit.prevent="handleSend">
+                        <button  class="rounded-2">SEND</button>
+                    </form>
+                          
             </div>
             
     </div>
@@ -25,6 +28,46 @@
 
 <script>
 export default {
+    props:['data'],
+    data() {
+        return {
+            commentText: null
+        }
+    },
+
+    methods: {
+        handleSend() {            
+    const newComment = {
+          id: this.data.comments.length + 1,
+          content: this.commentText,
+          createdAt: "now",
+          score: 0,
+          user: {
+            image: {
+              png: "./image-juliusomo.png",
+              webp: "./image-juliusomo.webp",
+            },
+            username: "juliusomo",
+          },
+          replies: [],
+        };        
+
+    fetch('http://localhost:3000/comments', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newComment),
+    })
+    .catch(err => console.log(err))
+    console.log("push reached")
+    }
+    },
+
+    // mounted() {
+    //     console.log(this.data.comments.length);
+    // }, 
+    // updated() {
+    //     console.log(this.commentText);
+    // }
 
 }
 </script>
