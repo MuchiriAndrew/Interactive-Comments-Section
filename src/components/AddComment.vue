@@ -38,7 +38,7 @@ export default {
         handleSend() {     
             location.reload()       
     const newComment = {
-          id: 5,
+          id: Date.now(),
           content: this.commentText,
           createdAt: "now",
           score: 0,

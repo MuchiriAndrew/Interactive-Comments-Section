@@ -22,9 +22,9 @@
             <div id="comments" class="bg-white rounded-2 mb-2" v-else >
                     <div id="counter-div" class="order-2 order-md-1 d-none d-md-flex">
                     <div id="count" class="rounded-3">
-                        <span @click="addScore1" id="ops"><b>+</b></span>
+                        <span @click="addScore(reply)" id="ops"><b>+</b></span>
                         <span id="number"><b>{{reply.score}}</b></span>
-                        <span @click="subtractScore1" id="ops"><b>-</b></span>
+                        <span @click="subtractScore(reply)" id="ops"><b>-</b></span>
                     </div>
 
                     </div>
@@ -54,7 +54,7 @@
                     </div>
 
                     <div id="comment-text" class="pt-2">
-                        <p><b>@{{reply.replyingTo}} &nbsp;</b>{{reply.content}}</p>
+                        <p><b>{{comment.user.username}} &nbsp;</b>{{reply.content}}</p>
                     </div>
 
                     </div>
@@ -62,9 +62,9 @@
                     <div class="d-flex d-md-none order-2" id="new-info">
                         
                             <div id="count" class="rounded-3">
-                                <span @click="addScore1" id="ops"><b>+</b></span>
+                                <span @click="addScore(reply)" id="ops"><b>+</b></span>
                                 <span id="number"><b>{{reply.score}}</b></span>
-                                <span @click="subtractScore1" id="ops"><b>-</b></span>
+                                <span @click="subtractScore(reply)" id="ops"><b>-</b></span>
                             </div>
 
                             <div  id="second">
@@ -95,7 +95,7 @@ import Update from "../Update.vue"
 export default {
     components: {Update},
     name: 'ReplyComponent',
-    props: ['data','score1', 'addScore1', 'subtractScore1', 'reply'],
+    props: ['data','reply', 'comment'],
     data() {
     return {
       clicked1:false,
@@ -109,7 +109,74 @@ export default {
     handleUpdate() {
         this.clicked1 = !this.clicked1
     },
-  }
+
+    addScore(reply) {
+      reply.score++
+
+      console.log(reply.id);
+
+      fetch(`http://localhost:3000/comments/${this.comment.id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            replies:[
+                {
+                id: reply.id,
+                content: reply.content,
+                createdAt: reply.createdAt,
+                replyingTo: reply.replyingTo,
+                score: reply.score,
+                user: {
+                    image: {
+                    png: reply.user.image.png,
+                    webp: reply.user.image.webp,
+                    },
+                    username: reply.user.username,
+                }
+                }
+            ]
+        }),
+    })
+    .catch(err => console.log(err))
+    console.log("comment update success")
+    },
+
+
+
+
+
+
+
+    subtractScore(reply) {
+      if(reply.score > 0)  
+     reply.score--
+
+     fetch(`http://localhost:3000/comments/${this.comment.id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            replies:[
+                {
+                id: reply.id,
+                content: reply.content,
+                createdAt: reply.createdAt,
+                replyingTo: reply.replyingTo,
+                score: reply.score,
+                user: {
+                    image: {
+                    png: reply.user.image.png,
+                    webp: reply.user.image.webp,
+                    },
+                    username: reply.user.username,
+                }
+                }
+            ]
+        }),
+    })
+    .catch(err => console.log(err))
+    console.log("comment update success")
+    },
+  },
 }
 </script>
 

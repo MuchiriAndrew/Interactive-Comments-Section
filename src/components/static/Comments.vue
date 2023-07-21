@@ -47,22 +47,22 @@
           </div>
 
           <transition name="fade">                  
-              <AddReply v-if="show === index"/>
+              <AddReply v-if="show === index" :comment = 'comment'/>
           </transition>
 
           <!-- The reply Component For Each Comment -->
 
           <div id="replies-container" v-for="(reply,index) in comment.replies" :key="index">
               <div id="replies-container" v-if="reply.user.username === 'juliusomo'">          
-              <YourReply :reply = 'reply'/>
+              <YourReply :reply = 'reply' :comment = 'comment'/>
               </div>
 
               <div v-else  id="reply-comments" class="bg-white rounded-2 mb-2">
                 <div id="counter-div" class="order-2 order-md-1 d-none d-md-flex" >
                 <div id="count" class="rounded-3">
-                    <span @click="addScore(reply)" id="ops"><b>+</b></span>
+                    <span @click="addReplyScore(reply)" id="ops"><b>+</b></span>
                     <span id="number"><b>{{reply.score}}</b></span>
-                    <span @click="subtractScore(reply)" id="ops"><b>-</b></span>
+                    <span @click="subtractReplyScore(reply)" id="ops"><b>-</b></span>
                 </div>
 
                 </div>
@@ -83,16 +83,16 @@
                 </div>
 
                 <div id="comment-text" class="pt-2">
-                    <p><b>@{{reply.replyingTo}}</b> {{reply.content}}</p>
+                    <p><b>{{reply.replyingTo}}</b> {{reply.content}}</p>
                 </div>
 
                 </div>
 
                 <div id="new-div" class="order-2 d-flex d-md-none">
             <div id="count" class="rounded-3">
-                <span @click="addScore(reply)" id="ops"><b>+</b></span>
+                <span @click="addReplyScore(reply)" id="ops"><b>+</b></span>
                 <span id="number"><b>{{reply.score}}</b></span>
-                <span @click="subtractScore(reply)" id="ops"><b>-</b></span>
+                <span @click="subtractReplyScore(reply)" id="ops"><b>-</b></span>
               </div>
 
               <div  @click="show2 === index ? show2 = -1 : show2 = index" id="second-info">
@@ -104,7 +104,7 @@
               </div>  
 
               <transition name="fade">                  
-                <AddReply v-if="show2 === index" style="width:85%"/>
+                <AddReply v-if="show2 === index" style="width:85%" :reply = 'reply' :comment="comment" :index = 'index'/>
               </transition>
            </div>
 
@@ -131,16 +131,37 @@ export default {
   methods: {
     addScore(comment) {
       comment.score++
+
+      fetch(`http://localhost:3000/comments/${comment.id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+           score:comment.score
+        }),
+    })
+    .catch(err => console.log(err))
+
     },
-    addScore(reply) {
+
+    addReplyScore(reply) {
       reply.score++
     },
 
     subtractScore(comment) {
       if(comment.score > 0)  
      comment.score--
+
+     fetch(`http://localhost:3000/comments/${comment.id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+           score:comment.score
+        }),
+    })
+    .catch(err => console.log(err))
     },
-    subtractScore(reply) {
+
+    subtractReplyScore(reply) {
       if(reply.score > 0)  
      reply.score--
     },
@@ -153,8 +174,8 @@ export default {
       this.commentData = data
     }
     getData()
-    .then(data=> console.log('replies found',this.commentData))
-  }
+    .then(data=> console.log('comments found',this.commentData))
+  },
 }
 </script>
 

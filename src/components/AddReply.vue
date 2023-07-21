@@ -5,18 +5,22 @@
                 <img src="../assets/avatars/image-juliusomo.png" alt="juliusomo">
             </div>
 
-            <form id="text-area" class="">
-                <textarea v-model="text" name="addcomment" id="addcomment" class="rounded-2 p-2" placeholder="Add a reply..."></textarea>
+            <form id="text-area" class="" @submit="handleSendReply">
+                <textarea v-model="text" name="addcomment" id="addcomment" class="rounded-2 p-2" placeholder="Add a comment" ></textarea>
+                <button class="rounded-2 d-none d-md-block">REPLY</button>
             </form>
 
-            <button class="rounded-2 d-none d-md-block">REPLY</button>
+            
 
             <div id="newone" class="d-flex d-md-none">
                 <div id="image-div">
                     <img src="../assets/avatars/image-juliusomo.png" alt="juliusomo">
                 </div>
 
-                <button class="rounded-2">SEND</button>          
+                <form @submit="handleSendReply">
+                    <button class="rounded-2">SEND</button>      
+                </form>
+                    
             </div>
             
     </div>
@@ -25,14 +29,50 @@
 
 <script>
 export default {
+    props: ['comment', 'reply'],
     data(){
         return{
             text:""
         }
     },
-    updated() {
-        console.log(this.text);
+    mounted() {
+    },
+
+    methods: {
+        handleSendReply() {     
+            location.reload()   
+            const newReply = {
+                id: Date.now(),
+                content: this.text,
+                createdAt: "now",
+                replyingTo: "noone",
+                score: 0,
+                user: {
+                    image: {
+                    png: "./image-juliusomo.png",
+                    webp: "./image-juliusomo.webp",
+                    },
+                    username: "juliusomo",
+                }
+        };          
+
+        const postedReply  = [].concat(this.comment.replies, newReply)
+        console.log(postedReply);
+    
+    // To update a resource with the Fetch API is very simple and straightforward, all you have to pass in is the URL of the endpoint as the 1st parameter and an object which contains the details of the method, headers, and body as the 2nd parameter.
+
+    fetch(`http://localhost:3000/comments/${this.comment.id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            replies:postedReply
+        }),
+    })
+    .catch(err => console.log(err))
+    console.log("comment update success")
     }
+    },
+
 
 }
 </script>
