@@ -1,14 +1,14 @@
 <template>
 
 <!-- Modal -->
-    <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" >
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" >
         <div class="modal-dialog modal-dialog-centered bg-white rounded-3" id="modal-container">
         <div class="modal-content" id="modal-content">
             <h3>Delete Comment</h3>
             <p>Are you sure you want to remove this comment? This will remove the comment and can't be undone</p>
             <div id="btn-div">
                 <div id="cancel" class="rounded-2"  data-bs-dismiss="modal">NO, CANCEL</div>
-                <div id="yes-delete" class="rounded-2" data-bs-dismiss="modal">YES, DELETE</div>
+                <div @click="handleDelete(comment)" id="yes-delete" class="rounded-2" data-bs-dismiss="modal">YES, DELETE</div>
             </div>
         </div>
     </div>
@@ -16,15 +16,15 @@
 
         <transition name="comment-update">
 
-            <Update :reply = 'reply' :data = 'data' v-if="clicked1" :clicked1 = 'clicked1' :handleUpdate = 'handleUpdate'/>
+            <CommentUpdate v-if="clicked1" :clicked1 = 'clicked1' :comment = 'comment' :handleUpdate = 'handleUpdate'/>
 
 
             <div id="comments" class="bg-white rounded-2 mb-2" v-else >
                     <div id="counter-div" class="order-2 order-md-1 d-none d-md-flex">
                     <div id="count" class="rounded-3">
-                        <span @click="addScore(reply)" id="ops"><b>+</b></span>
-                        <span id="number"><b>{{reply.score}}</b></span>
-                        <span @click="subtractScore(reply)" id="ops"><b>-</b></span>
+                        <span @click="addScore(comment)" id="ops"><b>+</b></span>
+                        <span id="number"><b>{{comment.score}}</b></span>
+                        <span @click="subtractScore(comment)" id="ops"><b>-</b></span>
                     </div>
 
                     </div>
@@ -34,9 +34,9 @@
                     <div id="comment-info">
                         <div id="first-info">
                         <img src="../../assets/avatars/image-juliusomo.png" alt="juliusomo">
-                        <h6 class="m-0"><b>{{reply.user.username}}</b></h6>
+                        <h6 class="m-0"><b>{{comment.user.username}}</b></h6>
                         <span id="you-tag" class="rounded-1 px-2"><b>you</b></span>
-                        <span>{{reply.createdAt}}</span>
+                        <span>{{comment.createdAt}}</span>
                         </div>
 
                         <div class="d-none d-md-flex" id="second-info">
@@ -54,7 +54,7 @@
                     </div>
 
                     <div id="comment-text" class="pt-2">
-                        <p><b>{{comment.user.username}} &nbsp;</b>{{reply.content}}</p>
+                        <p><b></b>{{comment.content}}</p>
                     </div>
 
                     </div>
@@ -62,13 +62,13 @@
                     <div class="d-flex d-md-none order-2" id="new-info">
                         
                             <div id="count" class="rounded-3">
-                                <span @click="addScore(reply)" id="ops"><b>+</b></span>
-                                <span id="number"><b>{{reply.score}}</b></span>
-                                <span @click="subtractScore(reply)" id="ops"><b>-</b></span>
+                                <span @click="addScore(comment)" id="ops"><b>+</b></span>
+                                <span id="number"><b>{{comment.score}}</b></span>
+                                <span @click="subtractScore(comment)" id="ops"><b>-</b></span>
                             </div>
 
                             <div  id="second">
-                                <div @click="handleDelete" id="delete" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                <div id="delete" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                 <img src="../../assets/icon-delete.svg" alt="delete">
                                 <p class="m-0">Delete</p>
                             </div>
@@ -90,12 +90,12 @@
 </template>
 
 <script>
-import Update from "../Update.vue"
+import CommentUpdate from "../CommentUpdate.vue"
 
 export default {
-    components: {Update},
+    components: {CommentUpdate},
     name: 'ReplyComponent',
-    props: ['data','reply', 'comment'],
+    props: ['data','comment', 'comment'],
     data() {
     return {
       clicked1:false,
@@ -103,88 +103,62 @@ export default {
     }
   },
   methods: {
+     addScore(comment) {
+      comment.score++
+
+      fetch(`http://localhost:3000/comments/${comment.id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+           score:comment.score
+        }),
+    })
+    .catch(err => console.log(err))
+
+    },
+
+    subtractScore(comment) {
+      if(comment.score > 0)  
+     comment.score--
+
+     fetch(`http://localhost:3000/comments/${comment.id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+           score:comment.score
+        }),
+    })
+    .catch(err => console.log(err))
+    },
     handleEdit(){
         this.clicked1 = !this.clicked1
     },
     handleUpdate() {
         this.clicked1 = !this.clicked1
     },
-
-    addScore(reply) {
-      reply.score++
-
-    //   fetch(`http://localhost:3000/comments/${this.comment.id}`, {
-    //     method: 'PATCH',
-    //     headers: { 'Content-Type': 'application/json' },
-    //     body: JSON.stringify({
-    //         replies:[
-    //             {
-    //             id: reply.id,
-    //             content: reply.content,
-    //             createdAt: reply.createdAt,
-    //             replyingTo: reply.replyingTo,
-    //             score: reply.score,
-    //             user: {
-    //                 image: {
-    //                 png: reply.user.image.png,
-    //                 webp: reply.user.image.webp,
-    //                 },
-    //                 username: reply.user.username,
-    //             }
-    //             }
-    //         ]
-    //     }),
-    // })
-    // .catch(err => console.log(err))
-    // console.log("comment update success")
-    },
-
-    subtractScore(reply) {
-      if(reply.score > 0)  
-     reply.score--
-
-    //  fetch(`http://localhost:3000/comments/${this.comment.id}`, {
-    //     method: 'PATCH',
-    //     headers: { 'Content-Type': 'application/json' },
-    //     body: JSON.stringify({
-    //         replies:[this.comment.replies,
-    //             {
-    //             id: reply.id,
-    //             content: reply.content,
-    //             createdAt: reply.createdAt,
-    //             replyingTo: reply.replyingTo,
-    //             score: reply.score,
-    //             user: {
-    //                 image: {
-    //                 png: reply.user.image.png,
-    //                 webp: reply.user.image.webp,
-    //                 },
-    //                 username: reply.user.username,
-    //             }
-    //             }
-    //         ]
-    //     }),
-    // })
-    // .catch(err => console.log(err))
-    // console.log("comment update success")
-    },
-
+    handleDelete(comment) {
+        console.log(comment.id);
+        fetch(`http://localhost:3000/comments/${comment.id}`, {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' },
+        })
+        .catch(err => console.log(err))
+    }
   },
 }
 </script>
 
 <style scoped>
 #comments {
-    width: 85%;
+    width: 100%;
 }
 
-
 #first-info {
-    min-width: 45%;
+    min-width: 35%;
 }
 
 #second-info {
-    width: 30%;
+    width: 20%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;

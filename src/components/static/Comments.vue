@@ -1,7 +1,9 @@
 <template>
     <template v-for="(comment, index) in commentData" :key="index">
 
-          <div id="comments" class="bg-white rounded-2 mb-2">
+      <YourComment v-if="comment.user.username === 'juliusomo'" :comment="comment"/>
+
+          <div v-else id="comments" class="bg-white rounded-2 mb-2">
             <div id="counter-div" class="order-2 order-md-1 d-none d-md-flex">
               <div id="count" class="rounded-3">
                 <span @click="addScore(comment)" id="ops"><b>+</b></span>
@@ -116,9 +118,10 @@
 import AddReply from "../AddReply.vue"
 import ReplyComponent from "./ReplyComponent.vue"
 import YourReply from "./YourReply.vue"
+import YourComment from "./YourComment.vue"
 
 export default {
-  components: {AddReply, ReplyComponent,YourReply},
+  components: {AddReply, ReplyComponent,YourReply, YourComment},
   props : ['data'],
    data() {
     return {
@@ -143,10 +146,6 @@ export default {
 
     },
 
-    addReplyScore(reply) {
-      reply.score++
-    },
-
     subtractScore(comment) {
       if(comment.score > 0)  
      comment.score--
@@ -161,6 +160,10 @@ export default {
     .catch(err => console.log(err))
     },
 
+    addReplyScore(reply) {
+      reply.score++
+    },
+
     subtractReplyScore(reply) {
       if(reply.score > 0)  
      reply.score--
@@ -171,6 +174,7 @@ export default {
     const getData = async () => {
       const response = await fetch ('http://localhost:3000/comments')
       const data = await response.json()
+      console.log(data);
       this.commentData = data
     }
     getData()
@@ -269,7 +273,7 @@ export default {
 
 #first-info {
   display: flex;
-  min-width: 40%;
+  min-width: 35%;
   height: 100%;
   flex-direction: row;
   justify-content: space-between;
