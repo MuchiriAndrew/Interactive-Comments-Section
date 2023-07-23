@@ -13,24 +13,17 @@
 
 <script>
 import Comments from "../components/static/Comments.vue"
-import YourReply from "../components/static/YourReply.vue"
 import AddComment from "../components/AddComment.vue"
 import allData from "../data.json"
 
 export default {
-  components:{YourReply, AddComment, Comments,},
+  components:{AddComment, Comments,},
   name: 'HomeView',
   data() {
     return {
       data:allData,
     }
-  },
-
-  methods: {
-
-  },
-
-
+  }
 }
 
 </script>

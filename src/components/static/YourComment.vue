@@ -14,9 +14,9 @@
     </div>
     </div>
 
-        <transition name="comment-update">
+        <transition style="width:100%" name="comment-update">
 
-            <CommentUpdate v-if="clicked1" :clicked1 = 'clicked1' :comment = 'comment' :handleUpdate = 'handleUpdate'/>
+            <CommentUpdate v-if="clicked1" :clicked1 = 'clicked1' :comment = 'comment' :handleUpdate = 'handleUpdate' :placeholderText = 'placeholderText'/>
 
 
             <div id="comments" class="bg-white rounded-2 mb-2" v-else >
@@ -67,7 +67,7 @@
                                 <span @click="subtractScore(comment)" id="ops"><b>-</b></span>
                             </div>
 
-                            <div  id="second">
+                            <div id="second">
                                 <div id="delete" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                 <img src="../../assets/icon-delete.svg" alt="delete">
                                 <p class="m-0">Delete</p>
@@ -98,8 +98,7 @@ export default {
     props: ['data','comment', 'comment'],
     data() {
     return {
-      clicked1:false,
-      showModal:false
+        clicked1:false,
     }
   },
   methods: {
@@ -135,6 +134,8 @@ export default {
     },
     handleUpdate() {
         this.clicked1 = !this.clicked1
+
+        this.placeholderText = ""
     },
     handleDelete(comment) {
         console.log(comment.id);
@@ -325,7 +326,7 @@ export default {
 }
 
 #first-info {
-  min-width: 70%;
+  min-width: 55%;
 }
 
 #second-info {

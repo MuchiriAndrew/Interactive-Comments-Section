@@ -145,7 +145,7 @@ export default {
 
 #reply-first-info {
   display: flex;
-  min-width: 50%;
+  min-width: 42%;
   height: 100%;
   flex-direction: row;
   justify-content: space-between;

@@ -22,11 +22,9 @@
 
                 <div id="update-text">
                      <form @submit="updateFunction(comment)" id="text-area" class="">
-                    <textarea name="addcomment" id="addcomment" class="rounded-2 p-2" v-model="text" placeholder="Add a comment..." ></textarea>
-                    <button @click="handleUpdate" class="rounded-2">UPDATE</button>
+                        <textarea name="addcomment" id="addcomment" class="rounded-2 p-2" v-model="text" placeholder="Add a comment..." ></textarea>
+                        <button @click="handleUpdate" class="rounded-2 d-none d-md-flex">UPDATE</button>
                     </form>
-
-                    
                 </div>
 
             </div>
@@ -37,8 +35,12 @@
                         <span id="ops"><b>+</b></span>
                         <span id="number"><b>{{comment.score}}</b></span>
                         <span id="ops"><b>-</b></span>
-                    </div>                
-                
+                    </div>       
+
+                     <form @submit="updateFunction(comment)" id="text-area" class="">
+                        <button @click="handleUpdate" class="rounded-2 ">UPDATE</button>
+                    </form>
+
             </div>
       </div>
 
@@ -147,6 +149,20 @@ export default {
     align-items: flex-end;
 }
 
+#update-text form {
+    min-height: 130px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-end;
+}
+
+#update-text button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 #text-area {
     width: 100%;
 }
@@ -214,7 +230,7 @@ button:hover {
 }
 
 #first-info {
-  min-width: 80%;
+  min-width: 55%;
 }
 
 #second-info {
@@ -226,6 +242,13 @@ button:hover {
     display: flex;
     flex-direction:row ;
     justify-content: space-between;
+}
+
+#new-info form {
+    width: max-content;
+}
+#new-info form button{
+    font-size: 13px;
 }
 
 #second {

@@ -96,13 +96,18 @@ export default {
 }
 
 #text-area {
-    width: 65%;
-   min-height: 100px;
+    width: 85%;
+    height: 100%;
+    min-height: 100px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-start;
 }
 
 #addcomment {
     resize: none;
-    width: 100%;
+    width: 80%;
     min-height: 80px;
     border: 1px solid hsl(223, 19%, 93%);
     font-size: 13px;

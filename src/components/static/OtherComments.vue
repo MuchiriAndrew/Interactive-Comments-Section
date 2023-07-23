@@ -31,7 +31,7 @@
             </div>
             <div id="new-div" class="order-2 d-flex d-md-none">
             <div id="count" class="rounded-3">
-                <span @click="subtractScore(comment)" id="ops"><b>+</b></span>
+                <span @click="addScore(comment)" id="ops"><b>+</b></span>
                 <span id="number"><b>{{comment.score}}</b></span>
                 <span @click="subtractScore(comment)" id="ops"><b>-</b></span>
               </div>

@@ -47,7 +47,7 @@
               </div>  
 
               <transition name="fade">                  
-                <AddReply v-if="show2 === index" style="width:85%" :reply = 'reply' :comment="comment" :index = 'index'/>
+                <AddReply v-if="show2 === index"  :reply = 'reply' :comment="comment" :index = 'index'/>
               </transition>
 
 
@@ -78,74 +78,4 @@ export default {
 </script>
 
 <style scoped>
-#comments {
-    width: 85%;
-}
-
-#first-info {
-    min-width: 50%;
-}
-
-#second-info {
-    width: 12%;
-}
-
-@media only screen and (max-width: 767px){ 
-  #comments {
-    width: 90%;
-  height: auto;
-  min-height: 100px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 15px;
-}
-
-#counter-div{
-  height: max-content;
-  width: 25%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-#count {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-  width: 80px;
-  height: 30px;
-  background-color: hsl(223, 19%, 93%);
-}
-
-#text-wrapper {
-  width: 100%;
-  min-height: 100px;
-  display: flex;
-  flex-direction: column;
-  font-size: 13px;
-  justify-content: space-around;
-}
-
-#comment-info {
-  height: 30px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-#first-info {
-  min-width: 70%;
-}
-
-#second-info {
-  width: 17%;
-}
-}
-
-
 </style>
