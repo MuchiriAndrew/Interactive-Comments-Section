@@ -16,7 +16,7 @@
 
         <transition name="comment-update">
 
-            <Update :reply = 'reply' :data = 'data' v-if="clicked1" :clicked1 = 'clicked1' :handleUpdate = 'handleUpdate'/>
+            <ReplyUpdate :reply = 'reply' :data = 'data' v-if="clicked1" :clicked1 = 'clicked1' :handleUpdate = 'handleUpdate'/>
 
 
             <div id="comments" class="bg-white rounded-2 mb-2" v-else >
@@ -40,7 +40,7 @@
                         </div>
 
                         <div class="d-none d-md-flex" id="second-info">
-                            <div id="delete" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            <div id="delete" data-bs-toggle="modal" data-bs-target="#exampleModal2">
                                 <img src="../../assets/icon-delete.svg" alt="delete">
                                 <p class="m-0">Delete</p>
                             </div>
@@ -68,7 +68,7 @@
                             </div>
 
                             <div  id="second">
-                                <div @click="handleDelete" id="delete" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                <div @click="handleDelete" id="delete" data-bs-toggle="modal" data-bs-target="#exampleModal2">
                                 <img src="../../assets/icon-delete.svg" alt="delete">
                                 <p class="m-0">Delete</p>
                             </div>
@@ -90,10 +90,10 @@
 </template>
 
 <script>
-import Update from "../Update.vue"
+import ReplyUpdate from "../ReplyUpdate.vue"
 
 export default {
-    components: {Update},
+    components: {ReplyUpdate},
     name: 'ReplyComponent',
     props: ['data','reply', 'comment'],
     data() {

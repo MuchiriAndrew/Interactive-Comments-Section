@@ -2,113 +2,14 @@
     <template v-for="(comment, index) in commentData" :key="index">
 
       <YourComment v-if="comment.user.username === 'juliusomo'" :comment="comment"/>
+      <OtherComments v-else :comment = 'comment' :show = 'show' :index = 'index' :addScore = 'addScore' :subtractScore = 'subtractScore'/>
 
-          <div v-else id="comments" class="bg-white rounded-2 mb-2">
-            <div id="counter-div" class="order-2 order-md-1 d-none d-md-flex">
-              <div id="count" class="rounded-3">
-                <span @click="addScore(comment)" id="ops"><b>+</b></span>
-                <span id="number"><b>{{comment.score}}</b></span>
-                <span @click="subtractScore(comment)" id="ops"><b>-</b></span>
-              </div>
+      <!-- The reply Component For Each Comment -->
 
-            </div>
-            <div id="text-wrapper" class="pt-2 order-1 order-md-2">
-
-              <div id="comment-info">
-                <div id="first-info">
-                  <img src="../../assets/avatars/image-amyrobson.png" alt="amyrobson">
-                  <h6 class="m-0"><b>{{comment.user.username}}</b></h6>
-                  <span>{{comment.createdAt}}</span>
-                </div>
-
-                <div @click="show === index ? show = -1 : show = index" id="second-info" class="d-none d-md-flex">
-                  <img src="../../assets/icon-reply.svg" alt="reply">
-                  <p class="m-0">Reply</p>
-                </div>
-                
-              </div>
-
-              <div id="comment-text" class="pt-2">
-                <p>{{comment.content}}</p>
-              </div>
-
-            </div>
-            <div id="new-div" class="order-2 d-flex d-md-none">
-            <div id="count" class="rounded-3">
-                <span @click="subtractScore(comment)" id="ops"><b>+</b></span>
-                <span id="number"><b>{{comment.score}}</b></span>
-                <span @click="subtractScore(comment)" id="ops"><b>-</b></span>
-              </div>
-
-              <div  @click="show === index ? show = -1 : show = index" id="second-info">
-                  <img src="../../assets/icon-reply.svg" alt="reply">
-                  <p class="m-0">Reply</p>
-                </div>
-
-          </div>
-          </div>
-
-          <transition name="fade">                  
-              <AddReply v-if="show === index" :comment = 'comment'/>
-          </transition>
-
-          <!-- The reply Component For Each Comment -->
-
-          <div id="replies-container" v-for="(reply,index) in comment.replies" :key="index">
-              <div id="replies-container" v-if="reply.user.username === 'juliusomo'">          
-              <YourReply :reply = 'reply' :comment = 'comment'/>
-              </div>
-
-              <div v-else  id="reply-comments" class="bg-white rounded-2 mb-2">
-                <div id="counter-div" class="order-2 order-md-1 d-none d-md-flex" >
-                <div id="count" class="rounded-3">
-                    <span @click="addReplyScore(reply)" id="ops"><b>+</b></span>
-                    <span id="number"><b>{{reply.score}}</b></span>
-                    <span @click="subtractReplyScore(reply)" id="ops"><b>-</b></span>
-                </div>
-
-                </div>
-
-                <div id="text-wrapper" class="pt-2 order-1 order-md-2">
-
-                <div id="comment-info">
-                    <div id="reply-first-info">
-                    <img src="../../assets/avatars/image-ramsesmiron.png" alt="amyrobson">
-                    <h6 class="m-0"><b>{{reply.user.username}}</b></h6>
-                    <span>{{reply.createdAt}}</span>
-                    </div>
-
-                    <div @click="show2 === index ? show2 = -1 : show2 = index" id="reply-second-info" class="d-none d-md-flex">
-                    <img src="../../assets/icon-reply.svg" alt="reply">
-                    <p class="m-0">Reply</p>
-                    </div>
-                </div>
-
-                <div id="comment-text" class="pt-2">
-                    <p><b>{{reply.replyingTo}}</b> {{reply.content}}</p>
-                </div>
-
-                </div>
-
-                <div id="new-div" class="order-2 d-flex d-md-none">
-            <div id="count" class="rounded-3">
-                <span @click="addReplyScore(reply)" id="ops"><b>+</b></span>
-                <span id="number"><b>{{reply.score}}</b></span>
-                <span @click="subtractReplyScore(reply)" id="ops"><b>-</b></span>
-              </div>
-
-              <div  @click="show2 === index ? show2 = -1 : show2 = index" id="second-info">
-                  <img src="../../assets/icon-reply.svg" alt="reply">
-                  <p class="m-0">Reply</p>
-                </div>
-
-          </div>
-              </div>  
-
-              <transition name="fade">                  
-                <AddReply v-if="show2 === index" style="width:85%" :reply = 'reply' :comment="comment" :index = 'index'/>
-              </transition>
-           </div>
+      <div id="replies-container" v-for="(reply,index) in comment.replies" :key="index">
+        <YourReply v-if="reply.user.username === 'juliusomo'" :reply = 'reply' :comment = 'comment'/>
+        <OtherReplies v-else :reply = 'reply' :show2 = 'show2' :index = 'index' :comment = 'comment' />
+      </div>
 
 
     </template>
@@ -116,12 +17,14 @@
 
 <script>
 import AddReply from "../AddReply.vue"
-import ReplyComponent from "./ReplyComponent.vue"
+import ReplyComponent from "./OtherReplies.vue"
 import YourReply from "./YourReply.vue"
 import YourComment from "./YourComment.vue"
+import OtherComments from "./OtherComments.vue"
+import OtherReplies from "./OtherReplies.vue"
 
 export default {
-  components: {AddReply, ReplyComponent,YourReply, YourComment},
+  components: {AddReply, ReplyComponent,YourReply, YourComment, OtherComments, OtherReplies},
   props : ['data'],
    data() {
     return {
@@ -130,46 +33,6 @@ export default {
       commentData: [],
     }
   },
-
-  methods: {
-    addScore(comment) {
-      comment.score++
-
-      fetch(`http://localhost:3000/comments/${comment.id}`, {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-           score:comment.score
-        }),
-    })
-    .catch(err => console.log(err))
-
-    },
-
-    subtractScore(comment) {
-      if(comment.score > 0)  
-     comment.score--
-
-     fetch(`http://localhost:3000/comments/${comment.id}`, {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-           score:comment.score
-        }),
-    })
-    .catch(err => console.log(err))
-    },
-
-    addReplyScore(reply) {
-      reply.score++
-    },
-
-    subtractReplyScore(reply) {
-      if(reply.score > 0)  
-     reply.score--
-    },
-  },
-
   mounted() {
     const getData = async () => {
       const response = await fetch ('http://localhost:3000/comments')
