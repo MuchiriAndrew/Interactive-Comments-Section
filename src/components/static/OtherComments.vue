@@ -12,7 +12,7 @@
 
               <div id="comment-info">
                 <div id="first-info">
-                  <img src="../../assets/avatars/image-amyrobson.png" alt="amyrobson">
+                  <img :src='comment.user.image.png' :alt="comment.user.username">
                   <h6 class="m-0"><b>{{comment.user.username}}</b></h6>
                   <span>{{comment.createdAt}}</span>
                 </div>
@@ -54,7 +54,7 @@
 import AddReply from "../AddReply.vue"
 
 export default {
-    props: ['comment', 'show', 'index' ],
+    props: ['comment', 'show', 'index'],
     components: {AddReply},
     
     methods: {

@@ -16,16 +16,13 @@
 </template>
 
 <script>
-import AddReply from "../AddReply.vue"
-import ReplyComponent from "./OtherReplies.vue"
 import YourReply from "./YourReply.vue"
 import YourComment from "./YourComment.vue"
 import OtherComments from "./OtherComments.vue"
 import OtherReplies from "./OtherReplies.vue"
 
 export default {
-  components: {AddReply, ReplyComponent,YourReply, YourComment, OtherComments, OtherReplies},
-  props : ['data'],
+  components: {YourReply, YourComment, OtherComments, OtherReplies},
    data() {
     return {
       show:false,

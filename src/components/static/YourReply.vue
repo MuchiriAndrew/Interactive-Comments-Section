@@ -33,7 +33,7 @@
 
                     <div id="comment-info">
                         <div id="first-info">
-                        <img src="../../assets/avatars/image-juliusomo.png" alt="juliusomo">
+                        <img :src="reply.user.image.png" :alt="reply.user.username">
                         <h6 class="m-0"><b>{{reply.user.username}}</b></h6>
                         <span id="you-tag" class="rounded-1 px-2"><b>you</b></span>
                         <span>{{reply.createdAt}}</span>

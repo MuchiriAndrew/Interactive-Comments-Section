@@ -2,8 +2,8 @@
   <div class="container-fluid" id="wrapper">
     <div id="comments-container" class="">
 
-      <Comments :data = 'data' />
-      <AddComment :data = 'data' />
+      <Comments />
+      <AddComment />
 
     </div>
 
@@ -17,11 +17,12 @@ import AddComment from "../components/AddComment.vue"
 import allData from "../data.json"
 
 export default {
-  components:{AddComment, Comments,},
+  components:{AddComment, Comments},
   name: 'HomeView',
   data() {
     return {
       data:allData,
+      currentUser: []
     }
   }
 }

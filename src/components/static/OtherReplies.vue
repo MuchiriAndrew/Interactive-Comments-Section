@@ -14,7 +14,7 @@
 
                 <div id="comment-info">
                     <div id="reply-first-info">
-                    <img src="../../assets/avatars/image-ramsesmiron.png" alt="amyrobson">
+                    <img :src="reply.user.image.png" :alt="reply.user.username">
                     <h6 class="m-0"><b>{{reply.user.username}}</b></h6>
                     <span>{{reply.createdAt}}</span>
                     </div>

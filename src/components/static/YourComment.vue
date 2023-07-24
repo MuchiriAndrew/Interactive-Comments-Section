@@ -33,7 +33,7 @@
 
                     <div id="comment-info">
                         <div id="first-info">
-                        <img src="../../assets/avatars/image-juliusomo.png" alt="juliusomo">
+                        <img :src="comment.user.image.png" :alt="comment.user.username">
                         <h6 class="m-0"><b>{{comment.user.username}}</b></h6>
                         <span id="you-tag" class="rounded-1 px-2"><b>you</b></span>
                         <span>{{comment.createdAt}}</span>
@@ -95,7 +95,7 @@ import CommentUpdate from "../CommentUpdate.vue"
 export default {
     components: {CommentUpdate},
     name: 'ReplyComponent',
-    props: ['data','comment', 'comment'],
+    props: ['comment'],
     data() {
     return {
         clicked1:false,
