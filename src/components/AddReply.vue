@@ -2,7 +2,7 @@
   <div id="comments" class="bg-white rounded-2 mb-1 pt-3">
 
             <div id="image-div" class="d-none d-md-block">
-                <img :src="currentUser.image" :alt="currentUser.username">
+                <!-- <img :src="currentUser.image" :alt="currentUser.username"> -->
             </div>
 
             <form id="text-area" class="" @submit="handleSendReply">
@@ -14,7 +14,7 @@
 
             <div id="newone" class="d-flex d-md-none">
                 <div id="image-div">
-                    <img :src="currentUser.image" :alt="currentUser.username">
+                    <!-- <img :src="currentUser.image" :alt="currentUser.username"> -->
                 </div>
 
                 <form @submit="handleSendReply">
@@ -36,15 +36,6 @@ export default {
             currentUser:[]
         }
     },
-   mounted() {
-    const getData = async () => {
-      const response = await fetch ('http://localhost:3000/currentUser')
-      const data = await response.json()
-      this.currentUser = data
-    }
-    getData()
-    .then(data=> console.log(this.currentUser.image))
-  },
 
     methods: {
         handleSendReply() {     
@@ -57,32 +48,23 @@ export default {
 
             const newReply = {
                 id: Date.now(),
-                content: this.text,
-                createdAt: timestamp,
-                replyingTo: this.comment.user.username,
                 score: 0,
-                user: {
-                    image: {
-                    png: this.currentUser.image
-                    },
-                    username: "juliusomo",
-                }
+                user_id:4,
+                content: this.text,
+                parent_comment_id:this.comment.user_id,
+                createdAt: timestamp,
+                updated_at: timestamp
         };          
-
-        const postedReply  = [].concat(this.comment.replies, newReply)
-        console.log(postedReply);
     
     // To update a resource with the Fetch API is very simple and straightforward, all you have to pass in is the URL of the endpoint as the 1st parameter and an object which contains the details of the method, headers, and body as the 2nd parameter.
 
-    fetch(`http://localhost:3000/comments/${this.comment.id}`, {
-        method: 'PATCH',
+    fetch('http://localhost:3000/replies', {
+        method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            replies:postedReply
-        }),
+        body: JSON.stringify(newReply),
     })
     .catch(err => console.log(err))
-    console.log("comment update success")
+    console.log("reply post success")
     }
     },
 

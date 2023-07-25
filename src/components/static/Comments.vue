@@ -1,16 +1,16 @@
 <template>
     <template v-for="(comment, index) in commentData" :key="index">
 
-      <YourComment v-if="comment.user.username === 'juliusomo'" :comment="comment"/>
+      <YourComment v-if="comment.user_id === 4" :comment="comment"/>
       <OtherComments v-else :comment = 'comment' :show = 'show' :index = 'index' :addScore = 'addScore' :subtractScore = 'subtractScore'/>
 
       <!-- The reply Component For Each Comment -->
-
-      <div id="replies-container" v-for="(reply,index) in comment.replies" :key="index">
-        <YourReply v-if="reply.user.username === 'juliusomo'" :reply = 'reply' :comment = 'comment'/>
-        <OtherReplies v-else :reply = 'reply' :show2 = 'show2' :index = 'index' :comment = 'comment' />
+      <div id="replies-container" v-for="(reply,index) in replyData" :key="index">
+        <template v-if="reply.parent_comment_id === comment.id ">
+          <YourReply v-if="reply.user_id === 4" :reply = 'reply' :comment = 'comment'/>
+          <OtherReplies v-else :reply = 'reply' :show2 = 'show2' :index = 'index' :comment = 'comment' />
+        </template>
       </div>
-
 
     </template>
 </template>
@@ -28,17 +28,25 @@ export default {
       show:false,
       show2:false,
       commentData: [],
+      replyData: [],
     }
   },
   mounted() {
     const getData = async () => {
       const response = await fetch ('http://localhost:3000/comments')
       const data = await response.json()
-      console.log(data);
       this.commentData = data
     }
     getData()
     .then(data=> console.log('comments found',this.commentData))
+
+    const getReplies = async () => {
+      const response = await fetch ('http://localhost:3000/replies')
+      const data = await response.json()
+      this.replyData = data
+    }
+    getReplies()
+    .then(data=> console.log('replies found',this.replyData))
   },
 }
 </script>

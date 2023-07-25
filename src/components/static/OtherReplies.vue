@@ -14,9 +14,9 @@
 
                 <div id="comment-info">
                     <div id="reply-first-info">
-                    <img :src="reply.user.image.png" :alt="reply.user.username">
-                    <h6 class="m-0"><b>{{reply.user.username}}</b></h6>
-                    <span>{{reply.createdAt}}</span>
+                    <!-- <img :src="reply.user.image.png" :alt="reply.user.username"> -->
+                    <h6 class="m-0"><b>{{userData.username}}</b></h6>
+                    <span>{{reply.created_at}}</span>
                     </div>
 
                     <div @click="show2 === index ? show2 = -1 : show2 = index" id="reply-second-info" class="d-none d-md-flex">
@@ -26,7 +26,7 @@
                 </div>
 
                 <div id="comment-text" class="pt-2">
-                    <p><b>{{reply.replyingTo}}</b> {{reply.content}}</p>
+                    <p>{{reply.content}}</p>
                 </div>
 
                 </div>
@@ -61,16 +61,47 @@ export default {
   props: ['reply', 'show2', 'index', 'comment'],
   components:{AddReply},
     name: 'OtherReplies',
+    data() {
+      return{
+        userData: []
+      }
+    },
 
   methods: {
     addReplyScore(reply) {
       reply.score++
+      fetch(`http://localhost:3000/replies/${reply.id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+           score:reply.score
+        }),
+    })
+    .catch(err => console.log(err))
     },
 
     subtractReplyScore(reply) {
       if(reply.score > 0)  
      reply.score--
+     fetch(`http://localhost:3000/replies/${reply.id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+           score:reply.score
+        }),
+    })
+    .catch(err => console.log(err))
     },
+  },
+
+  mounted() {
+    const getUserData = async () => {
+      const response = await fetch (`http://localhost:3000/users/${this.reply.user_id}`)
+      const data = await response.json()
+      this.userData = data
+    }
+    getUserData()
+    .then(data=> console.log('user data found'))
   },
 
 

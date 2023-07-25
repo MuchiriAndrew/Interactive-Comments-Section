@@ -33,10 +33,10 @@
 
                     <div id="comment-info">
                         <div id="first-info">
-                        <img :src="comment.user.image.png" :alt="comment.user.username">
-                        <h6 class="m-0"><b>{{comment.user.username}}</b></h6>
+                        <!-- <img :src="comment.user.image.png" :alt="comment.user.username"> -->
+                        <h6 class="m-0"><b>{{userData.username}}</b></h6>
                         <span id="you-tag" class="rounded-1 px-2"><b>you</b></span>
-                        <span>{{comment.createdAt}}</span>
+                        <span>{{comment.created_at}}</span>
                         </div>
 
                         <div class="d-none d-md-flex" id="second-info">
@@ -99,6 +99,7 @@ export default {
     data() {
     return {
         clicked1:false,
+        userData:[]
     }
   },
   methods: {
@@ -138,13 +139,22 @@ export default {
         this.placeholderText = ""
     },
     handleDelete(comment) {
-        console.log(comment.id);
+        location.reload()
         fetch(`http://localhost:3000/comments/${comment.id}`, {
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json' },
         })
         .catch(err => console.log(err))
     }
+  },
+  mounted() {
+    const getUserData = async () => {
+      const response = await fetch (`http://localhost:3000/users/${this.comment.user_id}`)
+      const data = await response.json()
+      this.userData = data
+    }
+    getUserData()
+    .then(data=> console.log('user data found',))
   },
 }
 </script>

@@ -2,7 +2,7 @@
   <div id="comments" class="bg-white rounded-2 mb-1 pt-3">
 
             <div id="image-div" class="d-none d-md-block">
-                <img :src="currentUser.image" :alt="currentUser.username">
+                <!-- <img :src="currentUser.image" :alt="currentUser.username"> -->
             </div>
 
             <form @submit="handleSend" id="text-area" class="">
@@ -13,7 +13,7 @@
 
             <div id="newone" class="d-flex d-md-none">
                 <div id="image-div">
-                    <img :src="currentUser.image" :alt="currentUser.username">
+                    <!-- <img :src="currentUser.image" :alt="currentUser.username"> -->
                 </div>
                     <form @submit="handleSend">
                         <button  class="rounded-2">SEND</button>
@@ -44,16 +44,12 @@ export default {
         });
     const newComment = {
           id: Date.now(),
+          user_id:4,
           content: this.commentText,
-          createdAt: timestamp,
           score: 0,
-          user: {
-            image: {
-              png: this.currentUser.image,
-            },
-            username: "juliusomo",
-          },
-          replies: [],
+          parent_comment_id: null,
+          created_at: timestamp,
+          updated_at: timestamp
     };        
 
     fetch('http://localhost:3000/comments', {
@@ -64,17 +60,7 @@ export default {
     .catch(err => console.log(err))
     console.log("push reached")
     }
-    },
-
-    mounted() {
-    const getData = async () => {
-      const response = await fetch ('http://localhost:3000/currentUser')
-      const data = await response.json()
-      this.currentUser = data
     }
-    getData()
-    .then(data=> console.log(this.currentUser.image))
-  },
 }
 </script>
 

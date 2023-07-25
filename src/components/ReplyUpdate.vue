@@ -13,19 +13,18 @@
 
                 <div id="comment-info">
                     <div id="first-info">
-                    <img :src="reply.user.image.png" :alt="reply.user.username">
-                    <h6 class="m-0"><b>{{reply.user.username}}</b></h6>
+                    <!-- <img :src="reply.user.image.png" :alt="reply.user.username"> -->
+                    <h6 class="m-0"><b>{{reply.user_id}}</b></h6>
                     <span id="you-tag" class="rounded-1 px-2"><b>you</b></span>
-                    <span>{{reply.createdAt}}</span>
+                    <span>{{reply.created_at}}</span>
                     </div>
                 </div>
 
                 <div id="update-text">
-                     <form id="text-area" class="">
-                    <textarea name="addcomment" id="addcomment" class="rounded-2 p-2" placeholder="Add a comment..." :value = 'reply.content'></textarea>
+                     <form @submit="updateFunction(reply)" id="text-area" class="">
+                        <textarea name="addcomment" id="addcomment" class="rounded-2 p-2" placeholder="Add a comment..." v-model="text"></textarea>
+                        <button @click="handleUpdate" class="rounded-2">UPDATE</button>
                     </form>
-
-                    <button @click="handleUpdate" class="rounded-2">UPDATE</button>
                 </div>
 
             </div>
@@ -45,7 +44,24 @@
 
 <script>
 export default {
-    props: ['data','handleUpdate','reply']
+    props: ['data','handleUpdate','reply'],
+    data() {
+        return{
+            text:""
+        }
+    },
+    methods: {
+        updateFunction(reply) {
+            fetch(`http://localhost:3000/replies/${reply.id}`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+            content:this.text
+            }),
+        })
+        .catch(err => console.log(err))
+        }
+    }
 
 }
 </script>

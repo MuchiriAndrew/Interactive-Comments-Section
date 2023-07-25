@@ -12,9 +12,9 @@
 
               <div id="comment-info">
                 <div id="first-info">
-                  <img :src='comment.user.image.png' :alt="comment.user.username">
-                  <h6 class="m-0"><b>{{comment.user.username}}</b></h6>
-                  <span>{{comment.createdAt}}</span>
+                  <!-- <img :src='comment.user.image.png' :alt="comment.user.username"> -->
+                  <h6 class="m-0"><b>{{userData.username}}</b></h6>
+                  <span>{{comment.created_at}}</span>
                 </div>
 
                 <div @click="show === index ? show = -1 : show = index" id="second-info" class="d-none d-md-flex">
@@ -56,6 +56,11 @@ import AddReply from "../AddReply.vue"
 export default {
     props: ['comment', 'show', 'index'],
     components: {AddReply},
+    data() {
+      return{
+        userData:[]
+      }
+    },
     
     methods: {
     addScore(comment) {
@@ -85,7 +90,17 @@ export default {
     })
     .catch(err => console.log(err))
     },
+    },
+
+    mounted() {
+    const getUserData = async () => {
+      const response = await fetch (`http://localhost:3000/users/${this.comment.user_id}`)
+      const data = await response.json()
+      this.userData = data
     }
+    getUserData()
+    .then(data=> console.log('user data found',))
+  },
 
 }
 </script>

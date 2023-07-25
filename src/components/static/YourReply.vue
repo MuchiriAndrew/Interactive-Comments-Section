@@ -8,7 +8,7 @@
             <p>Are you sure you want to remove this comment? This will remove the comment and can't be undone</p>
             <div id="btn-div">
                 <div id="cancel" class="rounded-2"  data-bs-dismiss="modal">NO, CANCEL</div>
-                <div id="yes-delete" class="rounded-2" data-bs-dismiss="modal">YES, DELETE</div>
+                <div @click="handleDelete(reply)" id="yes-delete" class="rounded-2" data-bs-dismiss="modal">YES, DELETE</div>
             </div>
         </div>
     </div>
@@ -33,10 +33,10 @@
 
                     <div id="comment-info">
                         <div id="first-info">
-                        <img :src="reply.user.image.png" :alt="reply.user.username">
-                        <h6 class="m-0"><b>{{reply.user.username}}</b></h6>
+                        <!-- <img :src="reply.user.image.png" :alt="reply.user.username"> -->
+                        <h6 class="m-0"><b>{{userData.username}}</b></h6>
                         <span id="you-tag" class="rounded-1 px-2"><b>you</b></span>
-                        <span>{{reply.createdAt}}</span>
+                        <span>{{reply.created_at}}</span>
                         </div>
 
                         <div class="d-none d-md-flex" id="second-info">
@@ -54,7 +54,7 @@
                     </div>
 
                     <div id="comment-text" class="pt-2">
-                        <p><b>{{comment.user.username}} &nbsp;</b>{{reply.content}}</p>
+                        <p>{{reply.content}}</p>
                     </div>
 
                     </div>
@@ -68,7 +68,7 @@
                             </div>
 
                             <div  id="second">
-                                <div @click="handleDelete" id="delete" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                                <div id="delete" data-bs-toggle="modal" data-bs-target="#exampleModal2">
                                 <img src="../../assets/icon-delete.svg" alt="delete">
                                 <p class="m-0">Delete</p>
                             </div>
@@ -99,7 +99,8 @@ export default {
     data() {
     return {
       clicked1:false,
-      showModal:false
+      showModal:false,
+      userData:[],
     }
   },
   methods: {
@@ -113,62 +114,48 @@ export default {
     addScore(reply) {
       reply.score++
 
-    //   fetch(`http://localhost:3000/comments/${this.comment.id}`, {
-    //     method: 'PATCH',
-    //     headers: { 'Content-Type': 'application/json' },
-    //     body: JSON.stringify({
-    //         replies:[
-    //             {
-    //             id: reply.id,
-    //             content: reply.content,
-    //             createdAt: reply.createdAt,
-    //             replyingTo: reply.replyingTo,
-    //             score: reply.score,
-    //             user: {
-    //                 image: {
-    //                 png: reply.user.image.png,
-    //                 webp: reply.user.image.webp,
-    //                 },
-    //                 username: reply.user.username,
-    //             }
-    //             }
-    //         ]
-    //     }),
-    // })
-    // .catch(err => console.log(err))
-    // console.log("comment update success")
+      fetch(`http://localhost:3000/replies/${reply.id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+           score:reply.score
+        }),
+    })
+    .catch(err => console.log(err))
     },
 
     subtractScore(reply) {
       if(reply.score > 0)  
      reply.score--
 
-    //  fetch(`http://localhost:3000/comments/${this.comment.id}`, {
-    //     method: 'PATCH',
-    //     headers: { 'Content-Type': 'application/json' },
-    //     body: JSON.stringify({
-    //         replies:[this.comment.replies,
-    //             {
-    //             id: reply.id,
-    //             content: reply.content,
-    //             createdAt: reply.createdAt,
-    //             replyingTo: reply.replyingTo,
-    //             score: reply.score,
-    //             user: {
-    //                 image: {
-    //                 png: reply.user.image.png,
-    //                 webp: reply.user.image.webp,
-    //                 },
-    //                 username: reply.user.username,
-    //             }
-    //             }
-    //         ]
-    //     }),
-    // })
-    // .catch(err => console.log(err))
-    // console.log("comment update success")
+      fetch(`http://localhost:3000/replies/${reply.id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+           score:reply.score
+        }),
+    })
+    .catch(err => console.log(err))
     },
 
+    handleDelete(reply) {
+        location.reload()
+        fetch(`http://localhost:3000/replies/${reply.id}`, {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' },
+        })
+        .catch(err => console.log(err))
+    }
+  },
+
+  mounted() {
+    const getUserData = async () => {
+      const response = await fetch (`http://localhost:3000/users/${this.reply.user_id}`)
+      const data = await response.json()
+      this.userData = data
+    }
+    getUserData()
+    .then(data=> console.log('user data found'))
   },
 }
 </script>
