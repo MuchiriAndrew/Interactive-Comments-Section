@@ -51,7 +51,7 @@ export default {
     props: ['data','handleUpdate','comment'],
     data() {
         return{
-            text:""
+            text:this.comment.content
         }
     },
     methods: {

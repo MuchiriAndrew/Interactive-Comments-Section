@@ -47,7 +47,7 @@ export default {
     props: ['data','handleUpdate','reply'],
     data() {
         return{
-            text:""
+            text:this.reply.content
         }
     },
     methods: {
@@ -143,6 +143,20 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
+}
+
+#update-text form {
+    min-height: 130px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-end;
+}
+
+#update-text button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #text-area {
