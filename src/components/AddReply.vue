@@ -2,7 +2,7 @@
   <div id="comments" class="bg-white rounded-2 mb-1 pt-3">
 
             <div id="image-div" class="d-none d-md-block">
-                <!-- <img :src="currentUser.image" :alt="currentUser.username"> -->
+                <img :src="userData.image" :alt="userData.username">
             </div>
 
             <form id="text-area" class="" @submit="handleSendReply">
@@ -14,7 +14,7 @@
 
             <div id="newone" class="d-flex d-md-none">
                 <div id="image-div">
-                    <!-- <img :src="currentUser.image" :alt="currentUser.username"> -->
+                    <img :src="userData.image" :alt="userData.username">
                 </div>
 
                 <form @submit="handleSendReply">
@@ -33,7 +33,8 @@ export default {
     data(){
         return{
             text:"",
-            currentUser:[]
+            currentUser:[],
+            userData:[]
         }
     },
 
@@ -47,13 +48,11 @@ export default {
         }); 
 
             const newReply = {
-                id: Date.now(),
                 score: 0,
                 user_id:4,
                 content: this.text,
                 parent_comment_id:this.comment.user_id,
-                createdAt: timestamp,
-                updated_at: timestamp
+                timestamp: timestamp
         };          
     
     // To update a resource with the Fetch API is very simple and straightforward, all you have to pass in is the URL of the endpoint as the 1st parameter and an object which contains the details of the method, headers, and body as the 2nd parameter.
@@ -67,6 +66,16 @@ export default {
     console.log("reply post success")
     }
     },
+
+    mounted() {
+    const getUserData = async () => {
+      const response = await fetch (`http://localhost:3000/users/4`)
+      const data = await response.json()
+      this.userData = data
+    }
+    getUserData()
+    .then(data=> console.log('user data found'))
+  },
 
 
 }

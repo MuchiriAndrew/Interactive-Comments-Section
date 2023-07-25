@@ -12,9 +12,9 @@
 
               <div id="comment-info">
                 <div id="first-info">
-                  <!-- <img :src='comment.user.image.png' :alt="comment.user.username"> -->
+                  <img :src='userData.image' :alt="userData.username">
                   <h6 class="m-0"><b>{{userData.username}}</b></h6>
-                  <span>{{comment.created_at}}</span>
+                  <span>{{comment.timestamp}}</span>
                 </div>
 
                 <div @click="show === index ? show = -1 : show = index" id="second-info" class="d-none d-md-flex">

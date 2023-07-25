@@ -2,7 +2,7 @@
   <div id="comments" class="bg-white rounded-2 mb-1 pt-3">
 
             <div id="image-div" class="d-none d-md-block">
-                <!-- <img :src="currentUser.image" :alt="currentUser.username"> -->
+                <img :src="userData.image" :alt="userData.username">
             </div>
 
             <form @submit="handleSend" id="text-area" class="">
@@ -13,7 +13,7 @@
 
             <div id="newone" class="d-flex d-md-none">
                 <div id="image-div">
-                    <!-- <img :src="currentUser.image" :alt="currentUser.username"> -->
+                    <img :src="userData.image" :alt="userData.username">
                 </div>
                     <form @submit="handleSend">
                         <button  class="rounded-2">SEND</button>
@@ -30,7 +30,8 @@ export default {
     data() {
         return {
             commentText: null,
-            currentUser: []
+            userData: [],
+            userData:[]
         }
     },
 
@@ -43,13 +44,11 @@ export default {
           hour12: true,
         });
     const newComment = {
-          id: Date.now(),
           user_id:4,
           content: this.commentText,
           score: 0,
-          parent_comment_id: null,
-          created_at: timestamp,
-          updated_at: timestamp
+          parent_comment_id: 5,
+          timestamp: timestamp,
     };        
 
     fetch('http://localhost:3000/comments', {
@@ -60,7 +59,18 @@ export default {
     .catch(err => console.log(err))
     console.log("push reached")
     }
+    },
+
+    mounted() {
+    const getUserData = async () => {
+      const response = await fetch (`http://localhost:3000/users/4`)
+      const data = await response.json()
+      this.userData = data
     }
+    getUserData()
+    .then(data=> console.log('user data found'))
+  },
+
 }
 </script>
 
@@ -72,6 +82,7 @@ export default {
     justify-content: space-around;
     align-items: flex-start;
     padding-bottom: 20px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 #image-div{

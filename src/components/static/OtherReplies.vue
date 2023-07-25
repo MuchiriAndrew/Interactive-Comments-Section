@@ -14,9 +14,9 @@
 
                 <div id="comment-info">
                     <div id="reply-first-info">
-                    <!-- <img :src="reply.user.image.png" :alt="reply.user.username"> -->
+                    <img :src="userData.image" :alt="userData.username">
                     <h6 class="m-0"><b>{{userData.username}}</b></h6>
-                    <span>{{reply.created_at}}</span>
+                    <span>{{reply.timestamp}}</span>
                     </div>
 
                     <div @click="show2 === index ? show2 = -1 : show2 = index" id="reply-second-info" class="d-none d-md-flex">

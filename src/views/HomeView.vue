@@ -3,7 +3,7 @@
     <div id="comments-container" class="">
 
       <Comments />
-      <AddComment />
+      <AddComment class="sticky-bottom"/>
 
     </div>
 
