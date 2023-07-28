@@ -21,7 +21,7 @@
                   <img src="../../assets/icon-reply.svg" alt="reply">
                   <p class="m-0">Reply</p>
                 </div>
-                
+
               </div>
 
               <div id="comment-text" class="pt-2">
@@ -44,10 +44,10 @@
           </div>
           </div>
 
-          <transition name="fade">                  
+          <transition name="fade">
               <AddReply v-if="show === index" :comment = 'comment'/>
           </transition>
-  
+
 </template>
 
 <script>
@@ -61,12 +61,12 @@ export default {
         userData:[]
       }
     },
-    
+
     methods: {
     addScore(comment) {
       comment.score++
 
-      fetch(`http://localhost:3000/comments/${comment.id}`, {
+      fetch(`http://16.170.214.173:3005/comments/${comment.id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -78,10 +78,10 @@ export default {
     },
 
     subtractScore(comment) {
-      if(comment.score > 0)  
+      if(comment.score > 0)
      comment.score--
 
-     fetch(`http://localhost:3000/comments/${comment.id}`, {
+     fetch(`http://16.170.214.173:3005/comments/${comment.id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -94,7 +94,7 @@ export default {
 
     mounted() {
     const getUserData = async () => {
-      const response = await fetch (`http://localhost:3000/users/${this.comment.user_id}`)
+      const response = await fetch (`http://16.170.214.173:3005/users/${this.comment.user_id}`)
       const data = await response.json()
       this.userData = data
     }

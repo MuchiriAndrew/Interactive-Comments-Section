@@ -30,12 +30,12 @@
             </div>
 
            <div class="d-flex d-md-none order-2" id="new-info">
-                
+
                     <div id="count" class="rounded-3">
                         <span id="ops"><b>+</b></span>
                         <span id="number"><b>{{comment.score}}</b></span>
                         <span id="ops"><b>-</b></span>
-                    </div>       
+                    </div>
 
                      <form @submit="updateFunction(comment)" id="text-area" class="">
                         <button @click="handleUpdate" class="rounded-2 ">UPDATE</button>
@@ -57,7 +57,7 @@ export default {
     },
     methods: {
         updateFunction(comment) {
-            fetch(`http://localhost:3000/comments/${comment.id}`, {
+            fetch(`http://16.170.214.173:3005/comments/${comment.id}`, {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -69,7 +69,7 @@ export default {
     },
     mounted() {
     const getUserData = async () => {
-      const response = await fetch (`http://localhost:3000/users/4`)
+      const response = await fetch (`http://16.170.214.173:3005/users/4`)
       const data = await response.json()
       this.userData = data
     }
@@ -198,7 +198,7 @@ button:hover {
     transition: 0.3s ease-in-out;
 }
 
-@media only screen and (max-width: 767px){ 
+@media only screen and (max-width: 767px){
   #comments {
   width: 90%;
   height: auto;

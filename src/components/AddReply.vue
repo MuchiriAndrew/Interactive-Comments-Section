@@ -10,7 +10,7 @@
                 <button class="rounded-2 d-none d-md-block">REPLY</button>
             </form>
 
-            
+
 
             <div id="newone" class="d-flex d-md-none">
                 <div id="image-div">
@@ -18,11 +18,11 @@
                 </div>
 
                 <form @submit="handleSendReply">
-                    <button class="rounded-2">SEND</button>      
+                    <button class="rounded-2">SEND</button>
                 </form>
-                    
+
             </div>
-            
+
     </div>
 
 </template>
@@ -39,13 +39,13 @@ export default {
     },
 
     methods: {
-        handleSendReply() {     
-            location.reload()  
+        handleSendReply() {
+            location.reload()
         const timestamp = new Date().toLocaleString("en-US", {
           hour: "numeric",
           minute: "numeric",
           hour12: true,
-        }); 
+        });
 
             const newReply = {
                 score: 0,
@@ -53,11 +53,11 @@ export default {
                 content: this.text,
                 parent_comment_id:this.comment.user_id,
                 timestamp: timestamp
-        };          
-    
+        };
+
     // To update a resource with the Fetch API is very simple and straightforward, all you have to pass in is the URL of the endpoint as the 1st parameter and an object which contains the details of the method, headers, and body as the 2nd parameter.
 
-    fetch('http://localhost:3000/replies', {
+    fetch('http://16.170.214.173:3005/replies', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newReply),
@@ -69,7 +69,7 @@ export default {
 
     mounted() {
     const getUserData = async () => {
-      const response = await fetch (`http://localhost:3000/users/4`)
+      const response = await fetch (`http://16.170.214.173:3005/users/4`)
       const data = await response.json()
       this.userData = data
     }
@@ -131,7 +131,7 @@ button:hover {
     background-color: hsl(239, 57%, 85%);
     transition: 0.3s ease-in-out;
 }
-@media only screen and (max-width: 767px){ 
+@media only screen and (max-width: 767px){
 #newone {
     width: 100%;
     display: flex;

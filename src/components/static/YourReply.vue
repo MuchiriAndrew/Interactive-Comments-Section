@@ -49,7 +49,7 @@
                                 <img src="../../assets/icon-edit.svg" alt="delete">
                                 <p class="m-0">Edit</p>
                             </div>
-                        
+
                         </div>
                     </div>
 
@@ -60,7 +60,7 @@
                     </div>
 
                     <div class="d-flex d-md-none order-2" id="new-info">
-                        
+
                             <div id="count" class="rounded-3">
                                 <span @click="addScore(reply)" id="ops"><b>+</b></span>
                                 <span id="number"><b>{{reply.score}}</b></span>
@@ -78,15 +78,15 @@
                                 <p class="m-0">Edit</p>
                             </div>
 
-                            </div>    
+                            </div>
                     </div>
             </div>
 
 
         </transition>
-        
 
-      
+
+
 </template>
 
 <script>
@@ -114,7 +114,7 @@ export default {
     addScore(reply) {
       reply.score++
 
-      fetch(`http://localhost:3000/replies/${reply.id}`, {
+      fetch(`http://16.170.214.173:3005/replies/${reply.id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -125,10 +125,10 @@ export default {
     },
 
     subtractScore(reply) {
-      if(reply.score > 0)  
+      if(reply.score > 0)
      reply.score--
 
-      fetch(`http://localhost:3000/replies/${reply.id}`, {
+      fetch(`http://16.170.214.173:3005/replies/${reply.id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -140,7 +140,7 @@ export default {
 
     handleDelete(reply) {
         location.reload()
-        fetch(`http://localhost:3000/replies/${reply.id}`, {
+        fetch(`http://16.170.214.173:3005/replies/${reply.id}`, {
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json' },
         })
@@ -150,7 +150,7 @@ export default {
 
   mounted() {
     const getUserData = async () => {
-      const response = await fetch (`http://localhost:3000/users/${this.reply.user_id}`)
+      const response = await fetch (`http://16.170.214.173:3005/users/${this.reply.user_id}`)
       const data = await response.json()
       this.userData = data
     }
@@ -289,7 +289,7 @@ export default {
     cursor: pointer;
 }
 
-@media only screen and (max-width: 767px){ 
+@media only screen and (max-width: 767px){
   #comments {
   width: 90%;
   height: auto;

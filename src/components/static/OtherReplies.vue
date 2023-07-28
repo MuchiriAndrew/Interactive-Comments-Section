@@ -44,9 +44,9 @@
                 </div>
 
           </div>
-              </div>  
+              </div>
 
-              <transition name="fade">                  
+              <transition name="fade">
                 <AddReply v-if="show2 === index"  :reply = 'reply' :comment="comment" :index = 'index'/>
               </transition>
 
@@ -70,7 +70,7 @@ export default {
   methods: {
     addReplyScore(reply) {
       reply.score++
-      fetch(`http://localhost:3000/replies/${reply.id}`, {
+      fetch(`http://16.170.214.173:3005/replies/${reply.id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -81,9 +81,9 @@ export default {
     },
 
     subtractReplyScore(reply) {
-      if(reply.score > 0)  
+      if(reply.score > 0)
      reply.score--
-     fetch(`http://localhost:3000/replies/${reply.id}`, {
+     fetch(`http://16.170.214.173:3005/replies/${reply.id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -96,7 +96,7 @@ export default {
 
   mounted() {
     const getUserData = async () => {
-      const response = await fetch (`http://localhost:3000/users/${this.reply.user_id}`)
+      const response = await fetch (`http://16.170.214.173:3005/users/${this.reply.user_id}`)
       const data = await response.json()
       this.userData = data
     }

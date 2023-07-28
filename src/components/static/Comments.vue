@@ -33,7 +33,7 @@ export default {
   },
   mounted() {
     const getData = async () => {
-      const response = await fetch ('http://localhost:3000/comments')
+      const response = await fetch ('http://16.170.214.173:3005/comments')
       const data = await response.json()
       this.commentData = data
     }
@@ -41,7 +41,7 @@ export default {
     .then(data=> console.log('comments found',this.commentData))
 
     const getReplies = async () => {
-      const response = await fetch ('http://localhost:3000/replies')
+      const response = await fetch ('http://16.170.214.173:3005/replies')
       const data = await response.json()
       this.replyData = data
     }
@@ -233,7 +233,7 @@ color: hsl(211, 10%, 45%);
   color: hsl(238, 40%, 52%);
 }
 
-@media only screen and (max-width: 767px){ 
+@media only screen and (max-width: 767px){
 #comments {
   height: auto;
   min-height: 100px;

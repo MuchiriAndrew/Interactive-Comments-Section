@@ -18,9 +18,9 @@
                     <form @submit="handleSend">
                         <button  class="rounded-2">SEND</button>
                     </form>
-                          
+
             </div>
-            
+
     </div>
 
 </template>
@@ -36,8 +36,8 @@ export default {
     },
 
     methods: {
-        handleSend() {     
-            location.reload()  
+        handleSend() {
+            location.reload()
         const timestamp = new Date().toLocaleString("en-US", {
           hour: "numeric",
           minute: "numeric",
@@ -49,9 +49,9 @@ export default {
           score: 0,
           parent_comment_id: 5,
           timestamp: timestamp,
-    };        
+    };
 
-    fetch('http://localhost:3000/comments', {
+    fetch('http://16.170.214.173:3005/comments', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newComment),
@@ -63,7 +63,7 @@ export default {
 
     mounted() {
     const getUserData = async () => {
-      const response = await fetch (`http://localhost:3000/users/4`)
+      const response = await fetch (`http://16.170.214.173:3005/users/4`)
       const data = await response.json()
       this.userData = data
     }
@@ -123,7 +123,7 @@ button:hover {
     transition: 0.3s ease-in-out;
 }
 
-@media only screen and (max-width: 767px){ 
+@media only screen and (max-width: 767px){
 #newone {
     width: 100%;
     display: flex;
