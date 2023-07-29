@@ -3,11 +3,11 @@
     <div id="comments-container" class="">
 
       <Comments />
-      <AddComment class="sticky-bottom"/>
+      <AddComment />
 
     </div>
 
-    
+
   </div>
 </template>
 
@@ -31,7 +31,7 @@ export default {
 
 <style>
 
-@media only screen and (max-width: 1200px){ 
+@media only screen and (max-width: 1200px){
   #comments-container{
     width: 100%;
   }
