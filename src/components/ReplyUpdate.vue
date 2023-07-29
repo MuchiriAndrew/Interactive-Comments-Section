@@ -53,7 +53,7 @@ export default {
     },
     methods: {
         updateFunction(reply) {
-            fetch(`https://owl-yd4u.onrender.com/${reply.id}`, {
+            fetch(`https://owl-yd4u.onrender.com/replies/${reply.id}`, {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
