@@ -167,7 +167,7 @@ export default {
 
 
 #first-info {
-    min-width: 45%;
+    min-width: 50%;
 }
 
 #second-info {

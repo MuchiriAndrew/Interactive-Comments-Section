@@ -141,7 +141,7 @@ export default {
 
 #first-info {
   display: flex;
-  min-width: 35%;
+  min-width: 40%;
   height: 100%;
   flex-direction: row;
   justify-content: space-between;
@@ -150,7 +150,7 @@ export default {
 
 #reply-first-info {
   display: flex;
-  min-width: 42%;
+  min-width: 50%;
   height: 100%;
   flex-direction: row;
   justify-content: space-between;
