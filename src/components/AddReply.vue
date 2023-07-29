@@ -63,7 +63,7 @@ export default {
     })
     .catch(err => console.log(err))
     console.log("reply post success")
-      location.reload()
+     setTimeout(function(){ location.reload(); }, 1000);
     }
     },
 

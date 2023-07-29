@@ -61,6 +61,7 @@ export default {
             }),
         })
         .catch(err => console.log(err))
+        setTimeout(function(){ location.reload(); }, 1000);
         }
     },
     mounted() {

@@ -145,6 +145,7 @@ export default {
             headers: { 'Content-Type': 'application/json' },
         })
         .catch(err => console.log(err))
+        setTimeout(function(){ location.reload(); }, 1000);
     }
   },
   mounted() {

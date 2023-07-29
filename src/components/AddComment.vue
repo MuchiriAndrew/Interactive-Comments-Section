@@ -58,7 +58,7 @@ export default {
     .catch(err => console.log(err))
     console.log("push reached")
 
-     location.reload()
+    setTimeout(function(){ location.reload(); }, 1000);
     }
     },
 
