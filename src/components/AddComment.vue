@@ -37,7 +37,6 @@ export default {
 
     methods: {
         handleSend() {
-            location.reload()
         const timestamp = new Date().toLocaleString("en-US", {
           hour: "numeric",
           minute: "numeric",
@@ -58,6 +57,8 @@ export default {
     })
     .catch(err => console.log(err))
     console.log("push reached")
+
+     location.reload()
     }
     },
 

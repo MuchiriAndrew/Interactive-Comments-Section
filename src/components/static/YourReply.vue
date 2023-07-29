@@ -8,7 +8,7 @@
             <p>Are you sure you want to remove this comment? This will remove the comment and can't be undone</p>
             <div id="btn-div">
                 <div id="cancel" class="rounded-2"  data-bs-dismiss="modal">NO, CANCEL</div>
-                <div @click="handleDelete(reply)" id="yes-delete" class="rounded-2" data-bs-dismiss="modal">YES, DELETE</div>
+                <div id="yes-delete" class="rounded-2" data-bs-dismiss="modal">YES, DELETE</div>
             </div>
         </div>
     </div>
@@ -40,7 +40,7 @@
                         </div>
 
                         <div class="d-none d-md-flex" id="second-info">
-                            <div id="delete" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                            <div @click="handleDelete(reply)" id="delete">
                                 <img src="../../assets/icon-delete.svg" alt="delete">
                                 <p class="m-0">Delete</p>
                             </div>
@@ -68,7 +68,7 @@
                             </div>
 
                             <div  id="second">
-                                <div id="delete" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                                <div @click="handleDelete(reply)" id="delete">
                                 <img src="../../assets/icon-delete.svg" alt="delete">
                                 <p class="m-0">Delete</p>
                             </div>
@@ -95,7 +95,7 @@ import ReplyUpdate from "../ReplyUpdate.vue"
 export default {
     components: {ReplyUpdate},
     name: 'ReplyComponent',
-    props: ['data','reply', 'comment'],
+    props: ['data','reply','comment'],
     data() {
     return {
       clicked1:false,
@@ -139,7 +139,6 @@ export default {
     },
 
     handleDelete(reply) {
-        location.reload()
         fetch(`https://owl-yd4u.onrender.com/replies/${reply.id}`, {
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json' },

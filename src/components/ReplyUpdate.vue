@@ -21,7 +21,7 @@
                 </div>
 
                 <div id="update-text">
-                     <form @submit="updateFunction(reply)" id="text-area" class="">
+                     <form @submit.prevent="updateFunction(reply)" id="text-area" class="">
                         <textarea name="addcomment" id="addcomment" class="rounded-2 p-2" placeholder="Add a comment..." v-model="text"></textarea>
                         <button @click="handleUpdate" class="rounded-2">UPDATE</button>
                     </form>

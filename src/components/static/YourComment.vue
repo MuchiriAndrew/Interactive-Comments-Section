@@ -8,7 +8,7 @@
             <p>Are you sure you want to remove this comment? This will remove the comment and can't be undone</p>
             <div id="btn-div">
                 <div id="cancel" class="rounded-2"  data-bs-dismiss="modal">NO, CANCEL</div>
-                <div @click="handleDelete(comment)" id="yes-delete" class="rounded-2" data-bs-dismiss="modal">YES, DELETE</div>
+                <div id="yes-delete" class="rounded-2" data-bs-dismiss="modal">YES, DELETE</div>
             </div>
         </div>
     </div>
@@ -40,7 +40,7 @@
                         </div>
 
                         <div class="d-none d-md-flex" id="second-info">
-                            <div id="delete" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            <div @click="handleDelete(comment)" id="delete" >
                                 <img src="../../assets/icon-delete.svg" alt="delete">
                                 <p class="m-0">Delete</p>
                             </div>
@@ -68,7 +68,7 @@
                             </div>
 
                             <div id="second">
-                                <div id="delete" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                <div @click="handleDelete(comment)" id="delete">
                                 <img src="../../assets/icon-delete.svg" alt="delete">
                                 <p class="m-0">Delete</p>
                             </div>
@@ -99,7 +99,8 @@ export default {
     data() {
     return {
         clicked1:false,
-        userData:[]
+        userData:[],
+        commentData:[]
     }
   },
   methods: {
@@ -139,7 +140,6 @@ export default {
         this.placeholderText = ""
     },
     handleDelete(comment) {
-        location.reload()
         fetch(`https://owl-yd4u.onrender.com/comments/${comment.id}`, {
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json' },

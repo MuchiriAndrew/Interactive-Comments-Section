@@ -21,7 +21,7 @@
                 </div>
 
                 <div id="update-text">
-                     <form @submit="updateFunction(comment)" id="text-area" class="">
+                     <form @submit.prevent="updateFunction(comment)" id="text-area" class="">
                         <textarea name="addcomment" id="addcomment" class="rounded-2 p-2" v-model="text" placeholder="Add a comment..." ></textarea>
                         <button @click="handleUpdate" class="rounded-2 d-none d-md-flex">UPDATE</button>
                     </form>
@@ -37,7 +37,7 @@
                         <span id="ops"><b>-</b></span>
                     </div>
 
-                     <form @submit="updateFunction(comment)" id="text-area" class="">
+                     <form @submit.prevent="updateFunction(comment)" id="text-area" class="">
                         <button @click="handleUpdate" class="rounded-2 ">UPDATE</button>
                     </form>
 

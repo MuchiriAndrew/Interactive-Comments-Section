@@ -40,7 +40,6 @@ export default {
 
     methods: {
         handleSendReply() {
-            location.reload()
         const timestamp = new Date().toLocaleString("en-US", {
           hour: "numeric",
           minute: "numeric",
@@ -64,6 +63,7 @@ export default {
     })
     .catch(err => console.log(err))
     console.log("reply post success")
+      location.reload()
     }
     },
 
