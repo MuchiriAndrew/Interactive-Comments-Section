@@ -13,8 +13,8 @@
 
                 <div id="comment-info">
                     <div id="first-info">
-                    <img :src="userData.image" :alt="userData.username">
-                    <h6 class="m-0"><b>{{userData.username}}</b></h6>
+                    <img :src="userData.image" :alt="userData.name">
+                    <h6 class="m-0"><b>{{userData.name}}</b></h6>
                     <span id="you-tag" class="rounded-1 px-2"><b>you</b></span>
                     <span>{{comment.timestamp}}</span>
                     </div>
@@ -57,7 +57,7 @@ export default {
     },
     methods: {
         updateFunction(comment) {
-            fetch(`http://16.170.214.173:3005/comments/${comment.id}`, {
+            fetch(`https://owl-yd4u.onrender.com/comments/${comment.id}`, {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -69,7 +69,7 @@ export default {
     },
     mounted() {
     const getUserData = async () => {
-      const response = await fetch (`http://16.170.214.173:3005/users/4`)
+      const response = await fetch (`https://owl-yd4u.onrender.com/users/4`)
       const data = await response.json()
       this.userData = data
     }

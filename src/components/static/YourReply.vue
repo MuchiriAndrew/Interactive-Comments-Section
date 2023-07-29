@@ -33,8 +33,8 @@
 
                     <div id="comment-info">
                         <div id="first-info">
-                        <img :src="userData.image" :alt="userData.username">
-                        <h6 class="m-0"><b>{{userData.username}}</b></h6>
+                        <img :src="userData.image" :alt="userData.name">
+                        <h6 class="m-0"><b>{{userData.name}}</b></h6>
                         <span id="you-tag" class="rounded-1 px-2"><b>you</b></span>
                         <span>{{reply.timestamp}}</span>
                         </div>
@@ -114,7 +114,7 @@ export default {
     addScore(reply) {
       reply.score++
 
-      fetch(`http://16.170.214.173:3005/replies/${reply.id}`, {
+      fetch(`https://owl-yd4u.onrender.com/replies/${reply.id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -128,7 +128,7 @@ export default {
       if(reply.score > 0)
      reply.score--
 
-      fetch(`http://16.170.214.173:3005/replies/${reply.id}`, {
+      fetch(`https://owl-yd4u.onrender.com/replies/${reply.id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -140,7 +140,7 @@ export default {
 
     handleDelete(reply) {
         location.reload()
-        fetch(`http://16.170.214.173:3005/replies/${reply.id}`, {
+        fetch(`https://owl-yd4u.onrender.com/replies/${reply.id}`, {
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json' },
         })
@@ -150,7 +150,7 @@ export default {
 
   mounted() {
     const getUserData = async () => {
-      const response = await fetch (`http://16.170.214.173:3005/users/${this.reply.user_id}`)
+      const response = await fetch (`https://owl-yd4u.onrender.com/users/${this.reply.user_id}`)
       const data = await response.json()
       this.userData = data
     }

@@ -2,7 +2,7 @@
   <div id="comments" class="bg-white rounded-2 mb-1 pt-3">
 
             <div id="image-div" class="d-none d-md-block">
-                <img :src="userData.image" :alt="userData.username">
+                <img :src="userData.image" :alt="userData.name">
             </div>
 
             <form id="text-area" class="" @submit="handleSendReply">
@@ -14,7 +14,7 @@
 
             <div id="newone" class="d-flex d-md-none">
                 <div id="image-div">
-                    <img :src="userData.image" :alt="userData.username">
+                    <img :src="userData.image" :alt="userData.name">
                 </div>
 
                 <form @submit="handleSendReply">
@@ -57,7 +57,7 @@ export default {
 
     // To update a resource with the Fetch API is very simple and straightforward, all you have to pass in is the URL of the endpoint as the 1st parameter and an object which contains the details of the method, headers, and body as the 2nd parameter.
 
-    fetch('http://16.170.214.173:3005/replies', {
+    fetch('https://owl-yd4u.onrender.com/replies', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newReply),
@@ -69,7 +69,7 @@ export default {
 
     mounted() {
     const getUserData = async () => {
-      const response = await fetch (`http://16.170.214.173:3005/users/4`)
+      const response = await fetch (`https://owl-yd4u.onrender.com/users/4`)
       const data = await response.json()
       this.userData = data
     }

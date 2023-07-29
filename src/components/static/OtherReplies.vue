@@ -14,8 +14,8 @@
 
                 <div id="comment-info">
                     <div id="reply-first-info">
-                    <img :src="userData.image" :alt="userData.username">
-                    <h6 class="m-0"><b>{{userData.username}}</b></h6>
+                    <img :src="userData.image" :alt="userData.name">
+                    <h6 class="m-0"><b>{{userData.name}}</b></h6>
                     <span>{{reply.timestamp}}</span>
                     </div>
 
@@ -70,7 +70,7 @@ export default {
   methods: {
     addReplyScore(reply) {
       reply.score++
-      fetch(`http://16.170.214.173:3005/replies/${reply.id}`, {
+      fetch(`https://owl-yd4u.onrender.com/replies/${reply.id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -83,7 +83,7 @@ export default {
     subtractReplyScore(reply) {
       if(reply.score > 0)
      reply.score--
-     fetch(`http://16.170.214.173:3005/replies/${reply.id}`, {
+     fetch(`https://owl-yd4u.onrender.com/replies/${reply.id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -96,7 +96,7 @@ export default {
 
   mounted() {
     const getUserData = async () => {
-      const response = await fetch (`http://16.170.214.173:3005/users/${this.reply.user_id}`)
+      const response = await fetch (`https://owl-yd4u.onrender.com/users/${this.reply.user_id}`)
       const data = await response.json()
       this.userData = data
     }

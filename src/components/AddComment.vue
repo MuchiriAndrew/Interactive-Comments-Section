@@ -2,7 +2,7 @@
   <div id="comments" class="bg-white rounded-2 mb-1 pt-3">
 
             <div id="image-div" class="d-none d-md-block">
-                <img :src="userData.image" :alt="userData.username">
+                <img :src="userData.image" :alt="userData.name">
             </div>
 
             <form @submit="handleSend" id="text-area" class="">
@@ -13,7 +13,7 @@
 
             <div id="newone" class="d-flex d-md-none">
                 <div id="image-div">
-                    <img :src="userData.image" :alt="userData.username">
+                    <img :src="userData.image" :alt="userData.name">
                 </div>
                     <form @submit="handleSend">
                         <button  class="rounded-2">SEND</button>
@@ -51,7 +51,7 @@ export default {
           timestamp: timestamp,
     };
 
-    fetch('http://16.170.214.173:3005/comments', {
+    fetch('https://owl-yd4u.onrender.com/comments', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newComment),
@@ -63,7 +63,7 @@ export default {
 
     mounted() {
     const getUserData = async () => {
-      const response = await fetch (`http://16.170.214.173:3005/users/4`)
+      const response = await fetch (`https://owl-yd4u.onrender.com/users/4`)
       const data = await response.json()
       this.userData = data
     }

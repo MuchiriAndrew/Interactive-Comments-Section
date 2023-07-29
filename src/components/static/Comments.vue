@@ -33,7 +33,7 @@ export default {
   },
   mounted() {
     const getData = async () => {
-      const response = await fetch ('http://16.170.214.173:3005/comments')
+      const response = await fetch ('https://owl-yd4u.onrender.com/comments')
       const data = await response.json()
       this.commentData = data
     }
@@ -41,7 +41,7 @@ export default {
     .then(data=> console.log('comments found',this.commentData))
 
     const getReplies = async () => {
-      const response = await fetch ('http://16.170.214.173:3005/replies')
+      const response = await fetch ('https://owl-yd4u.onrender.com/replies')
       const data = await response.json()
       this.replyData = data
     }
