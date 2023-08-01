@@ -178,6 +178,7 @@ export default {
 .modalFade-leave-to{opacity: 0}
 .modalFade-leave-active{transition: all 0.5s ease-in-out;}
 
+
 #comments {
     width: 100%;
 }
