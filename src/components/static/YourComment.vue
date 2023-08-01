@@ -1,17 +1,15 @@
 <template>
 
 <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" >
-        <div class="modal-dialog modal-dialog-centered bg-white rounded-3" id="modal-container">
-        <div class="modal-content" id="modal-content">
-            <h3>Delete Comment</h3>
-            <p>Are you sure you want to remove this comment? This will remove the comment and can't be undone</p>
-            <div id="btn-div">
-                <div id="cancel" class="rounded-2"  data-bs-dismiss="modal">NO, CANCEL</div>
-                <div id="yes-delete" class="rounded-2" data-bs-dismiss="modal">YES, DELETE</div>
+    <div class="mymodal" id="myModal" v-if="showModal" @click="closeModal" >
+            <div class="content rounded-3" id="content" @click.stop>
+                <h3>Delete Comment</h3>
+                <p>Are you sure you want to remove this comment? This will remove the comment and can't be undone</p>
+                <div id="btn-div">
+                    <div @click="closeModal" id="cancel" class="rounded-2" >NO, CANCEL</div>
+                    <div @click="handleDelete" id="yes-delete" class="rounded-2">YES, DELETE</div>
+                </div>
             </div>
-        </div>
-    </div>
     </div>
 
         <transition style="width:100%" name="comment-update">
@@ -40,7 +38,7 @@
                         </div>
 
                         <div class="d-none d-md-flex" id="second-info">
-                            <div @click="handleDelete(comment)" id="delete" >
+                            <div @click="showModal = true; setComment(comment)" id="delete" >
                                 <img src="../../assets/icon-delete.svg" alt="delete">
                                 <p class="m-0">Delete</p>
                             </div>
@@ -68,7 +66,7 @@
                             </div>
 
                             <div id="second">
-                                <div @click="handleDelete(comment)" id="delete">
+                                <div @click="showModal = true; setComment(comment)" id="delete">
                                 <img src="../../assets/icon-delete.svg" alt="delete">
                                 <p class="m-0">Delete</p>
                             </div>
@@ -100,7 +98,9 @@ export default {
     return {
         clicked1:false,
         userData:[],
-        commentData:[]
+        commentData:[],
+        showModal: false,
+        currentCommentId: null
     }
   },
   methods: {
@@ -117,7 +117,6 @@ export default {
     .catch(err => console.log(err))
 
     },
-
     subtractScore(comment) {
       if(comment.score > 0)
      comment.score--
@@ -139,13 +138,20 @@ export default {
 
         this.placeholderText = ""
     },
-    handleDelete(comment) {
-        fetch(`https://owl-yd4u.onrender.com/comments/${comment.id}`, {
+    handleDelete() {
+        fetch(`https://owl-yd4u.onrender.com/comments/${this.currentCommentId}`, {
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json' },
         })
         .catch(err => console.log(err))
         setTimeout(function(){ location.reload(); }, 1000);
+    },
+    closeModal() {
+      this.showModal = false;
+    },
+    setComment(comment) {
+        this.currentCommentId  = comment.id
+        console.log(this.currentCommentId);
     }
   },
   mounted() {
@@ -222,33 +228,39 @@ export default {
     align-items: center;
 }
 
-#modal-container {
-    max-width: none;
-    width:350px;
-    min-height: 0px;
-    height: 200px;
-    padding: 17px;
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    margin: auto;
+#myModal {
+  position:fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ transition: opacity 0.3s ease;
+  z-index: 999;
 }
 
-#modal-content {
-    height: 100%;
+.mymodal.fade-in {
+  opacity: 1;
+}
+.content {
+    width: 400px;
+    height: 220px;
+    background-color: #fff;
+    padding: 20px;
     display: flex;
+    justify-content: center;
     flex-direction: column;
-    justify-content: space-around;
-    border: none;
+    text-align: start;
 }
 
-#modal-content h3 {
+#content h3 {
     font-size: 24px;
 }
 
-#modal-content p {
+#content p {
     color: hsl(211, 10%, 45%);
 }
 
@@ -263,6 +275,7 @@ export default {
 #cancel {
     background: hsl(240, 7%, 46%);
     width: 40%;
+    height: 50px;
     color: white;
     display: flex;
     justify-content: center;
@@ -277,6 +290,7 @@ export default {
 #yes-delete {
     background: hsl(358, 79%, 66%);
     width: 40%;
+    height: 50px;
     color: white;
     display: flex;
     justify-content: center;
@@ -356,6 +370,13 @@ export default {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+}
+
+.content {
+    width: 80%;
+    height: 220px;
+    background-color: #fff;
+    padding: 15px;
 }
 }
 

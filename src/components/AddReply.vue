@@ -5,7 +5,7 @@
                 <img :src="userData.image" :alt="userData.name">
             </div>
 
-            <form id="text-area" class="" @submit="handleSendReply">
+            <form id="text-area" class="" @submit.prevent="handleSendReply">
                 <textarea v-model="text" name="addcomment" id="addcomment" class="rounded-2 p-2" placeholder="Add a comment" ></textarea>
                 <button class="rounded-2 d-none d-md-block">REPLY</button>
             </form>
@@ -17,7 +17,7 @@
                     <img :src="userData.image" :alt="userData.name">
                 </div>
 
-                <form @submit="handleSendReply">
+                <form @submit.prevent="handleSendReply">
                     <button class="rounded-2">SEND</button>
                 </form>
 
@@ -53,8 +53,6 @@ export default {
                 parent_comment_id:this.comment.user_id,
                 timestamp: timestamp
         };
-
-    // To update a resource with the Fetch API is very simple and straightforward, all you have to pass in is the URL of the endpoint as the 1st parameter and an object which contains the details of the method, headers, and body as the 2nd parameter.
 
     fetch('https://owl-yd4u.onrender.com/replies', {
         method: 'POST',
