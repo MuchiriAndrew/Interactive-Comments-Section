@@ -1,9 +1,8 @@
 <template>
-    <template v-for="(comment, index) in commentData" :key="index">
 
+    <template  v-for="(comment, index) in commentData" :key="index">
       <YourComment v-if="comment.user_id === 4" :comment="comment"/>
       <OtherComments v-else :comment = 'comment' :show = 'show' :index = 'index' :addScore = 'addScore' :subtractScore = 'subtractScore'/>
-
       <!-- The reply Component For Each Comment -->
       <div id="replies-container" v-for="(reply,index) in replyData" :key="index">
         <template v-if="reply.parent_comment_id === comment.id ">
@@ -11,7 +10,6 @@
           <OtherReplies v-else :reply = 'reply' :show2 = 'show2' :index = 'index' :comment = 'comment' />
         </template>
       </div>
-
     </template>
 </template>
 
@@ -20,34 +18,36 @@ import YourReply from "./YourReply.vue"
 import YourComment from "./YourComment.vue"
 import OtherComments from "./OtherComments.vue"
 import OtherReplies from "./OtherReplies.vue"
+import Loading from "./Loading.vue"
 
 export default {
-  components: {YourReply, YourComment, OtherComments, OtherReplies},
+  components: {YourReply, YourComment, OtherComments, OtherReplies, Loading},
+  props:["commentData", "replyData"],
    data() {
     return {
       show:false,
       show2:false,
-      commentData: [],
-      replyData: [],
     }
   },
-  mounted() {
-    const getData = async () => {
-      const response = await fetch ('https://owl-yd4u.onrender.com/comments')
-      const data = await response.json()
-      this.commentData = data
-    }
-    getData()
-    .then(data=> console.log('comments found',this.commentData))
+//   mounted() {
+//     const getData = async () => {
+//       const response = await fetch ('https://owl-yd4u.onrender.com/comments')
+//       const data = await response.json()
+//       this.commentData = data
+//     }
+//     getData()
+//     .then(data=> console.log('comments found',this.commentData))
 
-    const getReplies = async () => {
-      const response = await fetch ('https://owl-yd4u.onrender.com/replies')
-      const data = await response.json()
-      this.replyData = data
-    }
-    getReplies()
-    .then(data=> console.log('replies found',this.replyData))
-  },
+//     const getReplies = async () => {
+//       const response = await fetch ('https://owl-yd4u.onrender.com/replies')
+//       const data = await response.json()
+//       this.replyData = data
+//     }
+//     getReplies()
+//     .then(data=> console.log('replies found',this.replyData))
+
+//     this.loading = false
+//   },
 }
 </script>
 
