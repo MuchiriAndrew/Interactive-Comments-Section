@@ -49,10 +49,7 @@ export default {
     getReplies()
     .then(data=> console.log('replies found',this.replyData))
 
-
-     setTimeout(() => {
-      this.loading = false;
-    }, 2000);
+    this.loading = false
   },
 }
 
