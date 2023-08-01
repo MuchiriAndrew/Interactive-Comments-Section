@@ -36,44 +36,60 @@ export default {
     this.loading = true
     console.log(this.loading);
 
-  const getData = () => {
-      const xhr = new XMLHttpRequest();
-      xhr.open('GET', 'https://owl-yd4u.onrender.com/comments', false); // The 'false' flag makes the request synchronous.
-      xhr.send();
-
-      if (xhr.status === 200) {
-        const data = JSON.parse(xhr.responseText);
-        this.commentData = data
-      } else {
-        throw new Error('Failed to fetch data.');
-      }
+    const getData = async () => {
+      const response = await fetch ('https://owl-yd4u.onrender.com/comments')
+      const data = await response.json()
+      this.commentData = data
     }
     getData()
-    console.log("comments found");
+    .then(data=> console.log('comments found',this.commentData))
 
-    const getReplies = () => {
-      const xhr = new XMLHttpRequest();
-      xhr.open('GET', 'https://owl-yd4u.onrender.com/replies', false); // The 'false' flag makes the request synchronous.
-      xhr.send();
-
-      if (xhr.status === 200) {
-        const data = JSON.parse(xhr.responseText);
-        this.replyData = data
-      } else {
-        throw new Error('Failed to fetch data.');
-      }
+    const getReplies = async () => {
+      const response = await fetch ('https://owl-yd4u.onrender.com/replies')
+      const data = await response.json()
+      this.replyData = data
     }
     getReplies()
-    console.log("replies found");
+    .then(data=> console.log('replies found',this.replyData))
 
-    this.loading = false
-    console.log(this.loading);
+// const getData = () => {
+//       const xhr = new XMLHttpRequest();
+//       xhr.open('GET', 'https://owl-yd4u.onrender.com/comments', false); // The 'false' flag makes the request synchronous.
+//       xhr.send();
+
+//       if (xhr.status === 200) {
+//         const data = JSON.parse(xhr.responseText);
+//         this.commentData = data
+//       } else {
+//         throw new Error('Failed to fetch data.');
+//       }
+//     }
+//     getData()
+//     console.log("comments found");
+
+//     const getReplies = () => {
+//       const xhr = new XMLHttpRequest();
+//       xhr.open('GET', 'https://owl-yd4u.onrender.com/replies', false); // The 'false' flag makes the request synchronous.
+//       xhr.send();
+
+//       if (xhr.status === 200) {
+//         const data = JSON.parse(xhr.responseText);
+//         this.replyData = data
+//       } else {
+//         throw new Error('Failed to fetch data.');
+//       }
+//     }
+//     getReplies()
+//     console.log("replies found");
+
+//     this.loading = false
+//     console.log(this.loading);
 
 
-    // setTimeout(() => {
-    //   this.loading = false
-    //   console.log(this.loading);
-    // }, 1000);
+    setTimeout(() => {
+      this.loading = false
+      console.log(this.loading);
+    }, 1000);
   },
 }
 
