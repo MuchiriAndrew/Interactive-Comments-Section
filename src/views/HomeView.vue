@@ -34,6 +34,8 @@ export default {
   },
   mounted() {
     this.loading = true
+    console.log(this.loading);
+
     const getData = async () => {
       const response = await fetch ('https://owl-yd4u.onrender.com/comments')
       const data = await response.json()
@@ -50,11 +52,11 @@ export default {
     getReplies()
     .then(data=> console.log('replies found',this.replyData))
 
-    this.loading = false
 
-    // setTimeout(() => {
-    //   this.loading = false
-    // }, 5000);
+    setTimeout(() => {
+      this.loading = false
+      console.log(this.loading);
+    }, 1000);
   },
 }
 
