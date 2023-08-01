@@ -1,6 +1,7 @@
 <template>
 
 <!-- Modal -->
+<transition name="modalFade">
     <div class="mymodal" id="myModal" v-if="showModal" @click="closeModal" >
             <div class="content rounded-3" id="content" @click.stop>
                 <h3>Delete Comment</h3>
@@ -11,6 +12,7 @@
                 </div>
             </div>
     </div>
+</transition>
 
         <transition style="width:100%" name="comment-update">
 
@@ -167,6 +169,15 @@ export default {
 </script>
 
 <style scoped>
+
+.modalFade-enter-from{opacity: 0;}
+.modalFade-enter-to{opacity: 1;}
+.modalFade-enter-active{transition: all 0.5s ease-in-out;}
+
+.modalFade-leave-from{ opacity: 1;}
+.modalFade-leave-to{opacity: 0}
+.modalFade-leave-active{transition: all 0.5s ease-in-out;}
+
 #comments {
     width: 100%;
 }
