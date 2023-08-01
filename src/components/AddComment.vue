@@ -69,7 +69,7 @@ export default {
       this.userData = data
     }
     getUserData()
-    .then(data=> console.log('user data found'))
+    .then(data=> console.log(''))
   },
 
 }
