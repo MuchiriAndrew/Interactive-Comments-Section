@@ -3,6 +3,7 @@
     <template  v-for="(comment, index) in commentData" :key="index">
       <YourComment v-if="comment.user_id === 4" :comment="comment"/>
       <OtherComments v-else :comment = 'comment' :show = 'show' :index = 'index' :addScore = 'addScore' :subtractScore = 'subtractScore'/>
+
       <!-- The reply Component For Each Comment -->
       <div id="replies-container" v-for="(reply,index) in replyData" :key="index">
         <template v-if="reply.parent_comment_id === comment.id ">
@@ -18,10 +19,9 @@ import YourReply from "./YourReply.vue"
 import YourComment from "./YourComment.vue"
 import OtherComments from "./OtherComments.vue"
 import OtherReplies from "./OtherReplies.vue"
-import Loading from "./Loading.vue"
 
 export default {
-  components: {YourReply, YourComment, OtherComments, OtherReplies, Loading},
+  components: {YourReply, YourComment, OtherComments, OtherReplies},
   props:["commentData", "replyData"],
    data() {
     return {
