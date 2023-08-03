@@ -29,7 +29,7 @@
                 <router-link
                 style="text-decoration:none"
                 class="text-white"
-                to="/"
+                to="/home"
                 active-class="active-link"
                 exact-active-class="active-link"
                 >Login
@@ -39,7 +39,7 @@
 
             <p class="small mb-5 pb-lg-2"><a class="text-muted" style="text-decoration:none" href="#!">Forgot password?</a></p>
             <p>Don't have an account? <router-link
-                to="/"
+                to="/sign-up"
                 style="text-decoration:none"
                 class="text-primary"
                 active-class="active-link"
@@ -56,8 +56,6 @@
       <div id="side-background" class="col-lg-6 px-0 d-none d-lg-block">
         <img src="../assets/tower.jpg"
           alt="Login image" class="w-100 vh-100" style="object-fit: cover; object-position: left;">
-          <!-- <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
-          class="img-fluid" alt="Sample image"> -->
       </div>
 
     </div>
