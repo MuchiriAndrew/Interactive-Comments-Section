@@ -108,6 +108,15 @@ export default {
       if (this.selectedFile) {
         this.previewUrl = URL.createObjectURL(this.selectedFile);
         console.log(this.previewUrl);
+
+    //     fetch(`https://freeimage.host/api/1/upload/?key=6d207e02198a847aa98d0a2a901485a5&source=${this.previewUrl}&format=json`, {
+    //     method: 'POST',
+    //     headers: { 'Content-Type': 'application/json' },
+    // })
+    // .catch(err => console.log(err))
+    // console.log("user added")
+
+
       } else {
         this.previewUrl = null;
       }
