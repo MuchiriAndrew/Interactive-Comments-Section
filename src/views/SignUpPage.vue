@@ -2,37 +2,51 @@
   <div id="container" class="p-0 container-fluid">
 
       <div id="myform" class="text-black text-center">
-
         <div class="mb-3">
            <svg xmlns="http://www.w3.org/2000/svg" height="3em" viewBox="0 0 640 512"><path d="M456 0c-48.6 0-88 39.4-88 88v29.2L12.5 390.6c-14 10.8-16.6 30.9-5.9 44.9s30.9 16.6 44.9 5.9L126.1 384H259.2l46.6 113.1c5 12.3 19.1 18.1 31.3 13.1s18.1-19.1 13.1-31.3L311.1 384H352c1.1 0 2.1 0 3.2 0l46.6 113.2c5 12.3 19.1 18.1 31.3 13.1s18.1-19.1 13.1-31.3l-42-102C484.9 354.1 544 280 544 192V128v-8l80.5-20.1c8.6-2.1 13.8-10.8 11.6-19.4C629 52 603.4 32 574 32H523.9C507.7 12.5 483.3 0 456 0zm0 64a24 24 0 1 1 0 48 24 24 0 1 1 0-48z"/></svg>
         </div>
 
-          <form @submit.prevent="handleCreateAccount">
-            <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign Up</h3>
+        <form @submit.prevent="handleCreateAccount">
+          <h3 class="fw-normal mb-3 pb-3 text-start" style="letter-spacing: 1px;">Sign Up</h3>
 
-            <div class="form-outline mb-4 text-start">
-              <input v-model="username" style="font-size:14px" type="name" id="username" class="form-control form-control-lg" :placeholder="username_placeholder" />
-              <label class="form-label" for="form2Example18">Username</label>
-            </div>
+          <div class="form-outline mb-4 text-start">
+            <input v-model="username" style="font-size:14px" type="name" id="username" class="form-control form-control-lg" :placeholder="username_placeholder" />
+            <label class="form-label" for="form2Example18">Username</label>
+          </div>
 
-            <div class="form-outline mb-4 text-start">
-              <input v-model="email" style="font-size:14px" type="email" id="email" class="form-control form-control-lg" :placeholder="email_placeholder" />
-              <label class="form-label" for="form2Example18">Email address</label>
-            </div>
+          <div class="form-outline mb-4 text-start">
+            <input v-model="email" style="font-size:14px" type="email" id="email" class="form-control form-control-lg" :placeholder="email_placeholder" />
+            <label class="form-label" for="form2Example18">Email address</label>
+          </div>
 
-            <div class="form-outline mb-4 text-start">
-              <input style="font-size:14px" v-model="password" type="password" id="password" class="form-control form-control-lg" :placeholder="password_placeholder" />
-              <label class="form-label" for="form2Example28">Password</label>
-            </div>
+          <div class="form-outline mb-4 text-start">
+            <input style="font-size:14px" v-model="password" type="password" id="password" class="form-control form-control-lg" :placeholder="password_placeholder" />
+            <label class="form-label" for="form2Example28">Password</label>
+          </div>
 
-            <div class="pt-1 mb-4">
-              <button  class="btn btn-info btn-lg btn-block text-white" type="submit" @click="handleClick">Create Account</button>
-            </div>
-          </form>
+          <div id="upload-div" class="d-flex d-lg-none text-start">
+            <p>Upload Profile Picture</p>
+            <input id="upload-input" class="mb-3 border-none" type="file" @change="handleFileChange" accept="image/*">
+            <div id="circular-image-container">
+            <img :src="previewUrl" id="circular-image">
+          </div>
+          </div>
 
+          <div class="pt-1 mb-4">
+            <button  class="btn btn-info btn-lg btn-block text-white" type="submit" @click="handleClick">Create Account</button>
+          </div>
+        </form>
       </div>
 
-    </div>
+      <div id="upload-div" class="d-none d-lg-flex text-start">
+        <p>Upload Profile Picture</p>
+          <input id="upload-input" class="mb-3 border-none" type="file" @change="handleFileChange" accept="image/*">
+          <div id="circular-image-container">
+            <img :src="previewUrl" id="circular-image">
+          </div>
+      </div>
+
+  </div>
 </template>
 <script>
 export default {
@@ -50,7 +64,9 @@ export default {
       username_placeholder:"Input a username",
       email_placeholder:"Enter valid email address",
       password_placeholder:"Input valid password",
-      isFilled: false
+      isFilled: false,
+      selectedFile:null,
+      previewUrl:null
     }
   },
   methods: {
@@ -85,11 +101,41 @@ export default {
         this.isPassword = "grey"
       }
     },
+
+    handleFileChange(event) {
+      this.selectedFile = event.target.files[0];
+
+      if (this.selectedFile) {
+        this.previewUrl = URL.createObjectURL(this.selectedFile);
+        console.log(this.previewUrl);
+      } else {
+        this.previewUrl = null;
+      }
+    },
+
     handleClick() {
       setTimeout(() => {
-        if (this.isFilled) {
-        window.location.href = '/';
-    }
+
+        const newUser = {
+        id: 10,
+        name: this.username,
+        email:this.email,
+        image: "image not uploaded",
+        password: this.password,
+        created_at: "2023-07-29T09:33:29.278Z",
+        updated_at: "2023-07-29T09:33:29.278Z"
+    };
+        fetch('https://owl-yd4u.onrender.com/users', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newUser),
+    })
+    .catch(err => console.log(err))
+    console.log("user added")
+
+    //     if (this.isFilled) {
+    //     window.location.href = '/';
+    // }
       }, 2000);
   }
   }
@@ -102,7 +148,8 @@ export default {
 #container {
   height: 100vh;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
+  flex-direction: row;
   align-items: center;
   overflow: hidden;
 }
@@ -120,6 +167,7 @@ form {
   width: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: center;
 }
 
 #username {
@@ -141,15 +189,38 @@ form {
 #password::placeholder {
   color: v-bind(isPassword);
 }
+#upload-div {
+  width: 300px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+}
 
+#upload-div p {
+  font-weight: 800;
+}
 
+#circular-image-container {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: none;
+  margin-top: 10px;
+}
+
+#circular-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 
 @media (max-width: 992px) {
 #container {
   min-height: 100vh;
   height: max-content;
   display: flex;
-  flex-direction:row;
+  flex-direction:column;
   justify-content:center;
   align-items: center;
 }
