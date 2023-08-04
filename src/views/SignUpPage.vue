@@ -133,9 +133,9 @@ export default {
     .catch(err => console.log(err))
     console.log("user added")
 
-    //     if (this.isFilled) {
-    //     window.location.href = '/';
-    // }
+        if (this.isFilled) {
+        window.location.href = '/';
+    }
       }, 2000);
   }
   }
