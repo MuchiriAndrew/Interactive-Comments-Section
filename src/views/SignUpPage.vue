@@ -1,5 +1,9 @@
 <template>
-  <div id="container" class="p-0 container-fluid">
+  <div class="container-fluid" id="mycontainer" v-if="loading">
+    <Loading />
+  </div>
+
+  <div v-else id="container" class="p-0 container-fluid">
 
       <div id="myform" class="text-black text-center">
         <div class="mb-3">
@@ -52,7 +56,10 @@
 </template>
 <script>
 import axios from 'axios';
+import Loading from "../components/static/Loading.vue"
+
 export default {
+  components:{Loading},
   data() {
     return{
       username:"",
@@ -71,7 +78,8 @@ export default {
       selectedFile:null,
       previewUrl:null,
       apiKey: "221be5b6dc62093c08bc29052aff64d5",
-      uploadeImageUrl: null
+      uploadeImageUrl: null,
+      loading:false
     }
   },
   methods: {
@@ -116,12 +124,14 @@ export default {
     },
 
     async uploadImage() {
+      this.loading = true
       const formData = new FormData();
       formData.append('image', this.selectedFile);
 
       try {
         const response = await axios.post(`https://api.imgbb.com/1/upload?key=${this.apiKey}`, formData);
         this.uploadedImageUrl = response.data.data.display_url
+        this.loading = false
         console.log("image posted");
         console.log(this.uploadedImageUrl);
       } catch (error) {
@@ -168,6 +178,13 @@ export default {
   flex-direction: row;
   align-items: center;
   overflow: hidden;
+}
+
+#mycontainer {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #myform {
