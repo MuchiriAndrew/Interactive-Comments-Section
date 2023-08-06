@@ -25,11 +25,12 @@
           </div>
 
           <div id="upload-div" class="d-flex d-lg-none text-start">
-            <p>Upload Profile Picture</p>
+            <p>Upload Profile </p>
             <input id="upload-input" class="mb-3 border-none" type="file" @change="handleFileChange" accept="image/*">
             <div id="circular-image-container">
             <img :src="previewUrl" id="circular-image">
-          </div>
+            </div>
+            <button @click="uploadImage" class="btn btn-primary rounded-3">Click Here</button>
           </div>
 
           <div class="pt-1 mb-4">
@@ -44,11 +45,13 @@
           <div id="circular-image-container">
             <img :src="previewUrl" id="circular-image">
           </div>
+          <button @click="uploadImage" class="btn btn-primary rounded-3">Upload Image</button>
       </div>
 
   </div>
 </template>
 <script>
+import axios from 'axios';
 export default {
   data() {
     return{
@@ -66,7 +69,9 @@ export default {
       password_placeholder:"Input valid password",
       isFilled: false,
       selectedFile:null,
-      previewUrl:null
+      previewUrl:null,
+      apiKey: "221be5b6dc62093c08bc29052aff64d5",
+      uploadeImageUrl: null
     }
   },
   methods: {
@@ -104,21 +109,23 @@ export default {
 
     handleFileChange(event) {
       this.selectedFile = event.target.files[0];
-
       if (this.selectedFile) {
         this.previewUrl = URL.createObjectURL(this.selectedFile);
         console.log(this.previewUrl);
+      }
+    },
 
-    //     fetch(`https://freeimage.host/api/1/upload/?key=6d207e02198a847aa98d0a2a901485a5&source=${this.previewUrl}&format=json`, {
-    //     method: 'POST',
-    //     headers: { 'Content-Type': 'application/json' },
-    // })
-    // .catch(err => console.log(err))
-    // console.log("user added")
+    async uploadImage() {
+      const formData = new FormData();
+      formData.append('image', this.selectedFile);
 
-
-      } else {
-        this.previewUrl = null;
+      try {
+        const response = await axios.post(`https://api.imgbb.com/1/upload?key=${this.apiKey}`, formData);
+        this.uploadedImageUrl = response.data.data.display_url
+        console.log("image posted");
+        console.log(this.uploadedImageUrl);
+      } catch (error) {
+        console.error('Error uploading image:', error);
       }
     },
 
@@ -129,7 +136,7 @@ export default {
         id: 10,
         name: this.username,
         email:this.email,
-        image: "image not uploaded",
+        image: this.uploadedImageUrl,
         password: this.password,
         created_at: "2023-07-29T09:33:29.278Z",
         updated_at: "2023-07-29T09:33:29.278Z"

@@ -9,16 +9,16 @@ const routes = [
     name: 'home',
     component: HomeView
   },
-  // {
-  //   path: '/login',
-  //   name: 'login',
-  //   component: LoginPage
-  // },
-  // {
-  //   path: '/sign-up',
-  //   name: 'sign-up',
-  //   component: SignUpPage
-  // },
+  {
+    path: '/login',
+    name: 'login',
+    component: LoginPage
+  },
+  {
+    path: '/sign-up',
+    name: 'sign-up',
+    component: SignUpPage
+  },
 ]
 
 const router = createRouter({
