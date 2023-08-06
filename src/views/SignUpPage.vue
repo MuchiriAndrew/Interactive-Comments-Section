@@ -39,7 +39,7 @@
           </div>
 
           <div class="pt-1 mb-4">
-            <button  class="btn btn-info btn-lg btn-block text-white" type="submit" @click="handleClick">Create Account</button>
+            <button  class="btn btn-info btn-lg btn-block text-white" type="submit" @submit.prevent="handleCreateAccount">Create Account</button>
           </div>
         </form>
       </div>
@@ -115,6 +115,7 @@ export default {
         this.isUsername = "grey"
         this.isEmail = "grey"
         this.isPassword = "grey"
+        this.handleClick()
       }
     },
 
@@ -147,7 +148,6 @@ export default {
 
     handleClick() {
       setTimeout(() => {
-
         const newUser = {
         id: 10,
         name: this.username,
