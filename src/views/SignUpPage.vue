@@ -143,10 +143,9 @@ export default {
         const response = await axios.post(`https://api.imgbb.com/1/upload?key=${this.apiKey}`, formData);
         this.uploadedImageUrl = response.data.data.display_url
         this.loading = false
-        console.log("image posted");
-        console.log(this.uploadedImageUrl);
+        alert("image posted");
       } catch (error) {
-        console.error('Error uploading image:', error);
+        alert('Error uploading image:', error);
       }
     },
 
@@ -167,8 +166,7 @@ export default {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newUser),
     })
-    .catch(err => console.log(err))
-    console.log("user added")
+    alert("user added")
 
         if (this.isFilled) {
         window.location.href = '/';
