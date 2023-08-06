@@ -26,31 +26,6 @@ export default {
       replyData:[]
     }
   },
-  // mounted() {
-  //   this.loading = true
-  //   console.log(this.loading);
-
-  //   const getData = async () => {
-  //     const response = await fetch ('https://owl-yd4u.onrender.com/comments')
-  //     const data = await response.json()
-  //       this.commentData = data
-  //   }
-  //   getData()
-  //   .then(data=> console.log('comments found',this.commentData))
-
-  //   const getReplies = async () => {
-  //     const response = await fetch ('https://owl-yd4u.onrender.com/replies')
-  //     const data = await response.json()
-  //       this.replyData = data
-  //   }
-  //   getReplies()
-  //   .then(data=> console.log('replies found',this.replyData))
-
-  //   setTimeout(() => {
-  //   this.loading = false
-  //   console.log(this.loading);
-  //   }, 1000);
-  // },
 
 async mounted() {
     try {

@@ -5,20 +5,20 @@ import SignUpPage from '../views/SignUpPage.vue'
 
 const routes = [
   {
-    path: '/home',
+    path: '/',
     name: 'home',
     component: HomeView
   },
-  {
-    path: '/',
-    name: 'login',
-    component: LoginPage
-  },
-  {
-    path: '/sign-up',
-    name: 'sign-up',
-    component: SignUpPage
-  },
+  // {
+  //   path: '/login',
+  //   name: 'login',
+  //   component: LoginPage
+  // },
+  // {
+  //   path: '/sign-up',
+  //   name: 'sign-up',
+  //   component: SignUpPage
+  // },
 ]
 
 const router = createRouter({
