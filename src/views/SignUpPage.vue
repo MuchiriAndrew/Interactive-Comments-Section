@@ -29,12 +29,13 @@
           </div>
 
           <div id="upload-div" class="d-flex d-lg-none text-start">
-            <p>Upload Profile </p>
-            <input id="upload-input" class="mb-3 border-none" type="file" @change="handleFileChange" accept="image/*">
-            <div id="circular-image-container">
-            <img :src="previewUrl" id="circular-image">
-            </div>
-            <button @click="uploadImage" class="btn btn-primary rounded-3">Click Here</button>
+            <p>Upload Profile Picture</p>
+          <input id="upload-input" class="mb-3 border-none p-3" type="file" @change="handleFileChange" accept="image/*">
+          <div id="circular-image-container" class="border-none rounded-circle mb-4">
+            <img v-if="previewUrl" :src="previewUrl" id="circular-image" class="rounded-circle">
+            <img v-else src="https://i.ibb.co/jRVNwJJ/blank-profile-picture-973460-1280.webp" id="circular-image" class="rounded-circle">
+          </div>
+          <button @click="uploadImage" class="btn btn-primary rounded-3">Upload Image</button>
           </div>
 
           <div class="pt-1 mb-4">
@@ -45,9 +46,10 @@
 
       <div id="upload-div" class="d-none d-lg-flex text-start">
         <p>Upload Profile Picture</p>
-          <input id="upload-input" class="mb-3 border-none" type="file" @change="handleFileChange" accept="image/*">
-          <div id="circular-image-container">
-            <img :src="previewUrl" id="circular-image">
+          <input id="upload-input" class="mb-3 border-none p-3" type="file" @change="handleFileChange" accept="image/*">
+          <div id="circular-image-container" class="border-none rounded-circle mb-4">
+            <img v-if="previewUrl" :src="previewUrl" id="circular-image" class="rounded-circle">
+            <img v-else src="https://i.ibb.co/jRVNwJJ/blank-profile-picture-973460-1280.webp" id="circular-image" class="rounded-circle">
           </div>
           <button @click="uploadImage" class="btn btn-primary rounded-3">Upload Image</button>
       </div>
@@ -78,7 +80,7 @@ export default {
       selectedFile:null,
       previewUrl:null,
       apiKey: "221be5b6dc62093c08bc29052aff64d5",
-      uploadeImageUrl: null,
+      uploadedImageUrl: null,
       loading:false
     }
   },
@@ -93,13 +95,14 @@ export default {
         this.email_placeholder = "Email field cannot be blank"
         this.isEmail = "red"
         this.isEmail2 = "pink"
-
+      }
+       if(this.uploadedImageUrl === null) {
+        this.uploadedImageUrl = "https://i.ibb.co/jRVNwJJ/blank-profile-picture-973460-1280.webp"
       }
       if(this.password === "") {
         this.password_placeholder = "Password field cannot be blank"
         this.isPassword = "red"
         this.isPassword2 = "pink"
-
       }
       else if(this.password.length < 6 ) {
         this.password = ""
@@ -120,6 +123,9 @@ export default {
       if (this.selectedFile) {
         this.previewUrl = URL.createObjectURL(this.selectedFile);
         console.log(this.previewUrl);
+      }
+      else {
+        this.previewUrl = null
       }
     },
 
@@ -223,23 +229,26 @@ form {
   color: v-bind(isPassword);
 }
 #upload-div {
-  width: 300px;
-  height: 300px;
+  width: 400px;
+  height: 400px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 #upload-div p {
   font-weight: 800;
 }
+#upload-div input {
+  width: 70%;
+}
 
 #circular-image-container {
   width: 200px;
   height: 200px;
-  border-radius: 50%;
-  overflow: hidden;
-  border: none;
   margin-top: 10px;
+  border: none;
 }
 
 #circular-image {
@@ -269,6 +278,12 @@ form {
   width: 100%;
   display: flex;
   flex-direction: column;
+}
+#upload-div {
+  width: 100%;
+}
+#upload-div input {
+  width: 80%;
 }
 }
 
