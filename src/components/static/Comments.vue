@@ -12,6 +12,7 @@
         </template>
       </div>
     </template>
+    <!-- <AddComment /> -->
 </template>
 
 <script>
@@ -19,9 +20,10 @@ import YourReply from "./YourReply.vue"
 import YourComment from "./YourComment.vue"
 import OtherComments from "./OtherComments.vue"
 import OtherReplies from "./OtherReplies.vue"
+import AddComment from "../AddComment.vue"
 
 export default {
-  components: {YourReply, YourComment, OtherComments, OtherReplies},
+  components: {YourReply, YourComment, OtherComments, OtherReplies, AddComment},
   props:["commentData", "replyData"],
    data() {
     return {
@@ -31,6 +33,7 @@ export default {
   },
 }
 </script>
+
 
 <style>
 
