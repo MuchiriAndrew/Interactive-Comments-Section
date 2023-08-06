@@ -28,7 +28,7 @@
             <label class="form-label" for="form2Example28">Password</label>
           </div>
 
-          <div id="upload-div" class="d-flex d-lg-none text-start">
+          <div id="upload-div" class="d-flex d-lg-none text-start mb-5">
             <p>Upload Profile Picture</p>
           <input id="upload-input" class="mb-3 border-none p-3" type="file" @change="handleFileChange" accept="image/*">
           <div id="circular-image-container" class="border-none rounded-circle mb-4">
@@ -42,6 +42,8 @@
             <button  class="btn btn-info btn-lg btn-block text-white" type="submit" >Create Account</button>
           </div>
         </form>
+
+        <p>Already have an account?<a style="text-decoration:none" href="/"> Sign In</a></p>
       </div>
 
       <div id="upload-div" class="d-none d-lg-flex text-start">
@@ -149,6 +151,7 @@ export default {
     },
 
     handleClick() {
+      this.loading = true
       setTimeout(() => {
         const newUser = {
         id: 10,
@@ -170,7 +173,7 @@ export default {
         if (this.isFilled) {
         window.location.href = '/';
     }
-      }, 2000);
+      }, 3000);
   }
   }
 
