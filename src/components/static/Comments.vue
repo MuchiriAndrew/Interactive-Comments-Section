@@ -12,7 +12,7 @@
         </template>
       </div>
     </template>
-    <!-- <AddComment /> -->
+    <AddComment />
 </template>
 
 <script>
