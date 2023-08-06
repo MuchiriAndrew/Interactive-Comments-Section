@@ -143,16 +143,16 @@ export default {
         const response = await axios.post(`https://api.imgbb.com/1/upload?key=${this.apiKey}`, formData);
         this.uploadedImageUrl = response.data.data.display_url
         this.loading = false
-        alert("image posted");
+        console.log("image posted");
       } catch (error) {
-        alert('Error uploading image:', error);
+        console.log('Error uploading image:', error);
       }
     },
 
-    handleClick() {
+
+    async handleClick() {
       this.loading = true
-      setTimeout(() => {
-        const newUser = {
+      const newUser = {
         id: 10,
         name: this.username,
         email:this.email,
@@ -161,17 +161,18 @@ export default {
         created_at: "2023-07-29T09:33:29.278Z",
         updated_at: "2023-07-29T09:33:29.278Z"
       };
-        fetch('https://owl-yd4u.onrender.com/users', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(newUser),
-    })
-    alert("user added")
 
-        if (this.isFilled) {
+      try {
+        await axios.post('https://owl-yd4u.onrender.com/users', newUser);
+        this.loading = false
+        console.log("user added");
+      } catch (error) {
+        console.log('Error adding user', error);
+      }
+
+       if (this.isFilled) {
         window.location.href = '/';
     }
-      }, 3000);
   }
   }
 
