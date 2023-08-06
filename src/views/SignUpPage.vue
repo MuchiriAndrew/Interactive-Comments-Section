@@ -39,7 +39,7 @@
           </div>
 
           <div class="pt-1 mb-4">
-            <button  class="btn btn-info btn-lg btn-block text-white" type="submit" @submit.prevent="handleCreateAccount">Create Account</button>
+            <button  class="btn btn-info btn-lg btn-block text-white" type="submit" >Create Account</button>
           </div>
         </form>
       </div>
@@ -91,15 +91,13 @@ export default {
         this.isUsername = "red"
         this.isUsername2 = "pink"
       }
-      if(this.email === "") {
+      else if(this.email === "") {
         this.email_placeholder = "Email field cannot be blank"
         this.isEmail = "red"
         this.isEmail2 = "pink"
       }
-       if(this.uploadedImageUrl === null) {
-        this.uploadedImageUrl = "https://i.ibb.co/jRVNwJJ/blank-profile-picture-973460-1280.webp"
-      }
-      if(this.password === "") {
+
+      else if(this.password === "") {
         this.password_placeholder = "Password field cannot be blank"
         this.isPassword = "red"
         this.isPassword2 = "pink"
@@ -110,6 +108,10 @@ export default {
         this.isPassword = "red"
         this.isPassword2 = "pink"
       }
+      else if(this.uploadedImageUrl === null) {
+        this.uploadedImageUrl = "https://i.ibb.co/jRVNwJJ/blank-profile-picture-973460-1280.webp"
+      }
+
       else{
         this.isFilled = true
         this.isUsername = "grey"
@@ -156,7 +158,7 @@ export default {
         password: this.password,
         created_at: "2023-07-29T09:33:29.278Z",
         updated_at: "2023-07-29T09:33:29.278Z"
-    };
+      };
         fetch('https://owl-yd4u.onrender.com/users', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
