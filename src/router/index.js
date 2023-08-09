@@ -5,12 +5,12 @@ import SignUpPage from '../views/SignUpPage.vue'
 
 const routes = [
   {
-    path: '/home',
+    path: '/',
     name: 'home',
     component: HomeView
   },
   {
-    path: '/',
+    path: '/login',
     name: 'login',
     component: LoginPage
   },
