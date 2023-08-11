@@ -156,7 +156,7 @@ export default {
         id: 10,
         name: this.username,
         email:this.email,
-        image: this.uploadedImageUrl,
+        image: "https://i.ibb.co/jRVNwJJ/blank-profile-picture-973460-1280.webp",
         password: this.password,
         created_at: "2023-07-29T09:33:29.278Z",
         updated_at: "2023-07-29T09:33:29.278Z"
