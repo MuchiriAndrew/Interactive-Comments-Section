@@ -10,7 +10,6 @@
           <form @submit.prevent="handleLogin">
             <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Login</h3>
 
-
             <div class="form-outline mb-4 text-start">
               <input v-model="email" style="font-size:14px" type="email" id="email" class="form-control form-control-lg" :placeholder="email_placeholder" />
               <label class="form-label" for="form2Example18">Email address</label>
@@ -40,7 +39,9 @@
     </div>
 </template>
 <script>
+import axios from 'axios';
 export default {
+  props:["currentId"],
   data() {
     return{
       email:"",
@@ -52,7 +53,8 @@ export default {
       username_placeholder:"Input a username",
       email_placeholder:"",
       password_placeholder:"",
-      isFilled: false
+      isFilled: false,
+      myid:null
     }
   },
   methods: {
@@ -73,12 +75,34 @@ export default {
         this.isPassword = "grey"
       }
     },
-    handleClick() {
-      setTimeout(() => {
-        if (this.isFilled) {
-        window.location.href = '/home';
-    }
-      }, 2000);
+    async handleClick() {
+
+      const credentials = {
+          user:{
+            email:this.email,
+            password:this.password
+          }
+      }
+
+      try {
+        const response = await axios.post("https://owl-yd4u.onrender.com/login", credentials);
+        if (response.data.user_id) {
+          console.log(response.data.user_id);
+          this.myid = response.data.user_id
+          setTimeout(() => {
+              if (this.isFilled) {
+              window.location.href = `/home/${this.myid}`;
+          }
+            }, 2000);
+        } else {
+          alert(response.data.error)
+        }
+      } catch (error) {
+        console.log('Error in authentication:', error);
+        alert("Error in authentication")
+      }
+
+
   }
   }
 

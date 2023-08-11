@@ -13,7 +13,7 @@
 
                 <div id="comment-info">
                     <div id="first-info">
-                    <img :src="userData.image" :alt="userData.name">
+                    <img class="rounded-circle" :src="userData.image" :alt="userData.name">
                     <h6 class="m-0"><b>{{userData.name}}</b></h6>
                     <span id="you-tag" class="rounded-1 px-2"><b>you</b></span>
                     <span>{{reply.timestamp}}</span>
@@ -44,7 +44,7 @@
 
 <script>
 export default {
-    props: ['data','handleUpdate','reply'],
+    props: ['data','handleUpdate','reply', 'id'],
     data() {
         return{
             text:this.reply.content,
@@ -66,7 +66,7 @@ export default {
     },
     mounted() {
     const getUserData = async () => {
-      const response = await fetch (`https://owl-yd4u.onrender.com/users/4`)
+      const response = await fetch (`https://owl-yd4u.onrender.com/users/${this.id}`)
       const data = await response.json()
       this.userData = data
     }

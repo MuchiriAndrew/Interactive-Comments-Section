@@ -1,11 +1,12 @@
 <template>
   <div class="container-fluid" id="wrapper">
+
     <div v-if="loading">
       <Loading />
     </div>
 
     <div v-else id="comments-container" class="">
-      <Comments :commentData = "commentData" :replyData = "replyData"/>
+      <Comments :commentData = "commentData" :replyData = "replyData" :id = 'id'/>
     </div>
   </div>
 </template>
@@ -17,6 +18,7 @@ import AddComment from "../components/AddComment.vue"
 
 export default {
   components:{AddComment, Comments, Loading},
+  props:['id'],
   name: 'HomeView',
   data() {
     return {

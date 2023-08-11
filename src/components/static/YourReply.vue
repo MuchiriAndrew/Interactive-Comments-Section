@@ -14,7 +14,7 @@
 
         <transition name="comment-update">
 
-            <ReplyUpdate :reply = 'reply' :data = 'data' v-if="clicked1" :clicked1 = 'clicked1' :handleUpdate = 'handleUpdate'/>
+            <ReplyUpdate :reply = 'reply' :data = 'data' v-if="clicked1" :clicked1 = 'clicked1' :handleUpdate = 'handleUpdate' :id = "id"/>
 
 
             <div id="comments" class="bg-white rounded-2 mb-2" v-else >
@@ -31,7 +31,7 @@
 
                     <div id="comment-info">
                         <div id="first-info">
-                        <img :src="userData.image" :alt="userData.name">
+                        <img class="rounded-circle" :src="userData.image" :alt="userData.name">
                         <h6 class="m-0"><b>{{userData.name}}</b></h6>
                         <span id="you-tag" class="rounded-1 px-2"><b>you</b></span>
                         <span>{{reply.timestamp}}</span>
@@ -93,7 +93,7 @@ import ReplyUpdate from "../ReplyUpdate.vue"
 export default {
     components: {ReplyUpdate},
     name: 'ReplyComponent',
-    props: ['data','reply','comment'],
+    props: ['data','reply','comment', 'id'],
     data() {
     return {
       clicked1:false,

@@ -1,18 +1,18 @@
 <template>
 
     <template  v-for="(comment, index) in commentData" :key="index">
-      <YourComment v-if="comment.user_id === 4" :comment="comment"/>
-      <OtherComments v-else :comment = 'comment' :show = 'show' :index = 'index' :addScore = 'addScore' :subtractScore = 'subtractScore'/>
+      <YourComment v-if="comment.user_id == id" :comment="comment" :id = "id"/>
+      <OtherComments v-else :comment = 'comment' :show = 'show' :index = 'index' :addScore = 'addScore' :subtractScore = 'subtractScore' :id = "id"/>
 
       <!-- The reply Component For Each Comment -->
       <div id="replies-container" v-for="(reply,index) in replyData" :key="index">
         <template v-if="reply.parent_comment_id === comment.id ">
-          <YourReply v-if="reply.user_id === 4" :reply = 'reply' :comment = 'comment'/>
+          <YourReply v-if="reply.user_id == id" :reply = 'reply' :comment = 'comment' :id = "id"/>
           <OtherReplies v-else :reply = 'reply' :show2 = 'show2' :index = 'index' :comment = 'comment' />
         </template>
       </div>
     </template>
-    <AddComment />
+    <AddComment :id = 'id'/>
 </template>
 
 <script>
@@ -24,7 +24,7 @@ import AddComment from "../AddComment.vue"
 
 export default {
   components: {YourReply, YourComment, OtherComments, OtherReplies, AddComment},
-  props:["commentData", "replyData"],
+  props:["commentData", "replyData", "id"],
    data() {
     return {
       show:false,

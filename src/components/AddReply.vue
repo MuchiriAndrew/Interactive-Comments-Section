@@ -2,7 +2,7 @@
   <div id="comments" class="bg-white rounded-2 mb-1 pt-3">
 
             <div id="image-div" class="d-none d-md-block">
-                <img :src="userData.image" :alt="userData.name">
+                <img class="rounded-circle" :src="userData.image" :alt="userData.name">
             </div>
 
             <form id="text-area" class="" @submit.prevent="handleSendReply">
@@ -14,7 +14,7 @@
 
             <div id="newone" class="d-flex d-md-none">
                 <div id="image-div">
-                    <img :src="userData.image" :alt="userData.name">
+                    <img class="rounded-circle" :src="userData.image" :alt="userData.name">
                 </div>
 
                 <form @submit.prevent="handleSendReply">
@@ -29,7 +29,7 @@
 
 <script>
 export default {
-    props: ['comment', 'reply'],
+    props: ['comment', 'reply', 'id'],
     data(){
         return{
             text:"",
@@ -48,7 +48,7 @@ export default {
 
             const newReply = {
                 score: 0,
-                user_id:4,
+                user_id:this.id,
                 content: this.text,
                 parent_comment_id:this.comment.user_id,
                 timestamp: timestamp
@@ -67,7 +67,7 @@ export default {
 
     mounted() {
     const getUserData = async () => {
-      const response = await fetch (`https://owl-yd4u.onrender.com/users/4`)
+      const response = await fetch (`https://owl-yd4u.onrender.com/users/${this.id}`)
       const data = await response.json()
       this.userData = data
     }

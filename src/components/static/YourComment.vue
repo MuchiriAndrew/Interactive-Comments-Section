@@ -16,7 +16,7 @@
 
         <transition style="width:100%" name="comment-update">
 
-            <CommentUpdate v-if="clicked1" :clicked1 = 'clicked1' :comment = 'comment' :handleUpdate = 'handleUpdate' :placeholderText = 'placeholderText'/>
+            <CommentUpdate v-if="clicked1" :id = "id" :clicked1 = 'clicked1' :comment = 'comment' :handleUpdate = 'handleUpdate' :placeholderText = 'placeholderText'/>
 
 
             <div id="comments" class="bg-white rounded-2 mb-2" v-else >
@@ -33,7 +33,7 @@
 
                     <div id="comment-info">
                         <div id="first-info">
-                        <img :src="userData.image" :alt="userData.name">
+                        <img class="rounded-circle" :src="userData.image" :alt="userData.name">
                         <h6 class="m-0"><b>{{userData.name}}</b></h6>
                         <span id="you-tag" class="rounded-1 px-2"><b>you</b></span>
                         <span>{{comment.timestamp}}</span>
@@ -95,7 +95,7 @@ import CommentUpdate from "../CommentUpdate.vue"
 export default {
     components: {CommentUpdate},
     name: 'ReplyComponent',
-    props: ['comment'],
+    props: ['comment', 'id'],
     data() {
     return {
         clicked1:false,
