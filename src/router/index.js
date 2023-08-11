@@ -5,15 +5,15 @@ import SignUpPage from '../views/SignUpPage.vue'
 
 const routes = [
   {
+    path: '/',
+    name: 'login',
+    component: LoginPage,
+  },
+  {
     path: '/home/:id',
     name: 'home',
     component: HomeView,
     props:true
-  },
-  {
-    path: '/login',
-    name: 'login',
-    component: LoginPage,
   },
   {
     path: '/sign-up',

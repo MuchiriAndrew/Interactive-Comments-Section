@@ -171,7 +171,7 @@ export default {
       }
 
        if (this.isFilled) {
-        window.location.href = '/login';
+        window.location.href = '/';
     }
   }
   }
