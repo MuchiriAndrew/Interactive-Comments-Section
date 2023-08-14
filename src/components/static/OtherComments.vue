@@ -45,7 +45,7 @@
           </div>
 
           <transition name="fade">
-              <AddReply v-if="show === index" :comment = 'comment' :id = 'id'/>
+              <AddReply style="width:85%" v-if="show === index" :comment = 'comment' :id = 'id'/>
           </transition>
 
 </template>

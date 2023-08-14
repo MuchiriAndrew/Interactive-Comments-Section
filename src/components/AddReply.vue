@@ -28,30 +28,30 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
     props: ['comment', 'reply', 'id'],
     data(){
         return{
             text:"",
             currentUser:[],
-            userData:[]
+            userData:[],
+            timestamp:null
         }
     },
 
     methods: {
-        handleSendReply() {
-        const timestamp = new Date().toLocaleString("en-US", {
-          hour: "numeric",
-          minute: "numeric",
-          hour12: true,
-        });
+        async handleSendReply() {
+        const response = await axios.get("https://timezoneapi.io/api/timezone/?Africa/Nairobi&token=aJilxRoLpzKyPOntwmWQ")
+        this.timestamp = await `${response.data.data.datetime.date_time_txt}`;
+        console.log(this.timestamp);
 
             const newReply = {
                 score: 0,
                 user_id:this.id,
                 content: this.text,
                 parent_comment_id:this.comment.user_id,
-                timestamp: timestamp
+                timestamp: this.timestamp
         };
 
     fetch('https://owl-yd4u.onrender.com/replies', {

@@ -5,7 +5,7 @@
                 <img class="rounded-circle" :src="userData.image" :alt="userData.name">
             </div>
 
-            <form @submit="handleSend" id="text-area" class="">
+            <form @submit.prevent="handleSend" id="text-area" class="">
                 <textarea v-model="commentText" name="addcomment" id="addcomment" class="rounded-2 p-2" placeholder="Add a comment..."></textarea>
                 <button class="rounded-2 d-none d-md-block">SEND</button>
             </form>
@@ -15,7 +15,7 @@
                 <div id="image-div">
                     <img class="rounded-circle" :src="userData.image" :alt="userData.name">
                 </div>
-                    <form @submit="handleSend">
+                    <form @submit.prevent="handleSend">
                         <button  class="rounded-2">SEND</button>
                     </form>
 
@@ -33,38 +33,38 @@ export default {
         return {
             commentText: null,
             userData: [],
-            userData:[]
+            userData:[],
+            timestamp:null
         }
     },
 
     methods: {
-        handleSend() {
-        const timestamp = new Date().toLocaleString("en-US", {
-          hour: "numeric",
-          minute: "numeric",
-          hour12: true,
-        });
-    const newComment = {
-          user_id:this.id,
-          content: this.commentText,
-          score: 0,
-          parent_comment_id: 5,
-          timestamp: timestamp,
-    };
+    async handleSend() {
+        const response = await axios.get("https://timezoneapi.io/api/timezone/?Africa/Nairobi&token=aJilxRoLpzKyPOntwmWQ")
+        this.timestamp = await `${response.data.data.datetime.date_time_txt}`;
+        console.log(this.timestamp);
 
-    fetch('https://owl-yd4u.onrender.com/comments', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(newComment),
-    })
-    .catch(err => console.log(err))
-    console.log("push reached")
+        const newComment = {
+            user_id:this.id,
+            content: this.commentText,
+            score: 0,
+            parent_comment_id: 5,
+            timestamp: this.timestamp,
+        };
+
+        fetch('https://owl-yd4u.onrender.com/comments', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(newComment),
+        })
+        .catch(err => console.log(err))
+        console.log("push reached")
 
     setTimeout(function(){ location.reload(); }, 1000);
     }
     },
 
-    async mounted() {
+    mounted() {
 
     const getUserData = async () => {
       const response = await fetch (`https://owl-yd4u.onrender.com/users/${this.id}`)
@@ -72,15 +72,7 @@ export default {
       this.userData = data
     }
     getUserData()
-    .then(data=> console.log(''))
-
-    try {
-        const response = await axios.get("https://timeapi.io/api/Time/current/zone?timeZone=Africa/Nairobi");
-        const data = response.json()
-        console.log(data);
-      } catch (error) {
-        console.log('error', error);
-      }
+    .then(data=> console.log('user data found'))
   },
 
 }
