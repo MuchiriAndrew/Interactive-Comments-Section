@@ -8,7 +8,7 @@
       <div id="replies-container" v-for="(reply,index) in replyData" :key="index">
         <template v-if="reply.parent_comment_id === comment.id ">
           <YourReply v-if="reply.user_id == id" :reply = 'reply' :comment = 'comment' :id = "id"/>
-          <OtherReplies v-else :reply = 'reply' :show2 = 'show2' :index = 'index' :comment = 'comment' />
+          <OtherReplies v-else :reply = 'reply' :show2 = 'show2' :index = 'index' :comment = 'comment' :id = "id" />
         </template>
       </div>
     </template>

@@ -47,7 +47,7 @@
               </div>
 
               <transition name="fade">
-                <AddReply v-if="show2 === index"  :reply = 'reply' :comment="comment" :index = 'index'/>
+                <AddReply style="width:85%" v-if="show2 === index"  :reply = 'reply' :comment="comment" :index = 'index' :id = "id"/>
               </transition>
 
 
@@ -58,7 +58,7 @@
 import AddReply from "../AddReply.vue"
 
 export default {
-  props: ['reply', 'show2', 'index', 'comment'],
+  props: ['reply', 'show2', 'index', 'comment', 'id'],
   components:{AddReply},
     name: 'OtherReplies',
     data() {
