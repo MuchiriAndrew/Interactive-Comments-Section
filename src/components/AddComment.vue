@@ -26,6 +26,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
     props:['id'],
     data() {
@@ -63,7 +64,8 @@ export default {
     }
     },
 
-    mounted() {
+    async mounted() {
+
     const getUserData = async () => {
       const response = await fetch (`https://owl-yd4u.onrender.com/users/${this.id}`)
       const data = await response.json()
@@ -71,6 +73,14 @@ export default {
     }
     getUserData()
     .then(data=> console.log(''))
+
+    try {
+        const response = await axios.get("https://timeapi.io/api/Time/current/zone?timeZone=Africa/Nairobi");
+        const data = response.json()
+        console.log(data);
+      } catch (error) {
+        console.log('error', error);
+      }
   },
 
 }
