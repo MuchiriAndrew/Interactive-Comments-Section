@@ -156,7 +156,7 @@ export default {
         id: 10,
         name: this.username,
         email:this.email,
-        image: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
+        image: this.uploadedImageUrl,
         password: this.password,
         created_at: "2023-07-29T09:33:29.278Z",
         updated_at: "2023-07-29T09:33:29.278Z"

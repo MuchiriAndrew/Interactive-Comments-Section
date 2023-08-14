@@ -12,7 +12,7 @@
 
               <div id="comment-info">
                 <div id="first-info">
-                  <img :src='userData.image' :alt="userData.name">
+                  <img class="rounded-circle" :src='userData.image' :alt="userData.name">
                   <h6 class="m-0"><b>{{userData.name}}</b></h6>
                   <span>{{comment.timestamp}}</span>
                 </div>
